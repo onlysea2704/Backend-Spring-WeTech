@@ -15,6 +15,7 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private String role;
 
     // Getters and setters
     public Long getId() { return id; }
