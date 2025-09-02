@@ -8,19 +8,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth1/test")
+@RequestMapping("/api")
 public class Test {
 
-//    @Autowired
-//    private UserRepository userRepository;
-//
-    @GetMapping("/test-api")
-    public String testApi(){
-        return "test api thành công";
+    @GetMapping("/admin/test")
+    public String testAdminApi(){
+        return "test api admin thành công";
     }
-//
-//    @GetMapping("/get-all-user")
-//    public List<User> getAllUser(){
-//        return  userRepository.findAll();
-//    }
+
+    @GetMapping("/user/test")
+    public String testUserApi(){
+        return "test api user thành công";
+    }
+
+    @GetMapping("/auth/test")
+    public String testAuthApi(){
+        return "test api auth thành công";
+    }
+
 }

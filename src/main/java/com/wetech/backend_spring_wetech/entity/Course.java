@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "course")
+@Table(name = "courses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,9 +42,6 @@ public class Course {
 
     @Column(name = "intro_2")
     private String intro2;
-
-    @Column(name = "row")
-    private String row;
 
     @Column(name = "number_register")
     private Integer numberRegister;

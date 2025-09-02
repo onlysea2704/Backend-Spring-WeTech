@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "transactions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,13 +17,13 @@ public class Transaction {
     @Column(name = "id_transaction")
     private Long idTransaction;
 
-    @Column(name = "transferAmount")
+    @Column(name = "transfer_amount")
     private Double transferAmount;
 
-    @Column(name = "transactionStart")
+    @Column(name = "transaction_start")
     private LocalDateTime transactionStart;
 
-    @Column(name = "transactionDate")
+    @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
 
     @Column(name = "status")
