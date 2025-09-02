@@ -20,6 +20,9 @@ public class Procedure {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "real_price")
     private Double realPrice;
 

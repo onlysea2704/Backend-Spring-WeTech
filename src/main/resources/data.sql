@@ -58,10 +58,10 @@ VALUES
     ('Tài liệu ReactJS', 'doc/react.pdf', 3);
 
 -- Bảng PROCEDURES (cha trước)
-INSERT INTO procedures (title, description, real_price, sale_price, type_company, number_register)
+INSERT INTO procedures (title, description, type, real_price, sale_price, type_company, number_register)
 VALUES
-    ('Đăng ký kinh doanh', 'Thủ tục đăng ký kinh doanh cơ bản', 500.0, 400.0, 'Công ty TNHH', 50),
-    ('Cấp phép xây dựng', 'Thủ tục xin giấy phép xây dựng', 800.0, 700.0, 'Công ty Xây dựng', 30);
+    ('Đăng ký kinh doanh', 'Thủ tục đăng ký kinh doanh cơ bản', 'tlct',500.0, 400.0, 'Công ty TNHH', 50),
+    ('Cấp phép xây dựng', 'Thủ tục xin giấy phép xây dựng', 'dktd', 800.0, 700.0, 'Công ty Xây dựng', 30);
 
 -- Bảng DOCUMENT_PROCEDURE (tham chiếu procedure_id)
 INSERT INTO document_procedures (name, link_material_raw, procedure_id, link_material_edit)
