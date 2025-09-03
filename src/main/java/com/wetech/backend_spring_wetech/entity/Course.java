@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,6 +48,7 @@ public class Course {
     private Integer numberRegister;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Section> sections;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)

@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,10 +15,12 @@ public class MyCourse {
     @Column(name = "my_course_id")
     private Long myCourseId;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "course_id")
     private Course course;
 }
