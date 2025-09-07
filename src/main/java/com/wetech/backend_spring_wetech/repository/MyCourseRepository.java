@@ -8,10 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MyCourseRepository extends JpaRepository<MyCourse, Long> {
-    int findFirstByCourseAndUser(Course course, User user);
-
-    int findFirstByMyCourseId(Long myCourseId);
-
-    int findFirstByMyCourseIdAndUserId(Long myCourseId, Long userId);
+    MyCourse findFirstByCourseIdAndUserId(Long courseId, Long userId);
 }
 

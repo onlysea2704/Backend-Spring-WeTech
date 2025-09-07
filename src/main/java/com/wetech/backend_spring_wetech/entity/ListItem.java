@@ -23,7 +23,6 @@ public class ListItem {
     @Column(name = "type_item")
     private String typeItem;
 
-    @ManyToOne
-    @JoinColumn(name = "id_transaction")
-    private Transaction transaction;
+    @Column(name = "id_transaction")
+    private Long idTransaction;
 }

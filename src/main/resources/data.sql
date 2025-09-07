@@ -1,33 +1,33 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
-DELETE FROM my_courses;
-DELETE FROM my_procedures;
-DELETE FROM customer_searchs;
-DELETE FROM procedures;
-DELETE FROM courses;
-DELETE FROM list_items;
-DELETE FROM transactions;
-DELETE FROM info_documents;
-DELETE FROM document_sections;
-DELETE FROM document_procedures;
-DELETE FROM videos;
-DELETE FROM sections;
-DELETE FROM customers;
+# DELETE FROM my_courses;
+# DELETE FROM my_procedures;
+# DELETE FROM customer_searchs;
+# DELETE FROM procedures;
+# DELETE FROM courses;
+# DELETE FROM list_items;
+# DELETE FROM transactions;
+# DELETE FROM info_documents;
+# DELETE FROM document_sections;
+# DELETE FROM document_procedures;
+# DELETE FROM videos;
+# DELETE FROM sections;
+# DELETE FROM customers;
 
 
-ALTER TABLE my_courses AUTO_INCREMENT = 1;
-ALTER TABLE my_procedures AUTO_INCREMENT = 1;
-ALTER TABLE customer_searchs AUTO_INCREMENT = 1;
-ALTER TABLE procedures AUTO_INCREMENT = 1;
-ALTER TABLE courses AUTO_INCREMENT = 1;
-ALTER TABLE list_items AUTO_INCREMENT = 1;
-ALTER TABLE transactions AUTO_INCREMENT = 1;
-ALTER TABLE info_documents AUTO_INCREMENT = 1;
-ALTER TABLE document_sections AUTO_INCREMENT = 1;
-ALTER TABLE document_procedures AUTO_INCREMENT = 1;
-ALTER TABLE videos AUTO_INCREMENT = 1;
-ALTER TABLE sections AUTO_INCREMENT = 1;
-ALTER TABLE customers AUTO_INCREMENT = 1;
+# ALTER TABLE my_courses AUTO_INCREMENT = 1;
+# ALTER TABLE my_procedures AUTO_INCREMENT = 1;
+# ALTER TABLE customer_searchs AUTO_INCREMENT = 1;
+# ALTER TABLE procedures AUTO_INCREMENT = 1;
+# ALTER TABLE courses AUTO_INCREMENT = 1;
+# ALTER TABLE list_items AUTO_INCREMENT = 1;
+# ALTER TABLE transactions AUTO_INCREMENT = 1;
+# ALTER TABLE info_documents AUTO_INCREMENT = 1;
+# ALTER TABLE document_sections AUTO_INCREMENT = 1;
+# ALTER TABLE document_procedures AUTO_INCREMENT = 1;
+# ALTER TABLE videos AUTO_INCREMENT = 1;
+# ALTER TABLE sections AUTO_INCREMENT = 1;
+# ALTER TABLE customers AUTO_INCREMENT = 1;
 
 
 -- Bảng COURSES
@@ -82,10 +82,10 @@ VALUES
     ('Tran Van D', '0987654321', 'cust2@gmail.com');
 
 -- Bảng CUSTOMER_SEARCH
-INSERT INTO customer_searchs (cccd, name, gender, dob)
-VALUES
-    ('012345678901', 'Nguyen Van E', 'Male', '1995-05-20'),
-    ('098765432109', 'Le Thi F', 'Female', '1998-09-15');
+# INSERT INTO customer_searchs (cccd, name, gender, dob)
+# VALUES
+#     ('012345678901', 'Nguyen Van E', 'Male', '1995-05-20'),
+#     ('098765432109', 'Le Thi F', 'Female', '1998-09-15');
 
 -- Bảng MY_COURSES (tham chiếu user_id, course_id)
 INSERT INTO my_courses (user_id, course_id)

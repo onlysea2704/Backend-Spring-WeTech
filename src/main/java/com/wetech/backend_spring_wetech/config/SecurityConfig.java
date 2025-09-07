@@ -35,7 +35,8 @@ public class SecurityConfig {
 //                        .requestMatchers("/api/non-auth/**").permitAll()
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/user/**").hasRole("USER")
-                                .requestMatchers("/api/auth/**").permitAll()
+//                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

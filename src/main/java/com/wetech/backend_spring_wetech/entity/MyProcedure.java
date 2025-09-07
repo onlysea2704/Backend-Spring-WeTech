@@ -14,11 +14,9 @@ public class MyProcedure {
     @Column(name = "my_procedure_id")
     private Long myProcedureId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "procedure_id")
-    private Procedure procedure;
+    @Column(name = "procedure_id")
+    private Long procedureId;
 }

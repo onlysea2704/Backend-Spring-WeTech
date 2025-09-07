@@ -45,8 +45,8 @@ public class CourseService {
         String username = authentication.getName();
         User user = (User) userService.loadUserByUsername(username);
 
-        int exist = myCourseRepository.findFirstByMyCourseIdAndUserId(courseId,  user.getId());
-        return exist == 1? true : false;
+        MyCourse exist = myCourseRepository.findFirstByCourseIdAndUserId(courseId,  user.getUserId());
+        return exist != null? true : false;
     }
 
 //    public MyCourse createMyCourse(Long courseId) {
