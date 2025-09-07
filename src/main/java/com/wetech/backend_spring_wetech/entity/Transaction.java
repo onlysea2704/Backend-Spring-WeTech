@@ -32,7 +32,5 @@ public class Transaction {
     @Column(name = "id_user")
     private Long userId;
 
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
-    private List<ListItem> items;
 }
 

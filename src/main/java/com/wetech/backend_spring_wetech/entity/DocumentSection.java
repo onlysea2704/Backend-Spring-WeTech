@@ -20,7 +20,6 @@ public class DocumentSection {
     @Column(name = "link")
     private String link;
 
-    @ManyToOne
-    @JoinColumn(name = "section_id")
-    private Section section;
+    @Column(name = "section_id")
+    private Long sectionId;
 }

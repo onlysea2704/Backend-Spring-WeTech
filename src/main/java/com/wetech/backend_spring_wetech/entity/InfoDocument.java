@@ -23,7 +23,6 @@ public class InfoDocument {
     @Column(name = "note")
     private String note;
 
-    @ManyToOne
-    @JoinColumn(name = "document_id")
-    private DocumentProcedure document;
+    @Column(name = "document_id")
+    private Long documentId;
 }

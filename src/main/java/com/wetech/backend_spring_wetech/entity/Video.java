@@ -20,8 +20,7 @@ public class Video {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "section_id")
-    private Section section;
+    @Column(name = "section_id")
+    private Long sectionId;
 }
 
