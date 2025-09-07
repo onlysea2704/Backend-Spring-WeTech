@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import jakarta.persistence.*;
+import lombok.*;
+
 @Entity
 @Table(name = "my_courses")
 @Data
@@ -15,13 +18,11 @@ public class MyCourse {
     @Column(name = "my_course_id")
     private Long myCourseId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @Column(name = "course_id")
+    private Long courseId;
 }
+
 

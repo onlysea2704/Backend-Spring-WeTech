@@ -19,13 +19,7 @@ public class Section {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @Column(name = "course_id")
+    private Long courseId;
 
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<Video> videos;
-
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<DocumentSection> documents;
 }

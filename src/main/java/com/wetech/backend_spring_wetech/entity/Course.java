@@ -46,11 +46,4 @@ public class Course {
 
     @Column(name = "number_register")
     private Integer numberRegister;
-
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Section> sections;
-
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private List<MyCourse> myCourses;
 }
