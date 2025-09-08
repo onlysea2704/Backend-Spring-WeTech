@@ -2,8 +2,12 @@ package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.MyCourse;
+import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.service.CourseService;
+import com.wetech.backend_spring_wetech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +18,8 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/get-all")
     public List<Course> getAll() {
@@ -37,9 +43,16 @@ public class CourseController {
 
     @GetMapping("/check-have-course")
     public boolean checkHaveCourse(@RequestParam Long courseId) {
-        return courseService.checkHaveCourse(courseId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = (User) userService.loadUserByUsername(username);
+        return courseService.checkHaveCourse(courseId, user.getUserId());
     }
 
+    @GetMapping("/find-my-course")
+    public List<Course> findMyCourse() {
+
+    }
 //    @PostMapping("/create-my-course")
 //    public MyCourse createMyCourse(@RequestParam Long courseId) {
 //        return courseService.createMyCourse(courseId);

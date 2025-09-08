@@ -40,14 +40,12 @@ public class CourseService {
         return courseRepository.findFirstByCourseId(courseId);
     }
 
-    public Boolean checkHaveCourse(Long courseId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = (User) userService.loadUserByUsername(username);
-
+    public Boolean checkHaveCourse(Long courseId, Long userId) {
         MyCourse exist = myCourseRepository.findFirstByCourseIdAndUserId(courseId,  user.getUserId());
         return exist != null? true : false;
     }
+
+    public List<Course> findMyCourse(Long userId) {}
 
 //    public MyCourse createMyCourse(Long courseId) {
 //
