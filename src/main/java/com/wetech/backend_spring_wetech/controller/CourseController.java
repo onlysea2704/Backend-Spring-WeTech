@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.List;
 
@@ -61,10 +64,15 @@ public class CourseController {
 //        return courseService.createMyCourse(courseId);
 //    }
 
-//    @PostMapping("create")
-//    public Course create(@RequestBody Course course) {
-//
-//    }
+    // API tạo khóa học
+    @PostMapping("/create")
+    public ResponseEntity<Course> createCourse(
+//            @RequestParam String title,
+//            @RequestParam String description,
+            @RequestParam("image") MultipartFile image) throws Exception {
+        Course course = courseService.createCourse(image);
+        return ResponseEntity.ok(course);
+    }
 //
 //    @PostMapping("update")
 //    public Course update(@RequestBody Course course) {
