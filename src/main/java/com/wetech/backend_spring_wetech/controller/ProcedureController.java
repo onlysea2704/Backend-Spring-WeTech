@@ -1,9 +1,12 @@
 package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.entity.Procedure;
+import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.service.ProcedureService;
 import com.wetech.backend_spring_wetech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,13 +17,15 @@ public class ProcedureController {
 
     @Autowired
     private ProcedureService procedureService;
+    @Autowired
+    private UserService userService;
 
-    @GetMapping("get-all")
+    @GetMapping("/get-all")
     public List<Procedure> getAll(){
         return procedureService.getAll();
     }
 
-    @GetMapping("get-top")
+    @GetMapping("/get-top")
     public List<Procedure> getTop(){
         return procedureService.getTop();
     }
@@ -35,6 +40,19 @@ public class ProcedureController {
         return procedureService.findById(id);
     }
 
+    @GetMapping("/find-my-procedure")
+    public List<Procedure> findMyProcedure(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = (User) userService.loadUserByUsername(username);
+        return procedureService.findMyProcedure(user.getUserId());
+    }
+
+
+//    @GetMapping("/find-my-procedure")
+//    public List<Procedure> findMyProcedure(){
+//    return procedureService
+//    }
 //    @PostMapping("/admin/create")
 //    public Procedure create(@RequestBody Procedure procedure){
 //

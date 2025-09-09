@@ -1,10 +1,9 @@
 package com.wetech.backend_spring_wetech.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "courses")
@@ -46,4 +45,7 @@ public class Course {
 
     @Column(name = "number_register")
     private Integer numberRegister;
+
+    @Column(name = "created_at")
+    private Date createdAt;
 }

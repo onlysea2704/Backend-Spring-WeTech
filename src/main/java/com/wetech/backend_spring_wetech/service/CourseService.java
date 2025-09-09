@@ -41,11 +41,13 @@ public class CourseService {
     }
 
     public Boolean checkHaveCourse(Long courseId, Long userId) {
-        MyCourse exist = myCourseRepository.findFirstByCourseIdAndUserId(courseId,  user.getUserId());
+        MyCourse exist = myCourseRepository.findFirstByCourseIdAndUserId(courseId,  userId);
         return exist != null? true : false;
     }
 
-    public List<Course> findMyCourse(Long userId) {}
+    public List<Course> findMyCourse(Long userId) {
+        return myCourseRepository.findMyCourseByUserId(userId);
+    }
 
 //    public MyCourse createMyCourse(Long courseId) {
 //

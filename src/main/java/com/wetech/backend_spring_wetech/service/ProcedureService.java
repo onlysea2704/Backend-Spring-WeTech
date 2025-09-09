@@ -32,4 +32,7 @@ public class ProcedureService {
         return procedureRepository.findFirstByProcedureId(id);
     }
 
+    public List<Procedure> findMyProcedure(Long userId){
+        return procedureRepository.findMyProcedureByUserId(userId);
+    }
 }

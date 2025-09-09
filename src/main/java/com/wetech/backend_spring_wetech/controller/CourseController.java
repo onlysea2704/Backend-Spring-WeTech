@@ -51,7 +51,10 @@ public class CourseController {
 
     @GetMapping("/find-my-course")
     public List<Course> findMyCourse() {
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = (User) userService.loadUserByUsername(username);
+        return courseService.findMyCourse(user.getUserId());
     }
 //    @PostMapping("/create-my-course")
 //    public MyCourse createMyCourse(@RequestParam Long courseId) {
