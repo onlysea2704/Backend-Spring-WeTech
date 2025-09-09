@@ -1,11 +1,13 @@
 package com.wetech.backend_spring_wetech.controller;
 
+import com.wetech.backend_spring_wetech.dto.CourseRequest;
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.MyCourse;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.service.CourseService;
 import com.wetech.backend_spring_wetech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -65,13 +67,16 @@ public class CourseController {
 //    }
 
     // API tạo khóa học
-    @PostMapping("/create")
+    @PostMapping(value ="/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Course> createCourse(
-//            @RequestParam String title,
-//            @RequestParam String description,
-            @RequestParam("image") MultipartFile image) throws Exception {
-        Course course = courseService.createCourse(image);
-        return ResponseEntity.ok(course);
+            @RequestPart(value = "course", required = false) CourseRequest courseRequest,
+            @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
+        if(courseRequest == null) {
+            System.out.println("1234");
+            return ResponseEntity.ok(null);
+        }
+        Course abc = courseService.createCourse(courseRequest, image);
+        return ResponseEntity.ok(abc);
     }
 //
 //    @PostMapping("update")

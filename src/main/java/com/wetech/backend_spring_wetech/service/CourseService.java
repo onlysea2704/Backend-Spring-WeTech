@@ -2,19 +2,21 @@ package com.wetech.backend_spring_wetech.service;
 
 import com.cloudinary.Cloudinary;
 import com.wetech.backend_spring_wetech.config.CloudinaryConfig;
+import com.wetech.backend_spring_wetech.dto.CourseRequest;
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.MyCourse;
 import com.wetech.backend_spring_wetech.repository.CourseRepository;
 import com.wetech.backend_spring_wetech.repository.MyCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Service
 public class CourseService {
@@ -54,16 +56,25 @@ public class CourseService {
         return myCourseRepository.findMyCourseByUserId(userId);
     }
 
-    public Course createCourse(MultipartFile image) throws IOException {
-        String imageUrl = uploadToCloudinary(image);
+    public Course createCourse(CourseRequest course, MultipartFile image) throws IOException {
 
-        Course course = Course.builder()
-                .title("sdfsdf")
-                .description("sfsdfsd")
+        String imageUrl = uploadToCloudinary(image);
+        LocalDate currentDate = LocalDate.now();
+        Date date = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Course newCourse = Course.builder()
+                .title(course.getTitle())
+                .description(course.getDescription())
+                .author(course.getAuthor())
+                .realPrice(course.getRealPrice())
+                .salePrice(course.getSalePrice())
+                .typeCourse(course.getTypeCourse())
                 .linkImage(imageUrl)
+                .intro1(course.getIntro1())
+                .intro2(course.getIntro2())
+                .createdAt(date)
                 .build();
 
-        return courseRepository.save(course);
+        return courseRepository.save(newCourse);
     }
 
 //    public Course createCourse(Course course) {
