@@ -3,6 +3,7 @@ package com.wetech.backend_spring_wetech.controller;
 import com.wetech.backend_spring_wetech.dto.CourseRequest;
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.MyCourse;
+import com.wetech.backend_spring_wetech.entity.Section;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.service.CourseService;
 import com.wetech.backend_spring_wetech.service.UserService;
@@ -61,28 +62,34 @@ public class CourseController {
         User user = (User) userService.loadUserByUsername(username);
         return courseService.findMyCourse(user.getUserId());
     }
-//    @PostMapping("/create-my-course")
-//    public MyCourse createMyCourse(@RequestParam Long courseId) {
-//        return courseService.createMyCourse(courseId);
-//    }
 
     // API tạo khóa học
-    @PostMapping(value ="/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/create-course", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Course> createCourse(
-            @RequestPart(value = "course", required = false) CourseRequest courseRequest,
+            @RequestPart(value = "course", required = false) Course courseRequest,
             @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
-        if(courseRequest == null) {
-            System.out.println("1234");
-            return ResponseEntity.ok(null);
-        }
-        Course abc = courseService.createCourse(courseRequest, image);
-        return ResponseEntity.ok(abc);
+        Course newCourse = courseService.createCourse(courseRequest, image);
+        return ResponseEntity.ok(newCourse);
     }
-//
-//    @PostMapping("update")
-//    public Course update(@RequestBody Course course) {
-//
-//    }
+
+    @PostMapping(value = "/update-course", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Course> updateCourse(
+            @RequestPart(value = "course", required = false) Course course,
+            @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
+        Course newCourse = courseService.updateCourse(course, image);
+        return ResponseEntity.ok(newCourse);
+    }
+
+    @DeleteMapping("/delete-course")
+    public ResponseEntity<Object> deleteCourse(@RequestParam Long courseId) {
+        boolean status = courseService.deleteCourse(courseId);
+        return ResponseEntity.ok(status);
+    }
+
+    @GetMapping("/get-sections")
+    public List<Section> getSections() {
+        List<Section> = courseService
+    }
 //
 //    @PostMapping("delete")
 //    public Course delete(@RequestBody Course course) {
