@@ -10,6 +10,7 @@ import com.wetech.backend_spring_wetech.entity.Video;
 import com.wetech.backend_spring_wetech.repository.CourseRepository;
 import com.wetech.backend_spring_wetech.repository.MyCourseRepository;
 import com.wetech.backend_spring_wetech.repository.SectionRepository;
+import com.wetech.backend_spring_wetech.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +32,8 @@ public class CourseService {
     private MyCourseRepository myCourseRepository;
     @Autowired
     private SectionRepository sectionRepository;
-//    @
+    @Autowired
+    private VideoRepository videoRepository;
     @Autowired
     private Cloudinary cloudinary;
 
@@ -72,20 +74,9 @@ public class CourseService {
 
         LocalDate currentDate = LocalDate.now();
         Date date = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Course newCourse = Course.builder()
-                .title(course.getTitle())
-                .description(course.getDescription())
-                .author(course.getAuthor())
-                .realPrice(course.getRealPrice())
-                .salePrice(course.getSalePrice())
-                .typeCourse(course.getTypeCourse())
-                .linkImage(imageUrl)
-                .intro1(course.getIntro1())
-                .intro2(course.getIntro2())
-                .createdAt(date)
-                .build();
-
-        return courseRepository.save(newCourse);
+        course.setLinkImage(imageUrl);
+        course.setCreatedAt(date);
+        return courseRepository.save(course);
     }
 
     public Course updateCourse(Course course, MultipartFile image) throws IOException {
@@ -141,7 +132,30 @@ public class CourseService {
     }
 
     public List<Video> findVideosBySectionId(Long sectionId) {
-        return video
+        return videoRepository.findBySectionId(sectionId);
+    }
+
+    public Video createVideo(Video videoInfo, MultipartFile video) throws IOException {
+            String videoUrl = uploadToCloudinary(video);
+            videoInfo.setLink(videoUrl);
+            return videoRepository.save(videoInfo);
+    }
+
+    public Video updateVideo(Video videoInfo, MultipartFile video) throws IOException {
+        String imageUrl = videoInfo.getLink();
+        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
+            imageUrl = uploadToCloudinary(video);
+        }
+        return videoRepository.save(videoInfo);
+    }
+
+    public boolean deleteVideo(Long videoId) {
+        try {
+            videoRepository.deleteById(videoId);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
     }
 
     private String uploadToCloudinary(MultipartFile file) throws IOException {
