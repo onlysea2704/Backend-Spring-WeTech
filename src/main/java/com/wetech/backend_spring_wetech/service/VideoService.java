@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +54,23 @@ public class VideoService {
         if (file == null || file.isEmpty()) {
             return null;
         }
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
-                ObjectUtils.asMap("resource_type", "auto"));
+//        Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
+//                ObjectUtils.asMap("resource_type", "auto"));
+        // Lấy tên gốc (vd: report.docx)
+        String originalFilename = file.getOriginalFilename();
+        // Lấy timestamp theo giờ phút giây
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        // Tạo tên file mới (vd: 20250913_235959.docx)
+        String newFilename = timestamp + originalFilename;
+        Map uploadResult = cloudinary.uploader().upload(
+                file.getBytes(),
+                ObjectUtils.asMap(
+                        "resource_type", "raw",
+                        "public_id", newFilename,
+                        "use_filename", false,
+                        "unique_filename", false  // không thêm chuỗi random
+                )
+        );
         return uploadResult.get("secure_url").toString(); // link ảnh trực tiếp
     }
 }
