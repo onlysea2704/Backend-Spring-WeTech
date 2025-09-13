@@ -2,7 +2,6 @@ package com.wetech.backend_spring_wetech.service;
 
 import com.cloudinary.Cloudinary;
 import com.wetech.backend_spring_wetech.config.CloudinaryConfig;
-import com.wetech.backend_spring_wetech.dto.CourseRequest;
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.MyCourse;
 import com.wetech.backend_spring_wetech.entity.Section;
@@ -88,20 +87,9 @@ public class CourseService {
 
         LocalDate currentDate = LocalDate.now();
         Date date = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Course newCourse = Course.builder()
-                .title(course.getTitle())
-                .description(course.getDescription())
-                .author(course.getAuthor())
-                .realPrice(course.getRealPrice())
-                .salePrice(course.getSalePrice())
-                .typeCourse(course.getTypeCourse())
-                .linkImage(imageUrl)
-                .intro1(course.getIntro1())
-                .intro2(course.getIntro2())
-                .createdAt(date)
-                .build();
-
-        return courseRepository.save(newCourse);
+        course.setLinkImage(imageUrl);
+        course.setCreatedAt(date);
+        return courseRepository.save(course);
     }
 
     public boolean deleteCourse(Long courseId) {
@@ -135,28 +123,7 @@ public class CourseService {
         return videoRepository.findBySectionId(sectionId);
     }
 
-    public Video createVideo(Video videoInfo, MultipartFile video) throws IOException {
-            String videoUrl = uploadToCloudinary(video);
-            videoInfo.setLink(videoUrl);
-            return videoRepository.save(videoInfo);
-    }
 
-    public Video updateVideo(Video videoInfo, MultipartFile video) throws IOException {
-        String imageUrl = videoInfo.getLink();
-        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
-            imageUrl = uploadToCloudinary(video);
-        }
-        return videoRepository.save(videoInfo);
-    }
-
-    public boolean deleteVideo(Long videoId) {
-        try {
-            videoRepository.deleteById(videoId);
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-    }
 
     private String uploadToCloudinary(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
