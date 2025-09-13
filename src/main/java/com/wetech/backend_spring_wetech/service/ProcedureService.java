@@ -35,4 +35,22 @@ public class ProcedureService {
     public List<Procedure> findMyProcedure(Long userId){
         return procedureRepository.findMyProcedureByUserId(userId);
     }
+
+    public Procedure create(Procedure procedure){
+        return procedureRepository.save(procedure);
+    }
+
+    public Procedure update(Procedure procedure){
+        return procedureRepository.save(procedure);
+    }
+
+    public boolean delete(Procedure procedure){
+        try {
+            procedureRepository.delete(procedure);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 }

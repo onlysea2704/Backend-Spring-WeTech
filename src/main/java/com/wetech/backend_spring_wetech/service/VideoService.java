@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class VideoService {
@@ -17,13 +18,17 @@ public class VideoService {
     @Autowired
     private Cloudinary cloudinary;
 
-    public Video createVideo(Video videoInfo, MultipartFile video) throws IOException {
+    public List<Video> findBySectionId(Long sectionId) {
+        return videoRepository.findBySectionId(sectionId);
+    }
+
+    public Video create(Video videoInfo, MultipartFile video) throws IOException {
         String videoUrl = uploadToCloudinary(video);
         videoInfo.setLink(videoUrl);
         return videoRepository.save(videoInfo);
     }
 
-    public Video updateVideo(Video videoInfo, MultipartFile video) throws IOException {
+    public Video update(Video videoInfo, MultipartFile video) throws IOException {
         String videoUrl = videoInfo.getLink();
         if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
             videoUrl = uploadToCloudinary(video);
@@ -31,9 +36,9 @@ public class VideoService {
         return videoRepository.save(videoInfo);
     }
 
-    public boolean deleteVideo(Long videoId) {
+    public boolean delete(Video videoId) {
         try {
-            videoRepository.deleteById(videoId);
+            videoRepository.deleteById(videoId.getVideoId());
             return true;
         }catch (Exception e) {
             return false;

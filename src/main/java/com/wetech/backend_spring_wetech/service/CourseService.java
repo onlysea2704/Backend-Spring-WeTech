@@ -30,10 +30,6 @@ public class CourseService {
     @Autowired
     private MyCourseRepository myCourseRepository;
     @Autowired
-    private SectionRepository sectionRepository;
-    @Autowired
-    private VideoRepository videoRepository;
-    @Autowired
     private Cloudinary cloudinary;
 
     @Autowired
@@ -101,29 +97,6 @@ public class CourseService {
             return false;
         }
     }
-
-    public List<Section> getSections(Long courseId) {
-        List<Section> sections = new ArrayList<>();
-        sections = sectionRepository.findByCourseId(courseId);
-        return sections;
-    }
-
-    public Section createSection(Long courseId, Section section) {
-        Section newSection = new Section();
-        newSection.setCourseId(courseId);
-        newSection.setName(section.getName());
-        return sectionRepository.save(newSection);
-    }
-
-    public Section updateSection(Section section){
-        return sectionRepository.save(section);
-    }
-
-    public List<Video> findVideosBySectionId(Long sectionId) {
-        return videoRepository.findBySectionId(sectionId);
-    }
-
-
 
     private String uploadToCloudinary(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {

@@ -86,13 +86,9 @@ public class CourseController {
         return ResponseEntity.ok(status);
     }
 
-    @GetMapping("/get-sections")
-    public List<Section> getSections() {
-        List<Section> = courseService
-    }
-//
-//    @PostMapping("delete")
-//    public Course delete(@RequestBody Course course) {
-//
+//    @GetMapping("/get-sections")
+//    public List<Section> getSections() {
+//        List<Section> = courseService
 //    }
+
 }

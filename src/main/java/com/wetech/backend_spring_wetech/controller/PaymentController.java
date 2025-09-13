@@ -8,10 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth/webhook")
-public class WebhookController {
+@RequestMapping("/payment")
+public class PaymentController {
 
-    @PostMapping("/verify-payment")
+
+
+    @PostMapping("/webhook/verify-payment")
     public ResponseEntity<Map<String, Object>> receiveWebhook(@RequestBody WebhookPayload payload) {
         // In ra console để test
         System.out.println("Nhận webhook từ SePay:");
