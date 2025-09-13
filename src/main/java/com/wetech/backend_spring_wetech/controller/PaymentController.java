@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.controller;
 
+import com.wetech.backend_spring_wetech.dto.InputCreateTransactionDto;
 import com.wetech.backend_spring_wetech.dto.WebhookPayload;
 import com.wetech.backend_spring_wetech.entity.ListItem;
 import com.wetech.backend_spring_wetech.entity.Transaction;
@@ -21,9 +22,8 @@ public class PaymentController {
 
     @PostMapping("/create")
     public ResponseEntity<Object> createPayment(
-            @RequestBody Transaction transaction,
-            @RequestBody List<ListItem> listItems) {
-        boolean statusCreated = paymentService.createTransaction(transaction, listItems);
+            @RequestBody InputCreateTransactionDto inputCreateTransactionDto) {
+        boolean statusCreated = paymentService.createTransaction(inputCreateTransactionDto.getTransaction(), inputCreateTransactionDto.getListItems());
         return ResponseEntity.ok(statusCreated);
     }
 

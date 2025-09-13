@@ -1,9 +1,11 @@
 package com.wetech.backend_spring_wetech.controller;
 
+import com.wetech.backend_spring_wetech.entity.Procedure;
 import com.wetech.backend_spring_wetech.entity.Video;
 import com.wetech.backend_spring_wetech.repository.VideoRepository;
 import com.wetech.backend_spring_wetech.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,21 +27,24 @@ public class VideoControllder {
         return ResponseEntity.ok(videos);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Object> create(@RequestBody Video videoInfo, @RequestParam("video") MultipartFile video) throws IOException {
-        Video newVideo = videoService.create(videoInfo, video);
+    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Object> create(
+            @RequestPart(value = "sectionId", required = true) Long sectionId,
+            @RequestPart(value = "video", required = true) MultipartFile video
+    ) throws IOException {
+        Video newVideo = videoService.create(sectionId, video);
         return ResponseEntity.ok(newVideo);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody Video videoInfo, @RequestParam("video") MultipartFile video) throws IOException {
-        Video updatedVideo = videoService.update(videoInfo, video);
-        return ResponseEntity.ok(updatedVideo);
-    }
+//    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<Object> update(@RequestBody Video videoInfo, @RequestParam("video") MultipartFile video) throws IOException {
+//        Video updatedVideo = videoService.update(videoInfo, video);
+//        return ResponseEntity.ok(updatedVideo);
+//    }
 
     @PostMapping("/delete")
-    public ResponseEntity<Object> delete(@RequestBody Video video) throws IOException {
-        boolean statusDeleted = videoService.delete(video);
+    public ResponseEntity<Object> delete(@RequestParam Long videoId) throws IOException {
+        boolean statusDeleted = videoService.delete(videoId);
         return ResponseEntity.ok(statusDeleted);
     }
 }

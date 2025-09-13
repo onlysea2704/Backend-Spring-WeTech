@@ -3,6 +3,8 @@ package com.wetech.backend_spring_wetech.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "procedures")
 @Data
@@ -23,6 +25,9 @@ public class Procedure {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "link_image")
+    private String linkImage;
+
     @Column(name = "real_price")
     private Double realPrice;
 
@@ -34,4 +39,7 @@ public class Procedure {
 
     @Column(name = "number_register")
     private Integer numberRegister;
+
+    @Column(name = "created_at")
+    private Date createdAt;
 }

@@ -13,7 +13,7 @@ public class ProcedureRepositoryCustomImpl implements ProcedureRepositoryCustom 
     private EntityManager em;
 
     public List<Procedure> getTop(){
-        String sql = "SELECT p FROM Procedure p ORDER BY p.numberRegister ASC limit :li";
+        String sql = "SELECT p FROM Procedure p ORDER BY p.numberRegister DESC limit :li";
         return em.createQuery( sql,Procedure.class)
                 .setParameter("li",20)
                 .getResultList();

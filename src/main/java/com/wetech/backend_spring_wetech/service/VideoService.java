@@ -24,10 +24,12 @@ public class VideoService {
         return videoRepository.findBySectionId(sectionId);
     }
 
-    public Video create(Video videoInfo, MultipartFile video) throws IOException {
+    public Video create(Long sectionId, MultipartFile video) throws IOException {
+        Video newVideo = new Video();
         String videoUrl = uploadToCloudinary(video);
-        videoInfo.setLink(videoUrl);
-        return videoRepository.save(videoInfo);
+        newVideo.setLink(videoUrl);
+        newVideo.setSectionId(sectionId);
+        return videoRepository.save(newVideo);
     }
 
     public Video update(Video videoInfo, MultipartFile video) throws IOException {
@@ -38,9 +40,9 @@ public class VideoService {
         return videoRepository.save(videoInfo);
     }
 
-    public boolean delete(Video videoId) {
+    public boolean delete(Long videoId) {
         try {
-            videoRepository.deleteById(videoId.getVideoId());
+            videoRepository.deleteById(videoId);
             return true;
         }catch (Exception e) {
             return false;
