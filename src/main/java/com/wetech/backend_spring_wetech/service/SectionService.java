@@ -20,20 +20,17 @@ public class SectionService {
         return sections;
     }
 
-    public Section create(Long courseId, Section section) {
-        Section newSection = new Section();
-        newSection.setCourseId(courseId);
-        newSection.setName(section.getName());
-        return sectionRepository.save(newSection);
+    public Section create(Section section) {
+        return sectionRepository.save(section);
     }
 
     public Section update(Section section){
         return sectionRepository.save(section);
     }
 
-    public boolean delete(Section section){
+    public boolean delete(Long sectionId) {
         try {
-            sectionRepository.delete(section);
+            sectionRepository.deleteById(sectionId);
             return true;
         }
         catch (Exception e) {
