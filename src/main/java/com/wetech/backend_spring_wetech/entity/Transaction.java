@@ -32,5 +32,8 @@ public class Transaction {
     @Column(name = "id_user")
     private Long userId;
 
+    @Column(name = "code")
+    private String code;
+
 }
 

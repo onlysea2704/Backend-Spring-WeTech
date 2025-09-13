@@ -40,5 +40,6 @@ public class VideoControllder {
     @PostMapping("/delete")
     public ResponseEntity<Object> delete(@RequestBody Video video) throws IOException {
         boolean statusDeleted = videoService.delete(video);
+        return ResponseEntity.ok(statusDeleted);
     }
 }

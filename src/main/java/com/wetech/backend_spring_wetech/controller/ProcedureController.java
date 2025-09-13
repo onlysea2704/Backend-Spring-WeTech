@@ -50,12 +50,6 @@ public class ProcedureController {
         return procedureService.findMyProcedure(user.getUserId());
     }
 
-
-//    @GetMapping("/find-my-procedure")
-//    public List<Procedure> findMyProcedure(){
-//    return procedureService
-//    }
-
     @PostMapping("/create")
     public ResponseEntity<Procedure> create(@RequestBody Procedure procedure){
         Procedure newProcedure =  procedureService.create(procedure);

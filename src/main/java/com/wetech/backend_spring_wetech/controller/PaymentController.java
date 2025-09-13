@@ -1,36 +1,35 @@
 package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.dto.WebhookPayload;
+import com.wetech.backend_spring_wetech.entity.ListItem;
+import com.wetech.backend_spring_wetech.entity.Transaction;
+import com.wetech.backend_spring_wetech.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
 
+    @Autowired
+    private PaymentService paymentService;
 
+    @PostMapping("/create")
+    public ResponseEntity<Object> createPayment(
+            @RequestBody Transaction transaction,
+            @RequestBody List<ListItem> listItems) {
+        boolean statusCreated = paymentService.createTransaction(transaction, listItems);
+        return ResponseEntity.ok(statusCreated);
+    }
 
     @PostMapping("/webhook/verify-payment")
-    public ResponseEntity<Map<String, Object>> receiveWebhook(@RequestBody WebhookPayload payload) {
-        // In ra console để test
-        System.out.println("Nhận webhook từ SePay:");
-        System.out.println("ID: " + payload.getId());
-        System.out.println("Ngân hàng: " + payload.getGateway());
-        System.out.println("Số tiền: " + payload.getTransferAmount());
-        System.out.println("Nội dung: " + payload.getContent());
-        System.out.println("Nội dung: " + payload.getCode());
-
-
-        // TODO: xử lý lưu DB hoặc logic nghiệp vụ ở đây
-
-        // Trả về JSON
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("message", "Webhook received successfully");
-
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Object> verifyTransaction(@RequestBody WebhookPayload payload) {
+        boolean statusPayment = paymentService.verifyTransaction(payload);
+        return ResponseEntity.ok(statusPayment);
     }
 }
