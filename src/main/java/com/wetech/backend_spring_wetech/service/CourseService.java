@@ -77,7 +77,7 @@ public class CourseService {
     public Course updateCourse(Course course, MultipartFile image) throws IOException {
 
         String imageUrl = course.getLinkImage();
-        if(course.getLinkImage() != null && !course.getLinkImage().equals("")){
+        if(image != null){
             imageUrl = uploadToCloudinary(image);
         }
 

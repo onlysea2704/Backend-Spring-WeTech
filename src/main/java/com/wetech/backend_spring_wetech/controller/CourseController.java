@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/course")
+@RequestMapping("/course")
 public class CourseController {
 
     @Autowired
@@ -48,11 +48,12 @@ public class CourseController {
     }
 
     @GetMapping("/check-have-course")
-    public boolean checkHaveCourse(@RequestParam Long courseId) {
+    public ResponseEntity<Object> checkHaveCourse(@RequestParam Long courseId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = (User) userService.loadUserByUsername(username);
-        return courseService.checkHaveCourse(courseId, user.getUserId());
+        boolean statusCheck = courseService.checkHaveCourse(courseId, user.getUserId());
+        return ResponseEntity.ok().body(statusCheck);
     }
 
     @GetMapping("/find-my-course")
