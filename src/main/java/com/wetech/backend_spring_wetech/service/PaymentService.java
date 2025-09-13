@@ -10,9 +10,11 @@ import com.wetech.backend_spring_wetech.repository.MyCourseRepository;
 import com.wetech.backend_spring_wetech.repository.MyProcedureRepository;
 import com.wetech.backend_spring_wetech.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PaymentService {
 
     @Autowired

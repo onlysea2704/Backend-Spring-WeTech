@@ -3,10 +3,12 @@ package com.wetech.backend_spring_wetech.service;
 import com.wetech.backend_spring_wetech.entity.Section;
 import com.wetech.backend_spring_wetech.repository.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class SectionService {
 
     @Autowired
