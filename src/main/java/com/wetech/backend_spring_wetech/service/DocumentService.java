@@ -1,51 +1,47 @@
 package com.wetech.backend_spring_wetech.service;
 
+import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.wetech.backend_spring_wetech.entity.DocumentSection;
 import com.wetech.backend_spring_wetech.entity.Video;
-import com.wetech.backend_spring_wetech.repository.VideoRepository;
+import com.wetech.backend_spring_wetech.repository.DocumentSectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.cloudinary.Cloudinary;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class VideoService {
+public class DocumentService {
 
-    @Autowired
-    private VideoRepository videoRepository;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private DocumentSectionRepository documentSectionRepository;
 
-    public List<Video> findBySectionId(Long sectionId) {
-        return videoRepository.findBySectionId(sectionId);
+    public List<DocumentSection> getDocumentBySectionId(Long sectionId){
+        List<DocumentSection> documentSections = documentSectionRepository.findBySectionId(sectionId);
+        return documentSections;
     }
 
-    public Video create(Long sectionId, MultipartFile video) throws IOException {
-        Video newVideo = new Video();
-        String videoUrl = uploadToCloudinary(video);
-        newVideo.setLink(videoUrl);
-        newVideo.setSectionId(sectionId);
-        return videoRepository.save(newVideo);
+    public DocumentSection createDocument(Long sectionId, MultipartFile document) throws IOException {
+        DocumentSection newDocument = new DocumentSection();
+        String videoUrl = uploadToCloudinary(document);
+        newDocument.setLink(videoUrl);
+        newDocument.setSectionId(sectionId);
+        return documentSectionRepository.save(newDocument);
     }
 
-//    public Video update(Video videoInfo, MultipartFile video) throws IOException {
-//        String videoUrl = videoInfo.getLink();
-//        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
-//            videoUrl = uploadToCloudinary(video);
-//        }
-//        return videoRepository.save(videoInfo);
-//    }
-
-    public boolean delete(Long videoId) {
+    public boolean deleteDocument(Long documentId){
         try {
-            videoRepository.deleteById(videoId);
+            documentSectionRepository.deleteById(documentId);
             return true;
-        }catch (Exception e) {
+        }catch (Exception e){
             return false;
         }
     }

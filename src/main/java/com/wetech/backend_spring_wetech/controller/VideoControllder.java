@@ -36,12 +36,6 @@ public class VideoControllder {
         return ResponseEntity.ok(newVideo);
     }
 
-//    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<Object> update(@RequestBody Video videoInfo, @RequestParam("video") MultipartFile video) throws IOException {
-//        Video updatedVideo = videoService.update(videoInfo, video);
-//        return ResponseEntity.ok(updatedVideo);
-//    }
-
     @PostMapping("/delete")
     public ResponseEntity<Object> delete(@RequestParam Long videoId) throws IOException {
         boolean statusDeleted = videoService.delete(videoId);
