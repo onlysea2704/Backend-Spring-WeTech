@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -45,5 +46,13 @@ public class AuthController {
     @GetMapping("/protected")
     public ResponseEntity<?> protectedEndpoint() {
         return ResponseEntity.ok("This is a protected endpoint");
+    }
+
+    @GetMapping("/get-info")
+    public ResponseEntity<?> getUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = (User) userService.loadUserByUsername(username);
+        return ResponseEntity.ok(user);
     }
 }
