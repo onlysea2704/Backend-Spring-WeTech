@@ -32,28 +32,29 @@ ALTER TABLE customers AUTO_INCREMENT = 1;
 ALTER TABLE users AUTO_INCREMENT = 1;
 
 
--- Bảng COURSES
+-- Bảng COURSES (Cập nhật lại type_course trong câu INSERT)
 INSERT INTO courses (title, description, author, real_price, sale_price, type_course, link_image, intro_1, intro_2, number_register) VALUES
-    ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 500.0, 399.0, 'thanh_lap_cong_ty', 'img/python.png', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),
-    ('Thay đổi đăng ký kinh doanh toàn tập', 'Nắm vững quy trình thay đổi giám đốc, địa chỉ, vốn điều lệ.', 'Tran Thi B', 450.0, 350.0, 'dang_ky_thay_doi', 'img/js.png', 'Các loại thay đổi', 'Hồ sơ cần chuẩn bị', 180),
-    ('Thành lập Hộ kinh doanh cá thể 2025', 'Hướng dẫn từ A-Z để đăng ký và vận hành hộ kinh doanh.', 'Le Van C', 600.0, 450.0, 'thanh_lap_ho_kinh_doanh', 'img/nodejs.png', 'Giới thiệu mô hình HKD', 'Quy trình đăng ký', 300),
-    ('Quy trình giải thể Công ty đúng luật', 'Trọn bộ kiến thức về các bước giải thể doanh nghiệp an toàn.', 'Pham Thi D', 700.0, 550.0, 'giai_the_cong_ty', 'img/uiux.png', 'Điều kiện giải thể', 'Thủ tục với cơ quan thuế', 400),
-    ('Giải thể Hộ kinh doanh nhanh gọn', 'Các bước cần làm để chấm dứt hoạt động của hộ kinh doanh.', 'Hoang Van E', 800.0, 600.0, 'giai_the_ho_kinh_doanh', 'img/digital_marketing.png', 'Khi nào cần giải thể', 'Nộp hồ sơ và trả dấu', 550),
-    ('Sáp nhập Tỉnh và các thủ tục liên quan', 'Tìm hiểu quy trình và pháp lý về sáp nhập đơn vị hành chính cấp Tỉnh.', 'Vu Thi F', 550.0, 400.0, 'sap_nhap_tinh', 'img/agile.png', 'Giới thiệu về sáp nhập', 'Các bước thực hiện', 220),
-    ('Hướng dẫn cập nhật thông tin lên CCCD gắn chip', 'Toàn bộ quy trình đổi từ CMND sang CCCD và cập nhật thông tin doanh nghiệp.', 'Do Van G', 400.0, 300.0, 'cap_nhat_len_cccd', 'img/sql.png', 'Lợi ích của CCCD', 'Cập nhật cho người đại diện', 350),
-    ('Thành lập công ty Cổ phần cho Startup', 'Tối ưu hóa cấu trúc vốn và điều lệ cho công ty khởi nghiệp.', 'Trinh Van H', 650.0, 500.0, 'thanh_lap_cong_ty', 'img/flutter.png', 'Chọn loại hình doanh nghiệp', 'Huy động vốn cổ phần', 280),
-    ('Đăng ký thay đổi thành viên/cổ đông', 'Hướng dẫn thủ tục chuyển nhượng vốn góp, cổ phần.', 'Mai Thi I', 350.0, 250.0, 'dang_ky_thay_doi', 'img/photography.png', 'Chuyển nhượng vốn TNHH', 'Chuyển nhượng cổ phần', 150),
-    ('Thành lập Hộ kinh doanh có điều kiện', 'Các thủ tục cần thiết để đăng ký những ngành nghề kinh doanh có điều kiện.', 'Bui Van K', 500.0, 400.0, 'thanh_lap_ho_kinh_doanh', 'img/accounting.png', 'Ngành nghề có điều kiện', 'Xin giấy phép con', 200),
-    ('Giải thể công ty và nghĩa vụ tài chính', 'Xử lý các vấn đề về thuế, bảo hiểm xã hội khi giải thể.', 'Dang Thi L', 900.0, 750.0, 'giai_the_cong_ty', 'img/ml.png', 'Quyết toán thuế', 'Chốt sổ BHXH', 450),
-    ('Sáp nhập và những điều cần biết', 'Phân tích các khía cạnh pháp lý và tài chính của việc sáp nhập.', 'Ngo Van M', 550.0, 420.0, 'sap_nhap_tinh', 'img/illustrator.png', 'Hợp đồng sáp nhập', 'Định giá doanh nghiệp', 320),
-    ('Cập nhật CCCD cho toàn bộ nhân viên công ty', 'Hướng dẫn doanh nghiệp thực hiện cập nhật thông tin cho người lao động.', 'Ly Thi N', 400.0, 350.0, 'cap_nhat_len_cccd', 'img/english.png', 'Nghĩa vụ của doanh nghiệp', 'Tổ chức cập nhật tập trung', 600),
-    ('Thành lập công ty TNHH một thành viên', 'Hướng dẫn chi tiết cho cá nhân muốn thành lập công ty.', 'Duong Van P', 600.0, 500.0, 'thanh_lap_cong_ty', 'img/investment.png', 'Ưu và nhược điểm', 'Hồ sơ chi tiết', 700),
-    ('Đăng ký thay đổi địa chỉ khác quận/tỉnh', 'Quy trình và thủ tục khi di dời trụ sở chính sang địa bàn khác.', 'Ho Thi Q', 300.0, 200.0, 'dang_ky_thay_doi', 'img/yoga.png', 'Thủ tục với chi cục thuế', 'Thay đổi con dấu và hóa đơn', 120),
-    ('Giải thể chi nhánh, văn phòng đại diện', 'Các bước chấm dứt hoạt động của đơn vị phụ thuộc.', 'Phan Van R', 750.0, 600.0, 'giai_the_cong_ty', 'img/devops.png', 'Hồ sơ giải thể chi nhánh', 'Các lưu ý quan trọng', 260),
-    ('Thành lập Hộ kinh doanh online', 'Đăng ký và tối ưu thuế cho mô hình kinh doanh trên mạng xã hội, sàn TMĐT.', 'Chau Thi S', 450.0, 380.0, 'thanh_lap_ho_kinh_doanh', 'img/content_creation.png', 'Đăng ký thuế', 'Sử dụng hóa đơn điện tử', 480),
-    ('Giải thể Hộ kinh doanh và các vấn đề thuế', 'Hướng dẫn quyết toán và đóng mã số thuế hộ kinh doanh.', 'Vo Van T', 380.0, 300.0, 'giai_the_ho_kinh_doanh', 'img/cooking.png', 'Kê khai lần cuối', 'Thủ tục với cơ quan thuế', 90),
-    ('Đăng ký thay đổi ngành nghề kinh doanh', 'Hướng dẫn bổ sung, rút bớt ngành nghề đăng ký kinh doanh.', 'Ha Thi U', 1000.0, 850.0, 'dang_ky_thay_doi', 'img/ielts.png', 'Mã ngành cấp 4', 'Các ngành nghề cấm', 800),
-    ('Thành lập công ty có vốn đầu tư nước ngoài', 'Quy trình xin giấy phép đầu tư và thành lập doanh nghiệp FDI.', 'Nguyen Kim V', 850.0, 700.0, 'thanh_lap_cong_ty', 'img/ccna.png', 'Giấy chứng nhận ĐKĐT', 'Thủ tục sau cấp phép', 330);
+    ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 500.0, 399.0, 'Thành lập Công ty', 'img/python.png', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),
+    ('Thay đổi đăng ký kinh doanh toàn tập', 'Nắm vững quy trình thay đổi giám đốc, địa chỉ, vốn điều lệ.', 'Tran Thi B', 450.0, 350.0, 'Đăng ký thay đổi', 'img/js.png', 'Các loại thay đổi', 'Hồ sơ cần chuẩn bị', 180),
+    ('Thành lập Hộ kinh doanh cá thể 2025', 'Hướng dẫn từ A-Z để đăng ký và vận hành hộ kinh doanh.', 'Le Van C', 600.0, 450.0, 'Thành lập Hộ kinh doanh', 'img/nodejs.png', 'Giới thiệu mô hình HKD', 'Quy trình đăng ký', 300),
+    ('Quy trình giải thể Công ty đúng luật', 'Trọn bộ kiến thức về các bước giải thể doanh nghiệp an toàn.', 'Pham Thi D', 700.0, 550.0, 'Giải thể Công ty', 'img/uiux.png', 'Điều kiện giải thể', 'Thủ tục với cơ quan thuế', 400),
+    ('Giải thể Hộ kinh doanh nhanh gọn', 'Các bước cần làm để chấm dứt hoạt động của hộ kinh doanh.', 'Hoang Van E', 800.0, 600.0, 'Giải thể Hộ kinh doanh', 'img/digital_marketing.png', 'Khi nào cần giải thể', 'Nộp hồ sơ và trả dấu', 550),
+    ('Sáp nhập Tỉnh và các thủ tục liên quan', 'Tìm hiểu quy trình và pháp lý về sáp nhập đơn vị hành chính cấp Tỉnh.', 'Vu Thi F', 550.0, 400.0, 'Sáp nhập Tỉnh', 'img/agile.png', 'Giới thiệu về sáp nhập', 'Các bước thực hiện', 220),
+    ('Hướng dẫn cập nhật thông tin lên CCCD gắn chip', 'Toàn bộ quy trình đổi từ CMND sang CCCD và cập nhật thông tin doanh nghiệp.', 'Do Van G', 400.0, 300.0, 'Cập nhật lên CCCD', 'img/sql.png', 'Lợi ích của CCCD', 'Cập nhật cho người đại diện', 350),
+    ('Thành lập công ty Cổ phần cho Startup', 'Tối ưu hóa cấu trúc vốn và điều lệ cho công ty khởi nghiệp.', 'Trinh Van H', 650.0, 500.0, 'Thành lập Công ty', 'img/flutter.png', 'Chọn loại hình doanh nghiệp', 'Huy động vốn cổ phần', 280),
+    ('Đăng ký thay đổi thành viên/cổ đông', 'Hướng dẫn thủ tục chuyển nhượng vốn góp, cổ phần.', 'Mai Thi I', 350.0, 250.0, 'Đăng ký thay đổi', 'img/photography.png', 'Chuyển nhượng vốn TNHH', 'Chuyển nhượng cổ phần', 150),
+    ('Thành lập Hộ kinh doanh có điều kiện', 'Các thủ tục cần thiết để đăng ký những ngành nghề kinh doanh có điều kiện.', 'Bui Van K', 500.0, 400.0, 'Thành lập Hộ kinh doanh', 'img/accounting.png', 'Ngành nghề có điều kiện', 'Xin giấy phép con', 200),
+    ('Giải thể công ty và nghĩa vụ tài chính', 'Xử lý các vấn đề về thuế, bảo hiểm xã hội khi giải thể.', 'Dang Thi L', 900.0, 750.0, 'Giải thể Công ty', 'img/ml.png', 'Quyết toán thuế', 'Chốt sổ BHXH', 450),
+    ('Sáp nhập và những điều cần biết', 'Phân tích các khía cạnh pháp lý và tài chính của việc sáp nhập.', 'Ngo Van M', 550.0, 420.0, 'Sáp nhập Tỉnh', 'img/illustrator.png', 'Hợp đồng sáp nhập', 'Định giá doanh nghiệp', 320),
+    ('Cập nhật CCCD cho toàn bộ nhân viên công ty', 'Hướng dẫn doanh nghiệp thực hiện cập nhật thông tin cho người lao động.', 'Ly Thi N', 400.0, 350.0, 'Cập nhật lên CCCD', 'img/english.png', 'Nghĩa vụ của doanh nghiệp', 'Tổ chức cập nhật tập trung', 600),
+    ('Thành lập công ty TNHH một thành viên', 'Hướng dẫn chi tiết cho cá nhân muốn thành lập công ty.', 'Duong Van P', 600.0, 500.0, 'Thành lập Công ty', 'img/investment.png', 'Ưu và nhược điểm', 'Hồ sơ chi tiết', 700),
+    ('Đăng ký thay đổi địa chỉ khác quận/tỉnh', 'Quy trình và thủ tục khi di dời trụ sở chính sang địa bàn khác.', 'Ho Thi Q', 300.0, 200.0, 'Đăng ký thay đổi', 'img/yoga.png', 'Thủ tục với chi cục thuế', 'Thay đổi con dấu và hóa đơn', 120),
+    ('Giải thể chi nhánh, văn phòng đại diện', 'Các bước chấm dứt hoạt động của đơn vị phụ thuộc.', 'Phan Van R', 750.0, 600.0, 'Giải thể Công ty', 'img/devops.png', 'Hồ sơ giải thể chi nhánh', 'Các lưu ý quan trọng', 260),
+    ('Thành lập Hộ kinh doanh online', 'Đăng ký và tối ưu thuế cho mô hình kinh doanh trên mạng xã hội, sàn TMĐT.', 'Chau Thi S', 450.0, 380.0, 'Thành lập Hộ kinh doanh', 'img/content_creation.png', 'Đăng ký thuế', 'Sử dụng hóa đơn điện tử', 480),
+    ('Giải thể Hộ kinh doanh và các vấn đề thuế', 'Hướng dẫn quyết toán và đóng mã số thuế hộ kinh doanh.', 'Vo Van T', 380.0, 300.0, 'Giải thể Hộ kinh doanh', 'img/cooking.png', 'Kê khai lần cuối', 'Thủ tục với cơ quan thuế', 90),
+    ('Đăng ký thay đổi ngành nghề kinh doanh', 'Hướng dẫn bổ sung, rút bớt ngành nghề đăng ký kinh doanh.', 'Ha Thi U', 1000.0, 850.0, 'Đăng ký thay đổi', 'img/ielts.png', 'Mã ngành cấp 4', 'Các ngành nghề cấm', 800),
+    ('Thành lập công ty có vốn đầu tư nước ngoài', 'Quy trình xin giấy phép đầu tư và thành lập doanh nghiệp FDI.', 'Nguyen Kim V', 850.0, 700.0, 'Thành lập Công ty', 'img/ccna.png', 'Giấy chứng nhận ĐKĐT', 'Thủ tục sau cấp phép', 330);
+
 -- Bảng SECTIONS
 -- Sections for Course 1: IELTS
 INSERT INTO sections (name, course_id) VALUES ('Chương 1: Kỹ năng Listening và Reading', 1);
