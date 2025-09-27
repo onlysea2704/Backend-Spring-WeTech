@@ -34,26 +34,26 @@ ALTER TABLE users AUTO_INCREMENT = 1;
 
 -- Bảng COURSES (Cập nhật lại type_course trong câu INSERT)
 INSERT INTO courses (title, description, author, real_price, sale_price, type_course, link_image, intro_1, intro_2, number_register) VALUES
-    ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 500.0, 399.0, 'Thành lập Công ty', 'img/python.png', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),
-    ('Thay đổi đăng ký kinh doanh toàn tập', 'Nắm vững quy trình thay đổi giám đốc, địa chỉ, vốn điều lệ.', 'Tran Thi B', 450.0, 350.0, 'Đăng ký thay đổi', 'img/js.png', 'Các loại thay đổi', 'Hồ sơ cần chuẩn bị', 180),
-    ('Thành lập Hộ kinh doanh cá thể 2025', 'Hướng dẫn từ A-Z để đăng ký và vận hành hộ kinh doanh.', 'Le Van C', 600.0, 450.0, 'Thành lập Hộ kinh doanh', 'img/nodejs.png', 'Giới thiệu mô hình HKD', 'Quy trình đăng ký', 300),
-    ('Quy trình giải thể Công ty đúng luật', 'Trọn bộ kiến thức về các bước giải thể doanh nghiệp an toàn.', 'Pham Thi D', 700.0, 550.0, 'Giải thể Công ty', 'img/uiux.png', 'Điều kiện giải thể', 'Thủ tục với cơ quan thuế', 400),
-    ('Giải thể Hộ kinh doanh nhanh gọn', 'Các bước cần làm để chấm dứt hoạt động của hộ kinh doanh.', 'Hoang Van E', 800.0, 600.0, 'Giải thể Hộ kinh doanh', 'img/digital_marketing.png', 'Khi nào cần giải thể', 'Nộp hồ sơ và trả dấu', 550),
-    ('Sáp nhập Tỉnh và các thủ tục liên quan', 'Tìm hiểu quy trình và pháp lý về sáp nhập đơn vị hành chính cấp Tỉnh.', 'Vu Thi F', 550.0, 400.0, 'Sáp nhập Tỉnh', 'img/agile.png', 'Giới thiệu về sáp nhập', 'Các bước thực hiện', 220),
-    ('Hướng dẫn cập nhật thông tin lên CCCD gắn chip', 'Toàn bộ quy trình đổi từ CMND sang CCCD và cập nhật thông tin doanh nghiệp.', 'Do Van G', 400.0, 300.0, 'Cập nhật lên CCCD', 'img/sql.png', 'Lợi ích của CCCD', 'Cập nhật cho người đại diện', 350),
-    ('Thành lập công ty Cổ phần cho Startup', 'Tối ưu hóa cấu trúc vốn và điều lệ cho công ty khởi nghiệp.', 'Trinh Van H', 650.0, 500.0, 'Thành lập Công ty', 'img/flutter.png', 'Chọn loại hình doanh nghiệp', 'Huy động vốn cổ phần', 280),
-    ('Đăng ký thay đổi thành viên/cổ đông', 'Hướng dẫn thủ tục chuyển nhượng vốn góp, cổ phần.', 'Mai Thi I', 350.0, 250.0, 'Đăng ký thay đổi', 'img/photography.png', 'Chuyển nhượng vốn TNHH', 'Chuyển nhượng cổ phần', 150),
-    ('Thành lập Hộ kinh doanh có điều kiện', 'Các thủ tục cần thiết để đăng ký những ngành nghề kinh doanh có điều kiện.', 'Bui Van K', 500.0, 400.0, 'Thành lập Hộ kinh doanh', 'img/accounting.png', 'Ngành nghề có điều kiện', 'Xin giấy phép con', 200),
-    ('Giải thể công ty và nghĩa vụ tài chính', 'Xử lý các vấn đề về thuế, bảo hiểm xã hội khi giải thể.', 'Dang Thi L', 900.0, 750.0, 'Giải thể Công ty', 'img/ml.png', 'Quyết toán thuế', 'Chốt sổ BHXH', 450),
-    ('Sáp nhập và những điều cần biết', 'Phân tích các khía cạnh pháp lý và tài chính của việc sáp nhập.', 'Ngo Van M', 550.0, 420.0, 'Sáp nhập Tỉnh', 'img/illustrator.png', 'Hợp đồng sáp nhập', 'Định giá doanh nghiệp', 320),
-    ('Cập nhật CCCD cho toàn bộ nhân viên công ty', 'Hướng dẫn doanh nghiệp thực hiện cập nhật thông tin cho người lao động.', 'Ly Thi N', 400.0, 350.0, 'Cập nhật lên CCCD', 'img/english.png', 'Nghĩa vụ của doanh nghiệp', 'Tổ chức cập nhật tập trung', 600),
-    ('Thành lập công ty TNHH một thành viên', 'Hướng dẫn chi tiết cho cá nhân muốn thành lập công ty.', 'Duong Van P', 600.0, 500.0, 'Thành lập Công ty', 'img/investment.png', 'Ưu và nhược điểm', 'Hồ sơ chi tiết', 700),
-    ('Đăng ký thay đổi địa chỉ khác quận/tỉnh', 'Quy trình và thủ tục khi di dời trụ sở chính sang địa bàn khác.', 'Ho Thi Q', 300.0, 200.0, 'Đăng ký thay đổi', 'img/yoga.png', 'Thủ tục với chi cục thuế', 'Thay đổi con dấu và hóa đơn', 120),
-    ('Giải thể chi nhánh, văn phòng đại diện', 'Các bước chấm dứt hoạt động của đơn vị phụ thuộc.', 'Phan Van R', 750.0, 600.0, 'Giải thể Công ty', 'img/devops.png', 'Hồ sơ giải thể chi nhánh', 'Các lưu ý quan trọng', 260),
-    ('Thành lập Hộ kinh doanh online', 'Đăng ký và tối ưu thuế cho mô hình kinh doanh trên mạng xã hội, sàn TMĐT.', 'Chau Thi S', 450.0, 380.0, 'Thành lập Hộ kinh doanh', 'img/content_creation.png', 'Đăng ký thuế', 'Sử dụng hóa đơn điện tử', 480),
-    ('Giải thể Hộ kinh doanh và các vấn đề thuế', 'Hướng dẫn quyết toán và đóng mã số thuế hộ kinh doanh.', 'Vo Van T', 380.0, 300.0, 'Giải thể Hộ kinh doanh', 'img/cooking.png', 'Kê khai lần cuối', 'Thủ tục với cơ quan thuế', 90),
-    ('Đăng ký thay đổi ngành nghề kinh doanh', 'Hướng dẫn bổ sung, rút bớt ngành nghề đăng ký kinh doanh.', 'Ha Thi U', 1000.0, 850.0, 'Đăng ký thay đổi', 'img/ielts.png', 'Mã ngành cấp 4', 'Các ngành nghề cấm', 800),
-    ('Thành lập công ty có vốn đầu tư nước ngoài', 'Quy trình xin giấy phép đầu tư và thành lập doanh nghiệp FDI.', 'Nguyen Kim V', 850.0, 700.0, 'Thành lập Công ty', 'img/ccna.png', 'Giấy chứng nhận ĐKĐT', 'Thủ tục sau cấp phép', 330);
+    ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 5000, 3990, 'Thành lập Công ty', 'img/python.png', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),
+    ('Thay đổi đăng ký kinh doanh toàn tập', 'Nắm vững quy trình thay đổi giám đốc, địa chỉ, vốn điều lệ.', 'Tran Thi B', 4500, 3500, 'Đăng ký thay đổi', 'img/js.png', 'Các loại thay đổi', 'Hồ sơ cần chuẩn bị', 180),
+    ('Thành lập Hộ kinh doanh cá thể 2025', 'Hướng dẫn từ A-Z để đăng ký và vận hành hộ kinh doanh.', 'Le Van C', 6000, 4500, 'Thành lập Hộ kinh doanh', 'img/nodejs.png', 'Giới thiệu mô hình HKD', 'Quy trình đăng ký', 300),
+    ('Quy trình giải thể Công ty đúng luật', 'Trọn bộ kiến thức về các bước giải thể doanh nghiệp an toàn.', 'Pham Thi D', 7000, 5500, 'Giải thể Công ty', 'img/uiux.png', 'Điều kiện giải thể', 'Thủ tục với cơ quan thuế', 400),
+    ('Giải thể Hộ kinh doanh nhanh gọn', 'Các bước cần làm để chấm dứt hoạt động của hộ kinh doanh.', 'Hoang Van E', 8000, 6000, 'Giải thể Hộ kinh doanh', 'img/digital_marketing.png', 'Khi nào cần giải thể', 'Nộp hồ sơ và trả dấu', 550),
+    ('Sáp nhập Tỉnh và các thủ tục liên quan', 'Tìm hiểu quy trình và pháp lý về sáp nhập đơn vị hành chính cấp Tỉnh.', 'Vu Thi F', 5500, 4000, 'Sáp nhập Tỉnh', 'img/agile.png', 'Giới thiệu về sáp nhập', 'Các bước thực hiện', 220),
+    ('Hướng dẫn cập nhật thông tin lên CCCD gắn chip', 'Toàn bộ quy trình đổi từ CMND sang CCCD và cập nhật thông tin doanh nghiệp.', 'Do Van G', 4000, 3000, 'Cập nhật lên CCCD', 'img/sql.png', 'Lợi ích của CCCD', 'Cập nhật cho người đại diện', 350),
+    ('Thành lập công ty Cổ phần cho Startup', 'Tối ưu hóa cấu trúc vốn và điều lệ cho công ty khởi nghiệp.', 'Trinh Van H', 6500, 5000, 'Thành lập Công ty', 'img/flutter.png', 'Chọn loại hình doanh nghiệp', 'Huy động vốn cổ phần', 280),
+    ('Đăng ký thay đổi thành viên/cổ đông', 'Hướng dẫn thủ tục chuyển nhượng vốn góp, cổ phần.', 'Mai Thi I', 3500, 2500, 'Đăng ký thay đổi', 'img/photography.png', 'Chuyển nhượng vốn TNHH', 'Chuyển nhượng cổ phần', 150),
+    ('Thành lập Hộ kinh doanh có điều kiện', 'Các thủ tục cần thiết để đăng ký những ngành nghề kinh doanh có điều kiện.', 'Bui Van K', 5000, 4000, 'Thành lập Hộ kinh doanh', 'img/accounting.png', 'Ngành nghề có điều kiện', 'Xin giấy phép con', 200),
+    ('Giải thể công ty và nghĩa vụ tài chính', 'Xử lý các vấn đề về thuế, bảo hiểm xã hội khi giải thể.', 'Dang Thi L', 9000, 7500, 'Giải thể Công ty', 'img/ml.png', 'Quyết toán thuế', 'Chốt sổ BHXH', 450),
+    ('Sáp nhập và những điều cần biết', 'Phân tích các khía cạnh pháp lý và tài chính của việc sáp nhập.', 'Ngo Van M', 5500, 4200, 'Sáp nhập Tỉnh', 'img/illustrator.png', 'Hợp đồng sáp nhập', 'Định giá doanh nghiệp', 320),
+    ('Cập nhật CCCD cho toàn bộ nhân viên công ty', 'Hướng dẫn doanh nghiệp thực hiện cập nhật thông tin cho người lao động.', 'Ly Thi N', 4000, 3500, 'Cập nhật lên CCCD', 'img/english.png', 'Nghĩa vụ của doanh nghiệp', 'Tổ chức cập nhật tập trung', 600),
+    ('Thành lập công ty TNHH một thành viên', 'Hướng dẫn chi tiết cho cá nhân muốn thành lập công ty.', 'Duong Van P', 6000, 5000, 'Thành lập Công ty', 'img/investment.png', 'Ưu và nhược điểm', 'Hồ sơ chi tiết', 700),
+    ('Đăng ký thay đổi địa chỉ khác quận/tỉnh', 'Quy trình và thủ tục khi di dời trụ sở chính sang địa bàn khác.', 'Ho Thi Q', 3000, 2000, 'Đăng ký thay đổi', 'img/yoga.png', 'Thủ tục với chi cục thuế', 'Thay đổi con dấu và hóa đơn', 120),
+    ('Giải thể chi nhánh, văn phòng đại diện', 'Các bước chấm dứt hoạt động của đơn vị phụ thuộc.', 'Phan Van R', 7500, 6000, 'Giải thể Công ty', 'img/devops.png', 'Hồ sơ giải thể chi nhánh', 'Các lưu ý quan trọng', 260),
+    ('Thành lập Hộ kinh doanh online', 'Đăng ký và tối ưu thuế cho mô hình kinh doanh trên mạng xã hội, sàn TMĐT.', 'Chau Thi S', 4500, 3800, 'Thành lập Hộ kinh doanh', 'img/content_creation.png', 'Đăng ký thuế', 'Sử dụng hóa đơn điện tử', 480),
+    ('Giải thể Hộ kinh doanh và các vấn đề thuế', 'Hướng dẫn quyết toán và đóng mã số thuế hộ kinh doanh.', 'Vo Van T', 3800, 3000, 'Giải thể Hộ kinh doanh', 'img/cooking.png', 'Kê khai lần cuối', 'Thủ tục với cơ quan thuế', 90),
+    ('Đăng ký thay đổi ngành nghề kinh doanh', 'Hướng dẫn bổ sung, rút bớt ngành nghề đăng ký kinh doanh.', 'Ha Thi U', 10000, 8500, 'Đăng ký thay đổi', 'img/ielts.png', 'Mã ngành cấp 4', 'Các ngành nghề cấm', 800),
+    ('Thành lập công ty có vốn đầu tư nước ngoài', 'Quy trình xin giấy phép đầu tư và thành lập doanh nghiệp FDI.', 'Nguyen Kim V', 8500, 7000, 'Thành lập Công ty', 'img/ccna.png', 'Giấy chứng nhận ĐKĐT', 'Thủ tục sau cấp phép', 330);
 
 -- Bảng SECTIONS
 -- Sections for Course 1: IELTS
@@ -142,83 +142,83 @@ INSERT INTO sections (name, course_id) VALUES ('Chương 3: Các món chính và
 -- Bảng VIDEOS (cho các section từ ID 4 đến 63)
 -- Videos for Python Course (Sections 4-6)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giới thiệu và Cài đặt Python', 4);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Biến, Kiểu dữ liệu và Toán tử', 5);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Biến, Kiểu dữ liệu và Toán tử', 5);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Cấu trúc điều khiển và Vòng lặp', 6);
 -- Videos for JavaScript Course (Sections 7-9)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tổng quan về ES6', 7);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Tổng quan về ES6', 7);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Arrow Functions và Promises', 8);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Async/Await và Modules', 9);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Async/Await và Modules', 9);
 -- Videos for Node.js Course (Sections 10-12)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Môi trường Node.js và NPM', 10);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xây dựng máy chủ web với Express', 11);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Xây dựng máy chủ web với Express', 11);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kết nối cơ sở dữ liệu MongoDB', 12);
 -- Videos for UI/UX Course (Sections 13-15)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Nền tảng về UI và UX', 13);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Nền tảng về UI và UX', 13);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Wireframing và Prototyping', 14);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thực hành với Figma', 15);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Thực hành với Figma', 15);
 -- Videos for Digital Marketing Course (Sections 16-18)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tối ưu hóa công cụ tìm kiếm (SEO)', 16);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Quảng cáo trả phí (PPC)', 17);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quảng cáo trả phí (PPC)', 17);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Email Marketing và Automation', 18);
 -- Videos for Agile & Scrum Course (Sections 19-21)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Nguyên lý cốt lõi của Agile', 19);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Nguyên lý cốt lõi của Agile', 19);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Vai trò và sự kiện trong Scrum', 20);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Quản lý Backlog và Sprint', 21);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quản lý Backlog và Sprint', 21);
 -- Videos for SQL Course (Sections 22-24)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Truy vấn dữ liệu với SELECT', 22);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kết hợp bảng với JOIN', 23);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Kết hợp bảng với JOIN', 23);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hàm tổng hợp và gom nhóm', 24);
 -- Videos for Flutter Course (Sections 25-27)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Ngôn ngữ Dart cơ bản', 25);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Ngôn ngữ Dart cơ bản', 25);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xây dựng Widgets và Layout', 26);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Quản lý trạng thái (State Management)', 27);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quản lý trạng thái (State Management)', 27);
 -- Videos for Photography Course (Sections 28-30)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hiểu về máy ảnh và ống kính', 28);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Ánh sáng trong nhiếp ảnh', 29);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Ánh sáng trong nhiếp ảnh', 29);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chỉnh sửa ảnh hậu kỳ với Lightroom', 30);
 -- Videos for Accounting Course (Sections 31-33)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hạch toán các nghiệp vụ cơ bản', 31);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Hạch toán các nghiệp vụ cơ bản', 31);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kế toán thuế', 32);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Lập và phân tích báo cáo tài chính', 33);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Lập và phân tích báo cáo tài chính', 33);
 -- Videos for Machine Learning Course (Sections 34-36)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giới thiệu về Học Máy', 34);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hồi quy tuyến tính và Logistic', 35);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Hồi quy tuyến tính và Logistic', 35);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Cây quyết định và Random Forest', 36);
 -- Videos for Illustrator Course (Sections 37-39)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giao diện và công cụ cơ bản', 37);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Giao diện và công cụ cơ bản', 37);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thao tác với màu sắc và Gradient', 38);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Vẽ và thiết kế nhân vật', 39);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Vẽ và thiết kế nhân vật', 39);
 -- Videos for English Course (Sections 40-42)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chào hỏi và giới thiệu bản thân', 40);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Viết Email và báo cáo chuyên nghiệp', 41);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Viết Email và báo cáo chuyên nghiệp', 41);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thuyết trình và họp hành', 42);
 -- Videos for Investment Course (Sections 43-45)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tổng quan thị trường chứng khoán', 43);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Tổng quan thị trường chứng khoán', 43);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Đọc biểu đồ nến và chỉ báo kỹ thuật', 44);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xây dựng danh mục đầu tư', 45);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Xây dựng danh mục đầu tư', 45);
 -- Videos for Yoga Course (Sections 46-48)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Khởi động và làm nóng cơ thể', 46);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chuỗi bài tập Chào Mặt Trời', 47);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Chuỗi bài tập Chào Mặt Trời', 47);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thư giãn và thiền định cuối buổi', 48);
 -- Videos for DevOps Course (Sections 49-51)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Văn hóa và nguyên tắc DevOps', 49);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Văn hóa và nguyên tắc DevOps', 49);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tích hợp liên tục (CI) với Git', 50);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Triển khai liên tục (CD) lên server', 51);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Triển khai liên tục (CD) lên server', 51);
 -- Videos for Content Creation Course (Sections 52-54)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xác định đối tượng và kênh truyền thông', 52);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kỹ năng viết content thu hút', 53);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Kỹ năng viết content thu hút', 53);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Phân tích và đo lường hiệu quả', 54);
 -- Videos for Cooking Course (Sections 55-57)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Sơ chế và bảo quản nguyên liệu', 55);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các món khai vị đặc sắc', 56);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Các món khai vị đặc sắc', 56);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các món chính và tráng miệng', 57);
 -- Videos for IELTS Course (Sections 58-60)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kỹ năng Listening và Reading', 58);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Phân tích đề và viết bài Writing', 59);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Phân tích đề và viết bài Writing', 59);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chiến thuật trả lời Speaking', 60);
 -- Videos for CCNA Course (Sections 61-63)
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các khái niệm mạng cơ bản', 61);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Địa chỉ IP và chia mạng con', 62);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Địa chỉ IP và chia mạng con', 62);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Định tuyến và chuyển mạch', 63);
 
 

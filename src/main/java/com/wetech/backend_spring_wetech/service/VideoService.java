@@ -25,6 +25,10 @@ public class VideoService {
         return videoRepository.findBySectionId(sectionId);
     }
 
+    public List<Video> findByCourseId(Long sectionId) {
+        return videoRepository.findByCourseId(sectionId);
+    }
+
     public Video create(Long sectionId, MultipartFile video) throws IOException {
         Video newVideo = new Video();
         String videoUrl = uploadToCloudinary(video);

@@ -27,6 +27,12 @@ public class VideoControllder {
         return ResponseEntity.ok(videos);
     }
 
+    @GetMapping("/find-by-courseId")
+    public ResponseEntity<Object> getVideoByCourseId(@RequestParam("courseId") long courseId) {
+        List<Video> videos = videoService.findByCourseId(courseId);
+        return ResponseEntity.ok(videos);
+    }
+
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> create(
             @RequestPart(value = "sectionId", required = true) Long sectionId,

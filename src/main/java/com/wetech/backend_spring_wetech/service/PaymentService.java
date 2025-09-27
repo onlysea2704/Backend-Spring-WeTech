@@ -1,10 +1,7 @@
 package com.wetech.backend_spring_wetech.service;
 
 import com.wetech.backend_spring_wetech.dto.WebhookPayload;
-import com.wetech.backend_spring_wetech.entity.ListItem;
-import com.wetech.backend_spring_wetech.entity.MyCourse;
-import com.wetech.backend_spring_wetech.entity.MyProcedure;
-import com.wetech.backend_spring_wetech.entity.Transaction;
+import com.wetech.backend_spring_wetech.entity.*;
 import com.wetech.backend_spring_wetech.repository.ListItemRepository;
 import com.wetech.backend_spring_wetech.repository.MyCourseRepository;
 import com.wetech.backend_spring_wetech.repository.MyProcedureRepository;
@@ -26,16 +23,21 @@ public class PaymentService {
     @Autowired
     MyProcedureRepository myProcedureRepository;
 
-    public boolean createTransaction(Transaction transaction, List<ListItem> listItem) {
+    public  Transaction getTransactionByCode(String code){
+        return transactionRepository.findByCode(code);
+    }
+
+    public Transaction createTransaction(Transaction transaction, List<ListItem> listItem, User user) {
         try {
+            transaction.setUserId(user.getUserId());
             Transaction newTransaction = transactionRepository.save(transaction);
             for (ListItem item : listItem) {
                 item.setIdTransaction(newTransaction.getIdTransaction());
             }
             listItemRepository.saveAll(listItem);
-            return true;
+            return newTransaction;
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 
