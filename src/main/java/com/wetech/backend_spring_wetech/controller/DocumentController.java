@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/document")
+@RequestMapping("/api/document")
 public class DocumentController {
 
     @Autowired

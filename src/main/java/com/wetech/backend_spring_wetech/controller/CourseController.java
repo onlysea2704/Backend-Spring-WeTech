@@ -37,7 +37,7 @@ public class CourseController {
         return courseService.getTop();
     }
 
-    @GetMapping("/find-by-type")
+    @PostMapping("/find-by-type")
     public List<Course> findByType(@RequestBody List<String> types) {
         return courseService.findByType(types);
     }
