@@ -34,26 +34,26 @@ ALTER TABLE users AUTO_INCREMENT = 1;
 
 -- Bảng COURSES (Cập nhật lại type_course trong câu INSERT)
 INSERT INTO courses (title, description, author, real_price, sale_price, type_course, link_image, intro_1, intro_2, number_register) VALUES
-    ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 5000, 3990, 'Thành lập Công ty', 'img/python.png', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),
-    ('Thay đổi đăng ký kinh doanh toàn tập', 'Nắm vững quy trình thay đổi giám đốc, địa chỉ, vốn điều lệ.', 'Tran Thi B', 4500, 3500, 'Đăng ký thay đổi', 'img/js.png', 'Các loại thay đổi', 'Hồ sơ cần chuẩn bị', 180),
-    ('Thành lập Hộ kinh doanh cá thể 2025', 'Hướng dẫn từ A-Z để đăng ký và vận hành hộ kinh doanh.', 'Le Van C', 6000, 4500, 'Thành lập Hộ kinh doanh', 'img/nodejs.png', 'Giới thiệu mô hình HKD', 'Quy trình đăng ký', 300),
-    ('Quy trình giải thể Công ty đúng luật', 'Trọn bộ kiến thức về các bước giải thể doanh nghiệp an toàn.', 'Pham Thi D', 7000, 5500, 'Giải thể Công ty', 'img/uiux.png', 'Điều kiện giải thể', 'Thủ tục với cơ quan thuế', 400),
-    ('Giải thể Hộ kinh doanh nhanh gọn', 'Các bước cần làm để chấm dứt hoạt động của hộ kinh doanh.', 'Hoang Van E', 8000, 6000, 'Giải thể Hộ kinh doanh', 'img/digital_marketing.png', 'Khi nào cần giải thể', 'Nộp hồ sơ và trả dấu', 550),
-    ('Sáp nhập Tỉnh và các thủ tục liên quan', 'Tìm hiểu quy trình và pháp lý về sáp nhập đơn vị hành chính cấp Tỉnh.', 'Vu Thi F', 5500, 4000, 'Sáp nhập Tỉnh', 'img/agile.png', 'Giới thiệu về sáp nhập', 'Các bước thực hiện', 220),
-    ('Hướng dẫn cập nhật thông tin lên CCCD gắn chip', 'Toàn bộ quy trình đổi từ CMND sang CCCD và cập nhật thông tin doanh nghiệp.', 'Do Van G', 4000, 3000, 'Cập nhật lên CCCD', 'img/sql.png', 'Lợi ích của CCCD', 'Cập nhật cho người đại diện', 350),
-    ('Thành lập công ty Cổ phần cho Startup', 'Tối ưu hóa cấu trúc vốn và điều lệ cho công ty khởi nghiệp.', 'Trinh Van H', 6500, 5000, 'Thành lập Công ty', 'img/flutter.png', 'Chọn loại hình doanh nghiệp', 'Huy động vốn cổ phần', 280),
-    ('Đăng ký thay đổi thành viên/cổ đông', 'Hướng dẫn thủ tục chuyển nhượng vốn góp, cổ phần.', 'Mai Thi I', 3500, 2500, 'Đăng ký thay đổi', 'img/photography.png', 'Chuyển nhượng vốn TNHH', 'Chuyển nhượng cổ phần', 150),
-    ('Thành lập Hộ kinh doanh có điều kiện', 'Các thủ tục cần thiết để đăng ký những ngành nghề kinh doanh có điều kiện.', 'Bui Van K', 5000, 4000, 'Thành lập Hộ kinh doanh', 'img/accounting.png', 'Ngành nghề có điều kiện', 'Xin giấy phép con', 200),
-    ('Giải thể công ty và nghĩa vụ tài chính', 'Xử lý các vấn đề về thuế, bảo hiểm xã hội khi giải thể.', 'Dang Thi L', 9000, 7500, 'Giải thể Công ty', 'img/ml.png', 'Quyết toán thuế', 'Chốt sổ BHXH', 450),
-    ('Sáp nhập và những điều cần biết', 'Phân tích các khía cạnh pháp lý và tài chính của việc sáp nhập.', 'Ngo Van M', 5500, 4200, 'Sáp nhập Tỉnh', 'img/illustrator.png', 'Hợp đồng sáp nhập', 'Định giá doanh nghiệp', 320),
-    ('Cập nhật CCCD cho toàn bộ nhân viên công ty', 'Hướng dẫn doanh nghiệp thực hiện cập nhật thông tin cho người lao động.', 'Ly Thi N', 4000, 3500, 'Cập nhật lên CCCD', 'img/english.png', 'Nghĩa vụ của doanh nghiệp', 'Tổ chức cập nhật tập trung', 600),
-    ('Thành lập công ty TNHH một thành viên', 'Hướng dẫn chi tiết cho cá nhân muốn thành lập công ty.', 'Duong Van P', 6000, 5000, 'Thành lập Công ty', 'img/investment.png', 'Ưu và nhược điểm', 'Hồ sơ chi tiết', 700),
-    ('Đăng ký thay đổi địa chỉ khác quận/tỉnh', 'Quy trình và thủ tục khi di dời trụ sở chính sang địa bàn khác.', 'Ho Thi Q', 3000, 2000, 'Đăng ký thay đổi', 'img/yoga.png', 'Thủ tục với chi cục thuế', 'Thay đổi con dấu và hóa đơn', 120),
-    ('Giải thể chi nhánh, văn phòng đại diện', 'Các bước chấm dứt hoạt động của đơn vị phụ thuộc.', 'Phan Van R', 7500, 6000, 'Giải thể Công ty', 'img/devops.png', 'Hồ sơ giải thể chi nhánh', 'Các lưu ý quan trọng', 260),
-    ('Thành lập Hộ kinh doanh online', 'Đăng ký và tối ưu thuế cho mô hình kinh doanh trên mạng xã hội, sàn TMĐT.', 'Chau Thi S', 4500, 3800, 'Thành lập Hộ kinh doanh', 'img/content_creation.png', 'Đăng ký thuế', 'Sử dụng hóa đơn điện tử', 480),
-    ('Giải thể Hộ kinh doanh và các vấn đề thuế', 'Hướng dẫn quyết toán và đóng mã số thuế hộ kinh doanh.', 'Vo Van T', 3800, 3000, 'Giải thể Hộ kinh doanh', 'img/cooking.png', 'Kê khai lần cuối', 'Thủ tục với cơ quan thuế', 90),
-    ('Đăng ký thay đổi ngành nghề kinh doanh', 'Hướng dẫn bổ sung, rút bớt ngành nghề đăng ký kinh doanh.', 'Ha Thi U', 10000, 8500, 'Đăng ký thay đổi', 'img/ielts.png', 'Mã ngành cấp 4', 'Các ngành nghề cấm', 800),
-    ('Thành lập công ty có vốn đầu tư nước ngoài', 'Quy trình xin giấy phép đầu tư và thành lập doanh nghiệp FDI.', 'Nguyen Kim V', 8500, 7000, 'Thành lập Công ty', 'img/ccna.png', 'Giấy chứng nhận ĐKĐT', 'Thủ tục sau cấp phép', 330);
+    ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 5000, 3990, 'Thành lập Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),
+    ('Thay đổi đăng ký kinh doanh toàn tập', 'Nắm vững quy trình thay đổi giám đốc, địa chỉ, vốn điều lệ.', 'Tran Thi B', 4500, 3500, 'Đăng ký thay đổi', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Các loại thay đổi', 'Hồ sơ cần chuẩn bị', 180),
+    ('Thành lập Hộ kinh doanh cá thể 2025', 'Hướng dẫn từ A-Z để đăng ký và vận hành hộ kinh doanh.', 'Le Van C', 6000, 4500, 'Thành lập Hộ kinh doanh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034170/course_2_occbug.jpg', 'Giới thiệu mô hình HKD', 'Quy trình đăng ký', 300),
+    ('Quy trình giải thể Công ty đúng luật', 'Trọn bộ kiến thức về các bước giải thể doanh nghiệp an toàn.', 'Pham Thi D', 7000, 5500, 'Giải thể Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Điều kiện giải thể', 'Thủ tục với cơ quan thuế', 400),
+    ('Giải thể Hộ kinh doanh nhanh gọn', 'Các bước cần làm để chấm dứt hoạt động của hộ kinh doanh.', 'Hoang Van E', 8000, 6000, 'Giải thể Hộ kinh doanh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Khi nào cần giải thể', 'Nộp hồ sơ và trả dấu', 550),
+    ('Sáp nhập Tỉnh và các thủ tục liên quan', 'Tìm hiểu quy trình và pháp lý về sáp nhập đơn vị hành chính cấp Tỉnh.', 'Vu Thi F', 5500, 4000, 'Sáp nhập Tỉnh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034170/course_2_occbug.jpg', 'Giới thiệu về sáp nhập', 'Các bước thực hiện', 220),
+    ('Hướng dẫn cập nhật thông tin lên CCCD gắn chip', 'Toàn bộ quy trình đổi từ CMND sang CCCD và cập nhật thông tin doanh nghiệp.', 'Do Van G', 4000, 3000, 'Cập nhật lên CCCD', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Lợi ích của CCCD', 'Cập nhật cho người đại diện', 350),
+    ('Thành lập công ty Cổ phần cho Startup', 'Tối ưu hóa cấu trúc vốn và điều lệ cho công ty khởi nghiệp.', 'Trinh Van H', 6500, 5000, 'Thành lập Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Chọn loại hình doanh nghiệp', 'Huy động vốn cổ phần', 280),
+    ('Đăng ký thay đổi thành viên/cổ đông', 'Hướng dẫn thủ tục chuyển nhượng vốn góp, cổ phần.', 'Mai Thi I', 3500, 2500, 'Đăng ký thay đổi', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034170/course_2_occbug.jpg', 'Chuyển nhượng vốn TNHH', 'Chuyển nhượng cổ phần', 150),
+    ('Thành lập Hộ kinh doanh có điều kiện', 'Các thủ tục cần thiết để đăng ký những ngành nghề kinh doanh có điều kiện.', 'Bui Van K', 5000, 4000, 'Thành lập Hộ kinh doanh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Ngành nghề có điều kiện', 'Xin giấy phép con', 200),
+    ('Giải thể công ty và nghĩa vụ tài chính', 'Xử lý các vấn đề về thuế, bảo hiểm xã hội khi giải thể.', 'Dang Thi L', 9000, 7500, 'Giải thể Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Quyết toán thuế', 'Chốt sổ BHXH', 450),
+    ('Sáp nhập và những điều cần biết', 'Phân tích các khía cạnh pháp lý và tài chính của việc sáp nhập.', 'Ngo Van M', 5500, 4200, 'Sáp nhập Tỉnh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034170/course_2_occbug.jpg', 'Hợp đồng sáp nhập', 'Định giá doanh nghiệp', 320),
+    ('Cập nhật CCCD cho toàn bộ nhân viên công ty', 'Hướng dẫn doanh nghiệp thực hiện cập nhật thông tin cho người lao động.', 'Ly Thi N', 4000, 3500, 'Cập nhật lên CCCD', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Nghĩa vụ của doanh nghiệp', 'Tổ chức cập nhật tập trung', 600),
+    ('Thành lập công ty TNHH một thành viên', 'Hướng dẫn chi tiết cho cá nhân muốn thành lập công ty.', 'Duong Van P', 6000, 5000, 'Thành lập Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Ưu và nhược điểm', 'Hồ sơ chi tiết', 700),
+    ('Đăng ký thay đổi địa chỉ khác quận/tỉnh', 'Quy trình và thủ tục khi di dời trụ sở chính sang địa bàn khác.', 'Ho Thi Q', 3000, 2000, 'Đăng ký thay đổi', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034170/course_2_occbug.jpg', 'Thủ tục với chi cục thuế', 'Thay đổi con dấu và hóa đơn', 120),
+    ('Giải thể chi nhánh, văn phòng đại diện', 'Các bước chấm dứt hoạt động của đơn vị phụ thuộc.', 'Phan Van R', 7500, 6000, 'Giải thể Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Hồ sơ giải thể chi nhánh', 'Các lưu ý quan trọng', 260),
+    ('Thành lập Hộ kinh doanh online', 'Đăng ký và tối ưu thuế cho mô hình kinh doanh trên mạng xã hội, sàn TMĐT.', 'Chau Thi S', 4500, 3800, 'Thành lập Hộ kinh doanh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Đăng ký thuế', 'Sử dụng hóa đơn điện tử', 480),
+    ('Giải thể Hộ kinh doanh và các vấn đề thuế', 'Hướng dẫn quyết toán và đóng mã số thuế hộ kinh doanh.', 'Vo Van T', 3800, 3000, 'Giải thể Hộ kinh doanh', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034170/course_2_occbug.jpg', 'Kê khai lần cuối', 'Thủ tục với cơ quan thuế', 90),
+    ('Đăng ký thay đổi ngành nghề kinh doanh', 'Hướng dẫn bổ sung, rút bớt ngành nghề đăng ký kinh doanh.', 'Ha Thi U', 10000, 8500, 'Đăng ký thay đổi', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Mã ngành cấp 4', 'Các ngành nghề cấm', 800),
+    ('Thành lập công ty có vốn đầu tư nước ngoài', 'Quy trình xin giấy phép đầu tư và thành lập doanh nghiệp FDI.', 'Nguyen Kim V', 8500, 7000, 'Thành lập Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034168/course_3_nirfm5.png', 'Giấy chứng nhận ĐKĐT', 'Thủ tục sau cấp phép', 330);
 
 -- Bảng SECTIONS
 -- Sections for Course 1: IELTS
@@ -216,10 +216,10 @@ INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudina
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kỹ năng Listening và Reading', 58);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Phân tích đề và viết bài Writing', 59);
 INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chiến thuật trả lời Speaking', 60);
--- Videos for CCNA Course (Sections 61-63)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các khái niệm mạng cơ bản', 61);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Địa chỉ IP và chia mạng con', 62);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Định tuyến và chuyển mạch', 63);
+-- Videos for CCNA Course (Sections 1-3)
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các khái niệm mạng cơ bản', 1);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Địa chỉ IP và chia mạng con', 2);
+INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Định tuyến và chuyển mạch', 3);
 
 
 -- Bảng DOCUMENT_SECTIONS (cho các section từ ID 4 đến 63)
@@ -308,26 +308,26 @@ INSERT INTO document_sections (name, link, section_id) VALUES ('Tài liệu: Cá
 
 -- Bảng PROCEDURES (cha trước)
 INSERT INTO procedures (title, description, type, real_price, sale_price, type_company, number_register) VALUES
-    ('Thủ tục thành lập Công ty Cổ phần', 'Dịch vụ tư vấn và hoàn tất hồ sơ thành lập Công ty Cổ phần.', 'thanh_lap_cong_ty', 2500.0, 2000.0, 'cong_ty_co_phan', 150),
-    ('Đăng ký thay đổi địa chỉ trụ sở chính', 'Thực hiện thủ tục thay đổi địa chỉ công ty TNHH 1 thành viên.', 'dang_ky_thay_doi', 800.0, 600.0, 'cong_ty_tnhh_mot_thanh_vien', 85),
-    ('Thông báo thay đổi Giám đốc/Tổng Giám đốc', 'Soạn và nộp hồ sơ thông báo thay đổi người đại diện pháp luật.', 'thong_bao_thay_doi', 500.0, 400.0, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 110),
-    ('Thủ tục tạm ngừng kinh doanh 1 năm', 'Tư vấn và thực hiện thủ tục tạm ngừng kinh doanh cho Công ty Cổ phần.', 'tam_ngung_kinh_doanh', 1000.0, 800.0, 'cong_ty_co_phan', 45),
-    ('Thủ tục giải thể Công ty TNHH', 'Dịch vụ trọn gói giải thể doanh nghiệp TNHH 2 thành viên.', 'giai_the', 3000.0, 2500.0, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 30),
-    ('Thành lập Công ty TNHH một thành viên', 'Hồ sơ thành lập công ty TNHH 1 thành viên trọn gói, nhanh chóng.', 'thanh_lap_cong_ty', 1800.0, 1500.0, 'cong_ty_tnhh_mot_thanh_vien', 200),
-    ('Đăng ký thay đổi vốn điều lệ', 'Tư vấn và thực hiện thủ tục tăng/giảm vốn điều lệ cho công ty cổ phần.', 'dang_ky_thay_doi', 900.0, 750.0, 'cong_ty_co_phan', 95),
-    ('Thông báo thay đổi thông tin tài khoản ngân hàng', 'Thực hiện thông báo với cơ quan đăng ký kinh doanh về thay đổi tài khoản ngân hàng.', 'thong_bao_thay_doi', 400.0, 300.0, 'cong_ty_tnhh_mot_thanh_vien', 150),
-    ('Thủ tục tạm ngừng kinh doanh 6 tháng', 'Dịch vụ tạm ngừng kinh doanh cho công ty TNHH 2 thành viên trở lên.', 'tam_ngung_kinh_doanh', 900.0, 700.0, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 60),
-    ('Thủ tục giải thể nhanh Công ty Cổ phần', 'Tư vấn các bước giải thể công ty cổ phần, đảm bảo đúng pháp luật.', 'giai_the', 4000.0, 3500.0, 'cong_ty_co_phan', 25),
-    ('Thành lập Công ty TNHH hai thành viên trở lên', 'Dịch vụ thành lập công ty TNHH có từ 2 đến 50 thành viên.', 'thanh_lap_cong_ty', 2200.0, 1800.0, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 180),
-    ('Đăng ký thay đổi tên công ty', 'Thực hiện thủ tục đổi tên cho Công ty Cổ phần.', 'dang_ky_thay_doi', 700.0, 550.0, 'cong_ty_co_phan', 70),
-    ('Thông báo thay đổi ngành, nghề kinh doanh', 'Bổ sung, thay đổi ngành nghề kinh doanh cho công ty TNHH.', 'thong_bao_thay_doi', 600.0, 450.0, 'cong_ty_tnhh_mot_thanh_vien', 130),
-    ('Tạm ngừng kinh doanh và mở lại', 'Dịch vụ trọn gói tạm ngừng và đăng ký kinh doanh trở lại trước thời hạn.', 'tam_ngung_kinh_doanh', 1200.0, 1000.0, 'cong_ty_co_phan', 40),
-    ('Giải thể chi nhánh công ty', 'Thủ tục chấm dứt hoạt động của chi nhánh, văn phòng đại diện.', 'giai_the', 2000.0, 1600.0, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 22),
-    ('Thủ tục thành lập doanh nghiệp có vốn đầu tư nước ngoài', 'Tư vấn thành lập công ty cổ phần có yếu tố nước ngoài.', 'thanh_lap_cong_ty', 5000.0, 4500.0, 'cong_ty_co_phan', 55),
-    ('Đăng ký thay đổi thành viên góp vốn', 'Thủ tục thay đổi thành viên trong công ty TNHH 2 thành viên trở lên.', 'dang_ky_thay_doi', 1000.0, 850.0, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 65),
-    ('Thông báo mẫu dấu mới của doanh nghiệp', 'Thủ tục thông báo về việc thay đổi con dấu công ty.', 'thong_bao_thay_doi', 450.0, 350.0, 'cong_ty_co_phan', 90),
-    ('Thủ tục tạm ngừng kinh doanh cho TNHH 1 TV', 'Dịch vụ tạm ngừng kinh doanh nhanh gọn cho công ty TNHH một thành viên.', 'tam_ngung_kinh_doanh', 850.0, 650.0, 'cong_ty_tnhh_mot_thanh_vien', 50),
-    ('Thủ tục giải thể công ty không phát sinh doanh thu', 'Tư vấn giải thể cho công ty TNHH một thành viên chưa có hoạt động.', 'giai_the', 2500.0, 2200.0, 'cong_ty_tnhh_mot_thanh_vien', 35);
+    ('Thủ tục thành lập Công ty Cổ phần', 'Dịch vụ tư vấn và hoàn tất hồ sơ thành lập Công ty Cổ phần.', 'thanh_lap_cong_ty', 25000, 20000, 'cong_ty_co_phan', 150),
+    ('Đăng ký thay đổi địa chỉ trụ sở chính', 'Thực hiện thủ tục thay đổi địa chỉ công ty TNHH 1 thành viên.', 'dang_ky_thay_doi', 8000, 6000, 'cong_ty_tnhh_mot_thanh_vien', 85),
+    ('Thông báo thay đổi Giám đốc/Tổng Giám đốc', 'Soạn và nộp hồ sơ thông báo thay đổi người đại diện pháp luật.', 'thong_bao_thay_doi', 5000, 4000, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 110),
+    ('Thủ tục tạm ngừng kinh doanh 1 năm', 'Tư vấn và thực hiện thủ tục tạm ngừng kinh doanh cho Công ty Cổ phần.', 'tam_ngung_kinh_doanh', 10000, 8000, 'cong_ty_co_phan', 45),
+    ('Thủ tục giải thể Công ty TNHH', 'Dịch vụ trọn gói giải thể doanh nghiệp TNHH 2 thành viên.', 'giai_the', 30000, 25000, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 30),
+    ('Thành lập Công ty TNHH một thành viên', 'Hồ sơ thành lập công ty TNHH 1 thành viên trọn gói, nhanh chóng.', 'thanh_lap_cong_ty', 18000, 15000, 'cong_ty_tnhh_mot_thanh_vien', 200),
+    ('Đăng ký thay đổi vốn điều lệ', 'Tư vấn và thực hiện thủ tục tăng/giảm vốn điều lệ cho công ty cổ phần.', 'dang_ky_thay_doi', 9000, 7500, 'cong_ty_co_phan', 95),
+    ('Thông báo thay đổi thông tin tài khoản ngân hàng', 'Thực hiện thông báo với cơ quan đăng ký kinh doanh về thay đổi tài khoản ngân hàng.', 'thong_bao_thay_doi', 4000, 3000, 'cong_ty_tnhh_mot_thanh_vien', 150),
+    ('Thủ tục tạm ngừng kinh doanh 6 tháng', 'Dịch vụ tạm ngừng kinh doanh cho công ty TNHH 2 thành viên trở lên.', 'tam_ngung_kinh_doanh', 9000, 7000, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 60),
+    ('Thủ tục giải thể nhanh Công ty Cổ phần', 'Tư vấn các bước giải thể công ty cổ phần, đảm bảo đúng pháp luật.', 'giai_the', 40000, 35000, 'cong_ty_co_phan', 25),
+    ('Thành lập Công ty TNHH hai thành viên trở lên', 'Dịch vụ thành lập công ty TNHH có từ 2 đến 50 thành viên.', 'thanh_lap_cong_ty', 22000, 18000, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 180),
+    ('Đăng ký thay đổi tên công ty', 'Thực hiện thủ tục đổi tên cho Công ty Cổ phần.', 'dang_ky_thay_doi', 7000, 5500, 'cong_ty_co_phan', 70),
+    ('Thông báo thay đổi ngành, nghề kinh doanh', 'Bổ sung, thay đổi ngành nghề kinh doanh cho công ty TNHH.', 'thong_bao_thay_doi', 6000, 4500, 'cong_ty_tnhh_mot_thanh_vien', 130),
+    ('Tạm ngừng kinh doanh và mở lại', 'Dịch vụ trọn gói tạm ngừng và đăng ký kinh doanh trở lại trước thời hạn.', 'tam_ngung_kinh_doanh', 12000, 10000, 'cong_ty_co_phan', 40),
+    ('Giải thể chi nhánh công ty', 'Thủ tục chấm dứt hoạt động của chi nhánh, văn phòng đại diện.', 'giai_the', 20000, 16000, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 22),
+    ('Thủ tục thành lập doanh nghiệp có vốn đầu tư nước ngoài', 'Tư vấn thành lập công ty cổ phần có yếu tố nước ngoài.', 'thanh_lap_cong_ty', 50000, 45000, 'cong_ty_co_phan', 55),
+    ('Đăng ký thay đổi thành viên góp vốn', 'Thủ tục thay đổi thành viên trong công ty TNHH 2 thành viên trở lên.', 'dang_ky_thay_doi', 10000, 8500, 'cong_ty_tnhh_hai_thanh_vien_tro_len', 65),
+    ('Thông báo mẫu dấu mới của doanh nghiệp', 'Thủ tục thông báo về việc thay đổi con dấu công ty.', 'thong_bao_thay_doi', 4500, 3500, 'cong_ty_co_phan', 90),
+    ('Thủ tục tạm ngừng kinh doanh cho TNHH 1 TV', 'Dịch vụ tạm ngừng kinh doanh nhanh gọn cho công ty TNHH một thành viên.', 'tam_ngung_kinh_doanh', 8500, 6500, 'cong_ty_tnhh_mot_thanh_vien', 50),
+    ('Thủ tục giải thể công ty không phát sinh doanh thu', 'Tư vấn giải thể cho công ty TNHH một thành viên chưa có hoạt động.', 'giai_the', 25000, 22000, 'cong_ty_tnhh_mot_thanh_vien', 35);
 
 
 -- Bảng DOCUMENT_PROCEDURE (tham chiếu procedure_id)

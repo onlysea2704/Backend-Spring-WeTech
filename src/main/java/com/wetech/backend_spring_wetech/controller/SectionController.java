@@ -34,9 +34,9 @@ public class SectionController {
         return ResponseEntity.ok(updatedSection);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Object> deleteSection(@RequestParam Long videoId) {
-        boolean statusDeleted = sectionService.delete(videoId);
+    @PostMapping("/delete")
+    public ResponseEntity<Object> deleteSection(@RequestParam Long sectionId) {
+        boolean statusDeleted = sectionService.delete(sectionId);
         return ResponseEntity.ok(statusDeleted);
     }
 }

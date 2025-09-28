@@ -47,6 +47,8 @@ public class PaymentService {
 
         if (transaction.getTransferAmount() <= webhookPayload.getTransferAmount()) {
             List<ListItem> listItems = listItemRepository.findByIdTransaction(transaction.getIdTransaction());
+            transaction.setStatus("SUCCESS");
+            transactionRepository.save(transaction);
             for (ListItem item : listItems) {
                 if(item.getIdCourse() != null){
                     MyCourse myCourse = new MyCourse();

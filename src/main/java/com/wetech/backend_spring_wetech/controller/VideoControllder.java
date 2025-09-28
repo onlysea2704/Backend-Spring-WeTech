@@ -33,12 +33,20 @@ public class VideoControllder {
         return ResponseEntity.ok(videos);
     }
 
-    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @GetMapping("/create")
+    public ResponseEntity<Object> createVideo(
+            @RequestParam Long sectionId
+    ){
+        Video video = videoService.create(sectionId);
+        return ResponseEntity.ok(video);
+    }
+
+    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> create(
-            @RequestPart(value = "sectionId", required = true) Long sectionId,
-            @RequestPart(value = "video", required = true) MultipartFile video
+            @RequestPart(value = "videoInfo", required = true) Video videoInfo,
+            @RequestPart(value = "video", required = false) MultipartFile video
     ) throws IOException {
-        Video newVideo = videoService.create(sectionId, video);
+        Video newVideo = videoService.update(videoInfo, video);
         return ResponseEntity.ok(newVideo);
     }
 

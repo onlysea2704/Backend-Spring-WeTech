@@ -48,6 +48,7 @@ public class PaymentController {
     @PostMapping("/webhook/verify-payment")
     public ResponseEntity<Object> verifyTransaction(@RequestBody WebhookPayload payload) {
         boolean statusPayment = paymentService.verifyTransaction(payload);
+        System.out.println(statusPayment);
         return ResponseEntity.ok(statusPayment);
     }
 }

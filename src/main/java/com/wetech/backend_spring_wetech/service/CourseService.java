@@ -56,18 +56,15 @@ public class CourseService {
         return myCourseRepository.findMyCourseByUserId(userId);
     }
 
-    public Course createCourse(Course course, MultipartFile image) throws IOException {
+    public Course createCourse(){
 
-        String imageUrl = course.getLinkImage();
-        if(course.getLinkImage() != null && !course.getLinkImage().equals("")){
-            imageUrl = uploadToCloudinary(image);
-        }
+        Course newCourse = new Course();
 
         LocalDate currentDate = LocalDate.now();
         Date date = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        course.setLinkImage(imageUrl);
-        course.setCreatedAt(date);
-        return courseRepository.save(course);
+        newCourse.setCreatedAt(date);
+        newCourse.setNumberRegister(0);
+        return courseRepository.save(newCourse);
     }
 
     public Course updateCourse(Course course, MultipartFile image) throws IOException {

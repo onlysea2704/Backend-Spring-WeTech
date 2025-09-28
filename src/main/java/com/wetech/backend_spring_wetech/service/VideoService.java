@@ -29,21 +29,19 @@ public class VideoService {
         return videoRepository.findByCourseId(sectionId);
     }
 
-    public Video create(Long sectionId, MultipartFile video) throws IOException {
+    public Video create(Long sectionId){
         Video newVideo = new Video();
-        String videoUrl = uploadToCloudinary(video);
-        newVideo.setLink(videoUrl);
         newVideo.setSectionId(sectionId);
         return videoRepository.save(newVideo);
     }
 
-//    public Video update(Video videoInfo, MultipartFile video) throws IOException {
-//        String videoUrl = videoInfo.getLink();
-//        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
-//            videoUrl = uploadToCloudinary(video);
-//        }
-//        return videoRepository.save(videoInfo);
-//    }
+    public Video update(Video videoInfo, MultipartFile video) throws IOException {
+        String videoUrl = videoInfo.getLink();
+        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
+            videoUrl = uploadToCloudinary(video);
+        }
+        return videoRepository.save(videoInfo);
+    }
 
     public boolean delete(Long videoId) {
         try {

@@ -65,11 +65,9 @@ public class CourseController {
     }
 
     // API tạo khóa học
-    @PostMapping(value = "/create-course", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Course> createCourse(
-            @RequestPart(value = "course", required = false) Course courseRequest,
-            @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
-        Course newCourse = courseService.createCourse(courseRequest, image);
+    @GetMapping("/create-course")
+    public ResponseEntity<Course> createCourse(){
+        Course newCourse = courseService.createCourse();
         return ResponseEntity.ok(newCourse);
     }
 
