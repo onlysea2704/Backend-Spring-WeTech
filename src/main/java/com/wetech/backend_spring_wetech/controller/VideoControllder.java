@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.controller;
 
+import com.wetech.backend_spring_wetech.dto.SectionWithVideosDTO;
 import com.wetech.backend_spring_wetech.entity.Procedure;
 import com.wetech.backend_spring_wetech.entity.Video;
 import com.wetech.backend_spring_wetech.repository.VideoRepository;
@@ -29,7 +30,7 @@ public class VideoControllder {
 
     @GetMapping("/find-by-courseId")
     public ResponseEntity<Object> getVideoByCourseId(@RequestParam("courseId") long courseId) {
-        List<Video> videos = videoService.findByCourseId(courseId);
+        List<SectionWithVideosDTO> videos = videoService.findByCourseId(courseId);
         return ResponseEntity.ok(videos);
     }
 
