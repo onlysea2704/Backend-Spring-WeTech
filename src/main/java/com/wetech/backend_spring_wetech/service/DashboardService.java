@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.service;
 
+import com.wetech.backend_spring_wetech.dto.CourseCategoryStatsDTO;
 import com.wetech.backend_spring_wetech.dto.DashboardDTO;
 import com.wetech.backend_spring_wetech.dto.RevenueCardDTO;
 import com.wetech.backend_spring_wetech.dto.UserDto;
@@ -27,6 +28,29 @@ public class DashboardService {
     private CourseRepository courseRepository;
     @Autowired
     private UserRepository userRepository;
+
+    public DashboardDTO getInfoCarDashboard() {
+
+        // --- 1. Doanh thu tổng khóa học ---
+        Double courseRe = transactionRepository.getRevenueByType("course");
+
+        // --- 2. Doanh thu tổng thủ tục pháp lý ---
+        Double procedureRe = transactionRepository.getRevenueByType("procedure");
+
+        // --- 3. Tổng doanh thu ---
+        Double totalRe = courseRe+procedureRe;
+
+        // --- 4. Tổng số khóa học ---
+        Long totalCourses = courseRepository.count();
+
+        // Build DTO
+        RevenueCardDTO courseRevenue = new RevenueCardDTO("Doanh thu khóa học", courseRe, null);
+        RevenueCardDTO procedureRevenue = new RevenueCardDTO("Doanh thu thủ tục pháp lý", procedureRe, null);
+        RevenueCardDTO totalRevenue = new RevenueCardDTO("Tổng doanh thu", totalRe, null);
+
+        return new DashboardDTO(courseRevenue, procedureRevenue, totalRevenue, totalCourses);
+    }
+
 
     public DashboardDTO getDashboardData() {
         LocalDate now = LocalDate.now();
@@ -80,6 +104,9 @@ public class DashboardService {
         return userDtos;
     }
 
+    public List<CourseCategoryStatsDTO> getCourseCategoryStats() {
+        return courseRepository.getCategoryStats();
+    }
 
     private double calcChangePercent(Double current, Double previous) {
         if (previous == null || previous == 0) return 1.0;
