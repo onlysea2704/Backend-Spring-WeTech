@@ -46,7 +46,8 @@ public class VideoService {
             SectionWithVideosDTO dto = new SectionWithVideosDTO(
                     section.getSectionId(),
                     section.getName(),
-                    videos
+                    videos,
+                    section.getCourseId()
             );
             result.add(dto);
         }
@@ -61,9 +62,13 @@ public class VideoService {
 
     public Video update(Video videoInfo, MultipartFile video) throws IOException {
         String videoUrl = videoInfo.getLink();
-        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
+//        if(videoInfo.getLink() != null && !videoInfo.getLink().equals("")){
+//            videoUrl = uploadToCloudinary(video);
+//        }
+        if(video != null) {
             videoUrl = uploadToCloudinary(video);
         }
+        videoInfo.setLink(videoUrl);
         return videoRepository.save(videoInfo);
     }
 

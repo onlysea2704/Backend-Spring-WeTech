@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface DocumentSectionRepository extends JpaRepository<DocumentSection, Long> {
     public List<DocumentSection> findBySectionId(Long sectionId);
+    public List<DocumentSection> findByDocumentId(Long documentId);
 }

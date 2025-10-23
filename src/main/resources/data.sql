@@ -141,85 +141,85 @@ INSERT INTO sections (name, course_id) VALUES ('Chương 3: Các món chính và
 
 -- Bảng VIDEOS (cho các section từ ID 4 đến 63)
 -- Videos for Python Course (Sections 4-6)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giới thiệu và Cài đặt Python', 4);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Biến, Kiểu dữ liệu và Toán tử', 5);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Cấu trúc điều khiển và Vòng lặp', 6);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giới thiệu và Cài đặt Python', 4, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Biến, Kiểu dữ liệu và Toán tử', 5, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Cấu trúc điều khiển và Vòng lặp', 6, 708);
 -- Videos for JavaScript Course (Sections 7-9)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Tổng quan về ES6', 7);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Arrow Functions và Promises', 8);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Async/Await và Modules', 9);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Tổng quan về ES6', 7, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Arrow Functions và Promises', 8, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Async/Await và Modules', 9, 1004);
 -- Videos for Node.js Course (Sections 10-12)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Môi trường Node.js và NPM', 10);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Xây dựng máy chủ web với Express', 11);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kết nối cơ sở dữ liệu MongoDB', 12);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Môi trường Node.js và NPM', 10, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Xây dựng máy chủ web với Express', 11, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kết nối cơ sở dữ liệu MongoDB', 12, 708);
 -- Videos for UI/UX Course (Sections 13-15)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Nền tảng về UI và UX', 13);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Wireframing và Prototyping', 14);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Thực hành với Figma', 15);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Nền tảng về UI và UX', 13, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Wireframing và Prototyping', 14, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Thực hành với Figma', 15, 1004);
 -- Videos for Digital Marketing Course (Sections 16-18)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tối ưu hóa công cụ tìm kiếm (SEO)', 16);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quảng cáo trả phí (PPC)', 17);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Email Marketing và Automation', 18);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tối ưu hóa công cụ tìm kiếm (SEO)', 16, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quảng cáo trả phí (PPC)', 17, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Email Marketing và Automation', 18, 708);
 -- Videos for Agile & Scrum Course (Sections 19-21)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Nguyên lý cốt lõi của Agile', 19);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Vai trò và sự kiện trong Scrum', 20);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quản lý Backlog và Sprint', 21);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Nguyên lý cốt lõi của Agile', 19, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Vai trò và sự kiện trong Scrum', 20, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quản lý Backlog và Sprint', 21, 1004);
 -- Videos for SQL Course (Sections 22-24)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Truy vấn dữ liệu với SELECT', 22);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Kết hợp bảng với JOIN', 23);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hàm tổng hợp và gom nhóm', 24);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Truy vấn dữ liệu với SELECT', 22, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Kết hợp bảng với JOIN', 23, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hàm tổng hợp và gom nhóm', 24, 708);
 -- Videos for Flutter Course (Sections 25-27)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Ngôn ngữ Dart cơ bản', 25);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xây dựng Widgets và Layout', 26);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quản lý trạng thái (State Management)', 27);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Ngôn ngữ Dart cơ bản', 25, 1004);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xây dựng Widgets và Layout', 26, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Quản lý trạng thái (State Management)', 27, 994);
 -- Videos for Photography Course (Sections 28-30)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hiểu về máy ảnh và ống kính', 28);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Ánh sáng trong nhiếp ảnh', 29);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chỉnh sửa ảnh hậu kỳ với Lightroom', 30);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Hiểu về máy ảnh và ống kính', 28, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Ánh sáng trong nhiếp ảnh', 29, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chỉnh sửa ảnh hậu kỳ với Lightroom', 30, 708);
 -- Videos for Accounting Course (Sections 31-33)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Hạch toán các nghiệp vụ cơ bản', 31);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kế toán thuế', 32);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Lập và phân tích báo cáo tài chính', 33);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Hạch toán các nghiệp vụ cơ bản', 31, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kế toán thuế', 32, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Lập và phân tích báo cáo tài chính', 33, 994);
 -- Videos for Machine Learning Course (Sections 34-36)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giới thiệu về Học Máy', 34);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Hồi quy tuyến tính và Logistic', 35);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Cây quyết định và Random Forest', 36);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Giới thiệu về Học Máy', 34, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Hồi quy tuyến tính và Logistic', 35, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Cây quyết định và Random Forest', 36, 708);
 -- Videos for Illustrator Course (Sections 37-39)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Giao diện và công cụ cơ bản', 37);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thao tác với màu sắc và Gradient', 38);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Vẽ và thiết kế nhân vật', 39);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Giao diện và công cụ cơ bản', 37, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thao tác với màu sắc và Gradient', 38, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Vẽ và thiết kế nhân vật', 39, 994);
 -- Videos for English Course (Sections 40-42)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chào hỏi và giới thiệu bản thân', 40);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Viết Email và báo cáo chuyên nghiệp', 41);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thuyết trình và họp hành', 42);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chào hỏi và giới thiệu bản thân', 40, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Viết Email và báo cáo chuyên nghiệp', 41, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thuyết trình và họp hành', 42, 708);
 -- Videos for Investment Course (Sections 43-45)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Tổng quan thị trường chứng khoán', 43);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Đọc biểu đồ nến và chỉ báo kỹ thuật', 44);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Xây dựng danh mục đầu tư', 45);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Tổng quan thị trường chứng khoán', 43, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Đọc biểu đồ nến và chỉ báo kỹ thuật', 44, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Xây dựng danh mục đầu tư', 45, 994);
 -- Videos for Yoga Course (Sections 46-48)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Khởi động và làm nóng cơ thể', 46);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Chuỗi bài tập Chào Mặt Trời', 47);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thư giãn và thiền định cuối buổi', 48);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Khởi động và làm nóng cơ thể', 46, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Chuỗi bài tập Chào Mặt Trời', 47, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Thư giãn và thiền định cuối buổi', 48, 708);
 -- Videos for DevOps Course (Sections 49-51)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Văn hóa và nguyên tắc DevOps', 49);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tích hợp liên tục (CI) với Git', 50);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Triển khai liên tục (CD) lên server', 51);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Văn hóa và nguyên tắc DevOps', 49, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Tích hợp liên tục (CI) với Git', 50, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Triển khai liên tục (CD) lên server', 51, 994);
 -- Videos for Content Creation Course (Sections 52-54)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xác định đối tượng và kênh truyền thông', 52);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Kỹ năng viết content thu hút', 53);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Phân tích và đo lường hiệu quả', 54);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Xác định đối tượng và kênh truyền thông', 52, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Kỹ năng viết content thu hút', 53, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Phân tích và đo lường hiệu quả', 54, 708);
 -- Videos for Cooking Course (Sections 55-57)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Sơ chế và bảo quản nguyên liệu', 55);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Các món khai vị đặc sắc', 56);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các món chính và tráng miệng', 57);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Sơ chế và bảo quản nguyên liệu', 55, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Các món khai vị đặc sắc', 56, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các món chính và tráng miệng', 57, 708);
 -- Videos for IELTS Course (Sections 58-60)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kỹ năng Listening và Reading', 58);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Phân tích đề và viết bài Writing', 59);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chiến thuật trả lời Speaking', 60);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Kỹ năng Listening và Reading', 58, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Phân tích đề và viết bài Writing', 59, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Chiến thuật trả lời Speaking', 60, 708);
 -- Videos for CCNA Course (Sections 1-3)
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các khái niệm mạng cơ bản', 1);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Địa chỉ IP và chia mạng con', 2);
-INSERT INTO videos (link, description, section_id) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Định tuyến và chuyển mạch', 3);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Các khái niệm mạng cơ bản', 1, 708);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/v1757863410/20250914_222304videoplayback.mp4.mp4', 'Video: Địa chỉ IP và chia mạng con', 2, 994);
+INSERT INTO videos (link, description, section_id, duration) VALUES ('https://res.cloudinary.com/dggpj05f2/video/upload/videoplayback_3_dwg7kr.mp4', 'Video: Định tuyến và chuyển mạch', 3, 708);
 
 
 -- Bảng DOCUMENT_SECTIONS (cho các section từ ID 4 đến 63)
@@ -457,36 +457,36 @@ INSERT INTO my_procedures (user_id, procedure_id) VALUES
 
 -- Bảng TRANSACTIONS (tham chiếu id_user)
 INSERT INTO transactions (id_transaction, transfer_amount, transaction_start, transaction_date, status, id_user) VALUES
-(1, 399.0, '2025-09-01 10:00:00', '2025-09-01 10:01:00', 'SUCCESS', 1),
-(2, 2000.0, '2025-09-02 11:30:00', '2025-09-02 11:31:00', 'SUCCESS', 1),
-(3, 350.0, '2025-09-03 14:00:00', '2025-09-03 14:01:00', 'SUCCESS', 2),
-(4, 600.0, '2025-09-04 09:00:00', '2025-09-04 09:01:00', 'SUCCESS', 3),
-(5, 500.0, '2025-09-05 16:20:00', '2025-09-05 16:21:00', 'SUCCESS', 4),
-(6, 450.0, '2025-09-06 08:00:00', '2025-09-06 08:01:00', 'PENDING', 5),
-(7, 300.0, '2025-09-07 12:00:00', '2025-09-07 12:01:00', 'SUCCESS', 6),
-(8, 2500.0, '2025-09-08 15:00:00', '2025-09-08 15:01:00', 'SUCCESS', 7),
-(9, 750.0, '2025-09-09 18:00:00', '2025-09-09 18:01:00', 'FAILED', 8),
-(10, 420.0, '2025-09-10 10:45:00', '2025-09-10 10:46:00', 'SUCCESS', 9),
-(11, 3500.0, '2025-09-11 11:00:00', '2025-09-11 11:01:00', 'SUCCESS', 10),
-(12, 500.0, '2025-09-12 13:00:00', '2025-09-12 13:01:00', 'SUCCESS', 11),
-(13, 200.0, '2025-09-13 19:00:00', '2025-09-13 19:01:00', 'SUCCESS', 12),
-(14, 1800.0, '2025-10-01 09:15:00', '2025-10-01 09:16:00', 'SUCCESS', 13),
-(15, 700.0, '2025-10-02 10:00:00', '2025-10-02 10:01:00', 'SUCCESS', 14),
-(16, 850.0, '2025-10-03 14:30:00', '2025-10-03 14:31:00', 'PENDING', 15),
-(17, 399.0, '2025-10-04 17:00:00', '2025-10-04 17:01:00', 'SUCCESS', 1),
-(18, 550.0, '2025-10-05 20:00:00', '2025-10-05 20:01:00', 'SUCCESS', 2),
-(19, 400.0, '2025-10-06 21:00:00', '2025-10-06 21:01:00', 'SUCCESS', 3),
-(20, 1500.0, '2025-10-07 11:00:00', '2025-10-07 11:01:00', 'SUCCESS', 4),
-(21, 600.0, '2025-10-08 12:00:00', '2025-10-08 12:01:00', 'SUCCESS', 5),
-(22, 700.0, '2025-10-09 13:00:00', '2025-10-09 13:01:00', 'SUCCESS', 6),
-(23, 2200.0, '2025-10-10 16:00:00', '2025-10-10 16:01:00', 'FAILED', 7),
-(24, 850.0, '2025-10-11 15:10:00', '2025-10-11 15:11:00', 'SUCCESS', 8),
-(25, 450.0, '2025-10-12 18:00:00', '2025-10-12 18:01:00', 'SUCCESS', 9),
-(26, 300.0, '2025-10-13 09:00:00', '2025-10-13 09:01:00', 'SUCCESS', 10),
-(27, 1000.0, '2025-10-14 10:00:00', '2025-10-14 10:01:00', 'SUCCESS', 11),
-(28, 1600.0, '2025-10-15 11:00:00', '2025-10-15 11:01:00', 'SUCCESS', 12),
-(29, 350.0, '2025-10-16 14:00:00', '2025-10-16 14:01:00', 'SUCCESS', 13),
-(30, 2200.0, '2025-10-17 15:00:00', '2025-10-17 15:01:00', 'SUCCESS', 14);
+(1, 39900.0, '2025-09-01 10:00:00', '2025-09-01 10:01:00', 'SUCCESS', 1),
+(2, 200000.0, '2025-09-02 11:30:00', '2025-09-02 11:31:00', 'SUCCESS', 1),
+(3, 35000.0, '2025-09-03 14:00:00', '2025-09-03 14:01:00', 'SUCCESS', 2),
+(4, 60000.0, '2025-09-04 09:00:00', '2025-09-04 09:01:00', 'SUCCESS', 3),
+(5, 50000.0, '2025-09-05 16:20:00', '2025-09-05 16:21:00', 'SUCCESS', 4),
+(6, 45000.0, '2025-09-06 08:00:00', '2025-09-06 08:01:00', 'PENDING', 5),
+(7, 30000.0, '2025-09-07 12:00:00', '2025-09-07 12:01:00', 'SUCCESS', 6),
+(8, 25000.0, '2025-09-08 15:00:00', '2025-09-08 15:01:00', 'SUCCESS', 7),
+(9, 75000.0, '2025-09-09 18:00:00', '2025-09-09 18:01:00', 'FAILED', 8),
+(10, 42000.0, '2025-09-10 10:45:00', '2025-09-10 10:46:00', 'SUCCESS', 9),
+(11, 350000.0, '2025-09-11 11:00:00', '2025-09-11 11:01:00', 'SUCCESS', 10),
+(12, 50000.0, '2025-09-12 13:00:00', '2025-09-12 13:01:00', 'SUCCESS', 11),
+(13, 20000.0, '2025-09-13 19:00:00', '2025-09-13 19:01:00', 'SUCCESS', 12),
+(14, 180000.0, '2025-10-01 09:15:00', '2025-10-01 09:16:00', 'SUCCESS', 13),
+(15, 70000.0, '2025-10-02 10:00:00', '2025-10-02 10:01:00', 'SUCCESS', 14),
+(16, 85000.0, '2025-10-03 14:30:00', '2025-10-03 14:31:00', 'PENDING', 15),
+(17, 39900.0, '2025-10-04 17:00:00', '2025-10-04 17:01:00', 'SUCCESS', 1),
+(18, 55000.0, '2025-10-05 20:00:00', '2025-10-05 20:01:00', 'SUCCESS', 2),
+(19, 40000.0, '2025-10-06 21:00:00', '2025-10-06 21:01:00', 'SUCCESS', 3),
+(20, 150000.0, '2025-10-07 11:00:00', '2025-10-07 11:01:00', 'SUCCESS', 4),
+(21, 60000.0, '2025-10-08 12:00:00', '2025-10-08 12:01:00', 'SUCCESS', 5),
+(22, 70000.0, '2025-10-09 13:00:00', '2025-10-09 13:01:00', 'SUCCESS', 6),
+(23, 220000.0, '2025-10-10 16:00:00', '2025-10-10 16:01:00', 'FAILED', 7),
+(24, 85000.0, '2025-10-11 15:10:00', '2025-10-11 15:11:00', 'SUCCESS', 8),
+(25, 45000.0, '2025-10-12 18:00:00', '2025-10-12 18:01:00', 'SUCCESS', 9),
+(26, 30000.0, '2025-10-13 09:00:00', '2025-10-13 09:01:00', 'SUCCESS', 10),
+(27, 100000.0, '2025-10-14 10:00:00', '2025-10-14 10:01:00', 'SUCCESS', 11),
+(28, 160000.0, '2025-10-15 11:00:00', '2025-10-15 11:01:00', 'SUCCESS', 12),
+(29, 35000.0, '2025-10-16 14:00:00', '2025-10-16 14:01:00', 'SUCCESS', 13),
+(30, 220000.0, '2025-10-17 15:00:00', '2025-10-17 15:01:00', 'SUCCESS', 14);
 
 -- Bảng LIST_ITEMS (tham chiếu id_transaction, id_course, id_procedure)
 INSERT INTO list_items (id_transaction, id_course, id_procedure, type_item) VALUES

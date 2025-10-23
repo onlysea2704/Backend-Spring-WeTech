@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 @Data
 @Entity
@@ -23,8 +24,20 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "fullname")
+    private String fullname;
+
+    @Column(name = "sdt")
+    private String sdt;
+
+    @Column(name="link_image")
+    private String email;
+
     @Column(name = "role")
     private String role;
+
+    @Column(name = "created")
+    private Date created;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

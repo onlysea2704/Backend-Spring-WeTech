@@ -35,9 +35,7 @@ public class VideoControllder {
     }
 
     @GetMapping("/create")
-    public ResponseEntity<Object> createVideo(
-            @RequestParam Long sectionId
-    ){
+    public ResponseEntity<Object> createVideo(@RequestParam Long sectionId){
         Video video = videoService.create(sectionId);
         return ResponseEntity.ok(video);
     }
@@ -47,6 +45,7 @@ public class VideoControllder {
             @RequestPart(value = "videoInfo", required = true) Video videoInfo,
             @RequestPart(value = "video", required = false) MultipartFile video
     ) throws IOException {
+        System.out.println("videoInfo: " + videoInfo);
         Video newVideo = videoService.update(videoInfo, video);
         return ResponseEntity.ok(newVideo);
     }

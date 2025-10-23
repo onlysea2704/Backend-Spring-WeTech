@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.service;
 
+import com.wetech.backend_spring_wetech.dto.UserDto;
 import com.wetech.backend_spring_wetech.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.wetech.backend_spring_wetech.entity.User;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {

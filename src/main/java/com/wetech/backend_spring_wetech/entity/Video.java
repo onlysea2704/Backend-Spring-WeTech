@@ -22,5 +22,8 @@ public class Video {
 
     @Column(name = "section_id")
     private Long sectionId;
+
+    @Column(name = "duration")
+    private Long duration;
 }
 

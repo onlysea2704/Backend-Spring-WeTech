@@ -2,9 +2,12 @@ package com.wetech.backend_spring_wetech.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.wetech.backend_spring_wetech.dto.SectionWithDocumentDTO;
 import com.wetech.backend_spring_wetech.entity.DocumentSection;
+import com.wetech.backend_spring_wetech.entity.Section;
 import com.wetech.backend_spring_wetech.entity.Video;
 import com.wetech.backend_spring_wetech.repository.DocumentSectionRepository;
+import com.wetech.backend_spring_wetech.repository.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +25,8 @@ public class DocumentService {
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
+    private SectionRepository sectionRepository;
+    @Autowired
     private DocumentSectionRepository documentSectionRepository;
 
     public List<DocumentSection> getDocumentBySectionId(Long sectionId){
@@ -29,12 +34,41 @@ public class DocumentService {
         return documentSections;
     }
 
-    public DocumentSection createDocument(Long sectionId, MultipartFile document) throws IOException {
-        DocumentSection newDocument = new DocumentSection();
-        String videoUrl = uploadToCloudinary(document);
-        newDocument.setLink(videoUrl);
-        newDocument.setSectionId(sectionId);
-        return documentSectionRepository.save(newDocument);
+    public List<SectionWithDocumentDTO> findByCourseId(Long courseId) {
+
+        List<Section> sections = sectionRepository.findByCourseId(courseId);
+
+        List<SectionWithDocumentDTO> result = new ArrayList<>();
+
+        // Lặp qua từng section
+        for (Section section : sections) {
+            // Lấy danh sách document thuộc section đó
+            List<DocumentSection> documentSections = documentSectionRepository.findBySectionId(section.getSectionId());
+            // Gộp lại thành DTO
+            SectionWithDocumentDTO dto = new SectionWithDocumentDTO(
+                    section.getSectionId(),
+                    section.getName(),
+                    documentSections,
+                    section.getCourseId()
+            );
+            result.add(dto);
+        }
+        return result;
+    }
+
+    public DocumentSection create(Long sectionId){
+        DocumentSection newDocumentSection = new DocumentSection();
+        newDocumentSection.setSectionId(sectionId);
+        return documentSectionRepository.save(newDocumentSection);
+    }
+
+    public DocumentSection update(DocumentSection documentSection, MultipartFile document) throws IOException {
+        String documentUrl = documentSection.getLink();
+        if(document != null) {
+            documentUrl = uploadToCloudinary(document);
+        }
+        documentSection.setLink(documentUrl);
+        return documentSectionRepository.save(documentSection);
     }
 
     public boolean deleteDocument(Long documentId){

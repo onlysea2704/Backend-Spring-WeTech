@@ -7,7 +7,9 @@ import com.wetech.backend_spring_wetech.repository.MyCourseRepository;
 import com.wetech.backend_spring_wetech.repository.MyProcedureRepository;
 import com.wetech.backend_spring_wetech.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+import java.util.Map;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class PaymentService {
     private MyCourseRepository myCourseRepository;
     @Autowired
     MyProcedureRepository myProcedureRepository;
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
     public  Transaction getTransactionByCode(String code){
         return transactionRepository.findByCode(code);
@@ -49,6 +53,11 @@ public class PaymentService {
             List<ListItem> listItems = listItemRepository.findByIdTransaction(transaction.getIdTransaction());
             transaction.setStatus("SUCCESS");
             transactionRepository.save(transaction);
+
+            // Socket gửi đến FE
+            messagingTemplate.convertAndSend("/topic/payment/" + transaction.getUserId(),
+                    Map.of("message", "Thanh toán thành công"));
+
             for (ListItem item : listItems) {
                 if(item.getIdCourse() != null){
                     MyCourse myCourse = new MyCourse();

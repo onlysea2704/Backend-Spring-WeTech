@@ -3,6 +3,7 @@ package com.wetech.backend_spring_wetech.controller;
 import com.wetech.backend_spring_wetech.dto.JwtResponse;
 import com.wetech.backend_spring_wetech.dto.LoginRequest;
 import com.wetech.backend_spring_wetech.dto.RegisterRequest;
+import com.wetech.backend_spring_wetech.dto.UserDto;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.security.JwtTokenProvider;
 import com.wetech.backend_spring_wetech.service.UserService;
@@ -12,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -55,4 +58,6 @@ public class AuthController {
         User user = (User) userService.loadUserByUsername(username);
         return ResponseEntity.ok(user);
     }
+
+
 }
