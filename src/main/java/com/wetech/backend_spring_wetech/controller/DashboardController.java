@@ -1,7 +1,8 @@
 package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.dto.CourseCategoryStatsDTO;
-import com.wetech.backend_spring_wetech.dto.DashboardDTO;
+import com.wetech.backend_spring_wetech.dto.ListCardsDTO;
+import com.wetech.backend_spring_wetech.dto.TransactionUserDTO;
 import com.wetech.backend_spring_wetech.dto.UserDto;
 import com.wetech.backend_spring_wetech.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class DashboardController {
     private DashboardService dashboardService;
 
     @GetMapping("/dashboard/get-info-card")
-    public ResponseEntity<DashboardDTO> getInfoCarDashboard() {
-        DashboardDTO cards = dashboardService.getInfoCarDashboard();
+    public ResponseEntity<ListCardsDTO> getInfoCarDashboard() {
+        ListCardsDTO cards = dashboardService.getInfoCarDashboard();
         return ResponseEntity.ok(cards);
     }
 
@@ -37,12 +38,18 @@ public class DashboardController {
     }
 
     @GetMapping("/monthly/get-info-card")
-    public ResponseEntity<DashboardDTO> getDashboard() {
-        DashboardDTO cards = dashboardService.getDashboardData();
+    public ResponseEntity<ListCardsDTO> getMonthlyInfoCard() {
+        ListCardsDTO cards = dashboardService.getDashboardData();
         return ResponseEntity.ok(cards);
     }
 
+    @GetMapping("/customer/get-info-card")
+    public ListCardsDTO getCustomerStatsCards() {
+        return dashboardService.getCustomerStatsCards();
+    }
 
-
-
+    @GetMapping("/transaction/get-data-table")
+    public List<TransactionUserDTO> getAllTransactions() {
+        return dashboardService.getAllTransactionsWithUserInfo();
+    }
 }

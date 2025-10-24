@@ -27,5 +27,8 @@ public interface CourseRepository extends JpaRepository<Course, Long>, CourseRep
     """)
     List<CourseCategoryStatsDTO> getCategoryStats();
 
+    @Query("SELECT COUNT(c) FROM Course c")
+    Long getTotalCourses();
+
 }
 

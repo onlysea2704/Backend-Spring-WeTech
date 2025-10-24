@@ -1,10 +1,13 @@
 package com.wetech.backend_spring_wetech.repository;
 
+import com.wetech.backend_spring_wetech.dto.TransactionUserDTO;
 import com.wetech.backend_spring_wetech.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
@@ -40,5 +43,21 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
                   AND t.status = 'SUCCESS'
             """)
     Double getTotalRevenueByMonth(@Param("month") int month, @Param("year") int year);
+
+    @Query("""
+        SELECT new com.wetech.backend_spring_wetech.dto.TransactionUserDTO(
+            t.idTransaction,
+            t.transferAmount,
+            t.transactionDate,
+            t.status,
+            t.code,
+            u.fullname,
+            u.sdt
+        )
+        FROM Transaction t
+        JOIN User u ON t.userId = u.userId
+        ORDER BY t.transactionDate DESC
+    """)
+    List<TransactionUserDTO> getAllTransactionsWithUserInfo();
 }
 

@@ -1,9 +1,6 @@
 package com.wetech.backend_spring_wetech.service;
 
-import com.wetech.backend_spring_wetech.dto.CourseCategoryStatsDTO;
-import com.wetech.backend_spring_wetech.dto.DashboardDTO;
-import com.wetech.backend_spring_wetech.dto.RevenueCardDTO;
-import com.wetech.backend_spring_wetech.dto.UserDto;
+import com.wetech.backend_spring_wetech.dto.*;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.repository.CourseRepository;
 import com.wetech.backend_spring_wetech.repository.ListItemRepository;
@@ -12,7 +9,6 @@ import com.wetech.backend_spring_wetech.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,30 +25,27 @@ public class DashboardService {
     @Autowired
     private UserRepository userRepository;
 
-    public DashboardDTO getInfoCarDashboard() {
+    public ListCardsDTO getInfoCarDashboard() {
 
         // --- 1. Doanh thu tổng khóa học ---
         Double courseRe = transactionRepository.getRevenueByType("course");
-
         // --- 2. Doanh thu tổng thủ tục pháp lý ---
         Double procedureRe = transactionRepository.getRevenueByType("procedure");
-
         // --- 3. Tổng doanh thu ---
         Double totalRe = courseRe+procedureRe;
-
         // --- 4. Tổng số khóa học ---
-        Long totalCourses = courseRepository.count();
+        Double totalCourses = (double) courseRepository.count();
 
         // Build DTO
-        RevenueCardDTO courseRevenue = new RevenueCardDTO("Doanh thu khóa học", courseRe, null);
-        RevenueCardDTO procedureRevenue = new RevenueCardDTO("Doanh thu thủ tục pháp lý", procedureRe, null);
-        RevenueCardDTO totalRevenue = new RevenueCardDTO("Tổng doanh thu", totalRe, null);
+        CardStatsDTO courseRevenue = new CardStatsDTO("Doanh thu khóa học", courseRe, null);
+        CardStatsDTO procedureRevenue = new CardStatsDTO("Doanh thu thủ tục pháp lý", procedureRe, null);
+        CardStatsDTO totalRevenue = new CardStatsDTO("Tổng doanh thu", totalRe, null);
+        CardStatsDTO totalCourseCard = new CardStatsDTO("Tổng số khóa học", totalCourses, null);
 
-        return new DashboardDTO(courseRevenue, procedureRevenue, totalRevenue, totalCourses);
+        return new ListCardsDTO(courseRevenue, procedureRevenue, totalRevenue, totalCourseCard);
     }
 
-
-    public DashboardDTO getDashboardData() {
+    public ListCardsDTO getDashboardData() {
         LocalDate now = LocalDate.now();
         int currentMonth = now.getMonthValue();
         int currentYear = now.getYear();
@@ -76,14 +69,15 @@ public class DashboardService {
         double totalChange = calcChangePercent(totalNow, totalPrev);
 
         // --- 4. Tổng số khóa học ---
-        Long totalCourses = courseRepository.count();
+        Double totalCourses = (double) courseRepository.count();
 
         // Build DTO
-        RevenueCardDTO courseRevenue = new RevenueCardDTO("Doanh thu khóa học", courseNow, courseChange);
-        RevenueCardDTO procedureRevenue = new RevenueCardDTO("Doanh thu thủ tục pháp lý", procedureNow, procedureChange);
-        RevenueCardDTO totalRevenue = new RevenueCardDTO("Tổng doanh thu", totalNow, totalChange);
+        CardStatsDTO courseRevenueCard = new CardStatsDTO("Doanh thu khóa học", courseNow, courseChange);
+        CardStatsDTO procedureRevenueCard = new CardStatsDTO("Doanh thu thủ tục pháp lý", procedureNow, procedureChange);
+        CardStatsDTO totalRevenueCard = new CardStatsDTO("Tổng doanh thu", totalNow, totalChange);
+        CardStatsDTO totalCourseCard = new CardStatsDTO("Tổng số khóa học", totalCourses, null);
 
-        return new DashboardDTO(courseRevenue, procedureRevenue, totalRevenue, totalCourses);
+        return new ListCardsDTO(courseRevenueCard, procedureRevenueCard, totalRevenueCard, totalCourseCard);
     }
 
     public List<UserDto> getAllUser() {
@@ -106,6 +100,28 @@ public class DashboardService {
 
     public List<CourseCategoryStatsDTO> getCourseCategoryStats() {
         return courseRepository.getCategoryStats();
+    }
+
+    public ListCardsDTO getCustomerStatsCards() {
+        LocalDate now = LocalDate.now();
+        int month = now.getMonthValue();
+        int year = now.getYear();
+
+        Long totalCustomers = userRepository.getTotalCustomers();
+        Long newCustomers = userRepository.getNewCustomersThisMonth(month, year);
+        Long purchasedCustomers = userRepository.getCustomersWithPurchase();
+        Long totalCourses = courseRepository.getTotalCourses();
+
+        return new ListCardsDTO(
+                new CardStatsDTO("Tổng số khách hàng", totalCustomers.doubleValue(), null),
+                new CardStatsDTO("Khách đăng ký mới trong tháng", newCustomers.doubleValue(), null),
+                new CardStatsDTO("Khách đã mua hàng", purchasedCustomers.doubleValue(), null),
+                new CardStatsDTO("Tổng số khóa học hiện có", totalCourses.doubleValue(), null)
+        );
+    }
+
+    public List<TransactionUserDTO> getAllTransactionsWithUserInfo() {
+        return transactionRepository.getAllTransactionsWithUserInfo();
     }
 
     private double calcChangePercent(Double current, Double previous) {
