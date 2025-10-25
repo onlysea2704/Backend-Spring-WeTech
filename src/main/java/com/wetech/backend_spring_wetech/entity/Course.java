@@ -20,7 +20,7 @@ public class Course {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "author")
@@ -38,10 +38,10 @@ public class Course {
     @Column(name = "link_image")
     private String linkImage;
 
-    @Column(name = "intro_1")
+    @Column(name = "intro_1", columnDefinition = "TEXT")
     private String intro1;
 
-    @Column(name = "intro_2")
+    @Column(name = "intro_2", columnDefinition = "TEXT")
     private String intro2;
 
     @Column(name = "number_register")

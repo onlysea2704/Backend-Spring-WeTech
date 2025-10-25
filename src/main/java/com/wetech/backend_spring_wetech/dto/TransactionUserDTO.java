@@ -15,6 +15,6 @@ public class TransactionUserDTO {
     private LocalDateTime transactionDate;
     private String status;
     private String code;
-    private String fullname;
+    private String fullName;
     private String sdt;
 }

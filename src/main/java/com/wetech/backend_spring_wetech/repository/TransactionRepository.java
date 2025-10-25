@@ -51,7 +51,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             t.transactionDate,
             t.status,
             t.code,
-            u.fullname,
+            u.fullName,
             u.sdt
         )
         FROM Transaction t

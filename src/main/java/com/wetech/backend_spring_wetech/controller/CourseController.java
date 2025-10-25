@@ -76,13 +76,13 @@ public class CourseController {
             @RequestPart(value = "course", required = false) Course course,
             @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
         Course newCourse = courseService.updateCourse(course, image);
+        System.out.println(course);
         return ResponseEntity.ok(newCourse);
     }
 
-    @DeleteMapping("/delete-course")
+    @GetMapping("/delete-course")
     public ResponseEntity<Object> deleteCourse(@RequestParam Long courseId) {
         boolean status = courseService.deleteCourse(courseId);
         return ResponseEntity.ok(status);
     }
-
 }

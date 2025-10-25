@@ -24,14 +24,14 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "fullname")
-    private String fullname;
+    @Column(name = "full_name")
+    private String fullName;
 
     @Column(name = "sdt")
     private String sdt;
 
     @Column(name="link_image")
-    private String email;
+    private String linkImage;
 
     @Column(name = "role")
     private String role;

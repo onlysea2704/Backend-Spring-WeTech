@@ -88,10 +88,10 @@ public class DashboardService {
             UserDto userDto = new UserDto();
 //            userDto.setUsername(user.getUsername());
             userDto.setUserId(user.getUserId());
-            userDto.setEmail(user.getEmail());
+            userDto.setEmail(user.getUsername());
             userDto.setSdt(user.getSdt());
             userDto.setRole(user.getRole());
-            userDto.setFullname(user.getFullname());
+            userDto.setFullname(user.getFullName());
             userDto.setCreated(user.getCreated());
             userDtos.add(userDto);
         }
@@ -106,17 +106,18 @@ public class DashboardService {
         LocalDate now = LocalDate.now();
         int month = now.getMonthValue();
         int year = now.getYear();
+        int day  = now.getDayOfMonth();
 
         Long totalCustomers = userRepository.getTotalCustomers();
         Long newCustomers = userRepository.getNewCustomersThisMonth(month, year);
         Long purchasedCustomers = userRepository.getCustomersWithPurchase();
-        Long totalCourses = courseRepository.getTotalCourses();
+        Long totalCourses = userRepository.getNewCustomersToday(day, month, year);
 
         return new ListCardsDTO(
                 new CardStatsDTO("Tổng số khách hàng", totalCustomers.doubleValue(), null),
-                new CardStatsDTO("Khách đăng ký mới trong tháng", newCustomers.doubleValue(), null),
                 new CardStatsDTO("Khách đã mua hàng", purchasedCustomers.doubleValue(), null),
-                new CardStatsDTO("Tổng số khóa học hiện có", totalCourses.doubleValue(), null)
+                new CardStatsDTO("Khách mới trong tháng", newCustomers.doubleValue(), null),
+                new CardStatsDTO("Khách mới trong ngày", totalCourses.doubleValue(), null)
         );
     }
 

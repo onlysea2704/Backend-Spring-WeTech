@@ -1,6 +1,6 @@
 package com.wetech.backend_spring_wetech.service;
 
-import com.wetech.backend_spring_wetech.dto.UserDto;
+import com.wetech.backend_spring_wetech.dto.RegisterRequest;
 import com.wetech.backend_spring_wetech.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.wetech.backend_spring_wetech.entity.User;
 import org.springframework.stereotype.Service;
+import java.util.Date;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +27,14 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(String username, String password) {
+    public User registerUser(RegisterRequest registerRequest) {
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setUsername(registerRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setRole("USER");
+        user.setSdt(registerRequest.getPhone());
+        user.setCreated(new Date());
+        user.setFullName(registerRequest.getFullName());
         return userRepository.save(user);
     }
 

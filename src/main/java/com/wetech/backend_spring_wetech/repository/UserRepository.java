@@ -29,4 +29,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
         WHERE t.status = 'SUCCESS'
     """)
     Long getCustomersWithPurchase();
+
+    @Query("SELECT COUNT(u) FROM User u WHERE FUNCTION('DAY', u.created) = :day AND FUNCTION('MONTH', u.created) = :month AND FUNCTION('YEAR', u.created) = :year")
+    Long getNewCustomersToday(@Param("day") int day, @Param("month") int month, @Param("year") int year);
+
 }

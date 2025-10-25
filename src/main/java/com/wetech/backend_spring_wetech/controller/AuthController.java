@@ -1,9 +1,6 @@
 package com.wetech.backend_spring_wetech.controller;
 
-import com.wetech.backend_spring_wetech.dto.JwtResponse;
-import com.wetech.backend_spring_wetech.dto.LoginRequest;
-import com.wetech.backend_spring_wetech.dto.RegisterRequest;
-import com.wetech.backend_spring_wetech.dto.UserDto;
+import com.wetech.backend_spring_wetech.dto.*;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.security.JwtTokenProvider;
 import com.wetech.backend_spring_wetech.service.UserService;
@@ -13,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,8 +30,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        User user = userService.registerUser(request.getUsername(), request.getPassword());
-        return ResponseEntity.ok("User registered successfully");
+        User user = userService.registerUser(request);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
@@ -46,6 +44,15 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
+    @PostMapping("/update-profile")
+    public ResponseEntity<?> updateProfile(
+            @RequestPart("user") UserUpdateRequest user,
+            @RequestPart(value = "avatar", required = false) MultipartFile avatar
+    ) {
+        System.out.println(user.toString());
+        return ResponseEntity.ok("Profile updated");
+    }
+
     @GetMapping("/protected")
     public ResponseEntity<?> protectedEndpoint() {
         return ResponseEntity.ok("This is a protected endpoint");
@@ -56,7 +63,12 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = (User) userService.loadUserByUsername(username);
-        return ResponseEntity.ok(user);
+        UserDto userDto = new UserDto();
+        userDto.setFullname(user.getFullName());
+        userDto.setSdt(user.getSdt());
+        userDto.setEmail(user.getUsername());
+        userDto.setRole(user.getRole());
+        return ResponseEntity.ok(userDto);
     }
 
 
