@@ -16,5 +16,6 @@ public class UserDto {
     private String sdt;
     private String email;
     private String role;
+    private String linkImage;
     private Date created;
 }

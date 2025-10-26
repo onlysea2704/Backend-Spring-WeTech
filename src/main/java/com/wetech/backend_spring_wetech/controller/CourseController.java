@@ -76,7 +76,6 @@ public class CourseController {
             @RequestPart(value = "course", required = false) Course course,
             @RequestPart(value = "image", required = false) MultipartFile image) throws Exception {
         Course newCourse = courseService.updateCourse(course, image);
-        System.out.println(course);
         return ResponseEntity.ok(newCourse);
     }
 

@@ -1,6 +1,7 @@
 package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.dto.*;
+import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.security.JwtTokenProvider;
 import com.wetech.backend_spring_wetech.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -48,8 +50,9 @@ public class AuthController {
     public ResponseEntity<?> updateProfile(
             @RequestPart("user") UserUpdateRequest user,
             @RequestPart(value = "avatar", required = false) MultipartFile avatar
-    ) {
+    ) throws IOException {
         System.out.println(user.toString());
+        UserDto updatedUser = userService.updateUser(user, avatar);
         return ResponseEntity.ok("Profile updated");
     }
 
@@ -68,6 +71,8 @@ public class AuthController {
         userDto.setSdt(user.getSdt());
         userDto.setEmail(user.getUsername());
         userDto.setRole(user.getRole());
+        userDto.setLinkImage(user.getLinkImage());
+        userDto.setUserId(user.getUserId());
         return ResponseEntity.ok(userDto);
     }
 
