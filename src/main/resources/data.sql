@@ -31,7 +31,6 @@ ALTER TABLE sections AUTO_INCREMENT = 1;
 ALTER TABLE customers AUTO_INCREMENT = 1;
 ALTER TABLE users AUTO_INCREMENT = 1;
 
-
 -- Bảng COURSES (Cập nhật lại type_course trong câu INSERT)
 INSERT INTO courses (title, description, author, real_price, sale_price, type_course, link_image, intro_1, intro_2, number_register) VALUES
     ('Thành lập Công ty cho người mới', 'Hướng dẫn chi tiết thủ tục thành lập công ty TNHH và Cổ phần.', 'Nguyen Van A', 5000, 3990, 'Thành lập Công ty', 'https://res.cloudinary.com/dggpj05f2/image/upload/v1759034167/course_1_vtf7uo.jpg', 'Học các bước cơ bản', 'Xây dựng điều lệ công ty', 250),

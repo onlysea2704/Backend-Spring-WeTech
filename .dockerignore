@@ -1,0 +1,21 @@
+# Bỏ thư mục build và output
+target/
+build/
+
+# Bỏ file cấu hình IDE
+.idea/
+.vscode/
+*.iml
+
+# Bỏ file hệ thống
+*.log
+*.tmp
+.DS_Store
+
+# Bỏ thư mục Git
+.git/
+.gitignore
+
+# Bỏ file Docker riêng
+Dockerfile
+docker-compose.yml
