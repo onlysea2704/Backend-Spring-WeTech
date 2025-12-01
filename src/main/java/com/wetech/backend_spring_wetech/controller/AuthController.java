@@ -42,6 +42,9 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
         User user = (User) userService.loadUserByUsername(request.getUsername());
+        if(!userService.checkDevices(user, request.getDeviceInfoRequest())){
+            return ResponseEntity.badRequest().body("Thiết bị không được phép đăng nhập");
+        }
         String token = jwtTokenProvider.generateToken(authentication.getName(), user.getUserId(), user.getRole());
         return ResponseEntity.ok(new JwtResponse(token));
     }
@@ -62,7 +65,7 @@ public class AuthController {
     }
 
     @GetMapping("/get-info")
-    public ResponseEntity<?> getUserInfo() {
+    public ResponseEntity<UserDto> getUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = (User) userService.loadUserByUsername(username);

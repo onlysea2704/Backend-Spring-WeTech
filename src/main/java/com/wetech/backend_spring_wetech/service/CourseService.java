@@ -3,9 +3,14 @@ package com.wetech.backend_spring_wetech.service;
 import com.cloudinary.Cloudinary;
 import com.wetech.backend_spring_wetech.config.CloudinaryConfig;
 import com.wetech.backend_spring_wetech.entity.Course;
+import com.wetech.backend_spring_wetech.entity.DocumentSection;
 import com.wetech.backend_spring_wetech.entity.MyCourse;
+import com.wetech.backend_spring_wetech.entity.Video;
 import com.wetech.backend_spring_wetech.repository.CourseRepository;
+import com.wetech.backend_spring_wetech.repository.DocumentSectionRepository;
 import com.wetech.backend_spring_wetech.repository.MyCourseRepository;
+import com.wetech.backend_spring_wetech.repository.VideoRepository;
+import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +31,11 @@ public class CourseService {
     @Autowired
     private MyCourseRepository myCourseRepository;
     @Autowired
-    private Cloudinary cloudinary;
+    private CloudinaryUtils cloudinaryUtils;
+    @Autowired
+    VideoRepository videoRepository;
+    @Autowired
+    DocumentSectionRepository documentSectionRepository;
 
     @Autowired
     private UserService userService;
@@ -49,7 +58,7 @@ public class CourseService {
 
     public Boolean checkHaveCourse(Long courseId, Long userId) {
         MyCourse exist = myCourseRepository.findFirstByCourseIdAndUserId(courseId,  userId);
-        return exist != null? true : false;
+        return exist != null;
     }
 
     public List<Course> findMyCourse(Long userId) {
@@ -59,7 +68,6 @@ public class CourseService {
     public Course createCourse(){
 
         Course newCourse = new Course();
-
         LocalDate currentDate = LocalDate.now();
         Date date = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         newCourse.setCreatedAt(date);
@@ -71,7 +79,11 @@ public class CourseService {
 
         String imageUrl = course.getLinkImage();
         if(image != null){
-            imageUrl = uploadToCloudinary(image);
+            if(imageUrl != null && !imageUrl.isEmpty()) {
+                // nếu có video cũ mà muốn up video mới thì xóa video cũ đi
+                cloudinaryUtils.deleteFromCloudinary(imageUrl);
+            }
+            imageUrl = cloudinaryUtils.uploadToCloudinary(image);
         }
 
         LocalDate currentDate = LocalDate.now();
@@ -83,22 +95,21 @@ public class CourseService {
 
     public boolean deleteCourse(Long courseId) {
         try {
+            List<Video> videos = videoRepository.findByCourseId(courseId);
+            for (Video video : videos) {
+                cloudinaryUtils.deleteFromCloudinary(video.getLink());
+            }
+            List<DocumentSection> documentSections = documentSectionRepository.findByCourseId(courseId);
+            for (DocumentSection documentSection : documentSections) {
+                cloudinaryUtils.deleteFromCloudinary(documentSection.getLink());
+            }
+            Course course = courseRepository.findFirstByCourseId(courseId);
+            cloudinaryUtils.deleteFromCloudinary(course.getLinkImage());
             courseRepository.deleteById(courseId);
             return true;
         }
         catch (Exception e) {
             return false;
         }
-    }
-
-    private String uploadToCloudinary(MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return null;
-        }
-
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
-                ObjectUtils.asMap("resource_type", "auto"));
-
-        return uploadResult.get("secure_url").toString(); // link ảnh trực tiếp
     }
 }

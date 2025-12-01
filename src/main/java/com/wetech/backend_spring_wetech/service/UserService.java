@@ -2,11 +2,15 @@ package com.wetech.backend_spring_wetech.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.wetech.backend_spring_wetech.dto.DeviceInfoRequest;
 import com.wetech.backend_spring_wetech.dto.RegisterRequest;
 import com.wetech.backend_spring_wetech.dto.UserDto;
 import com.wetech.backend_spring_wetech.dto.UserUpdateRequest;
 import com.wetech.backend_spring_wetech.entity.Course;
+import com.wetech.backend_spring_wetech.entity.DeviceInfo;
+import com.wetech.backend_spring_wetech.repository.DeviceInfoRepository;
 import com.wetech.backend_spring_wetech.repository.UserRepository;
+import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +33,9 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     @Autowired
-    private Cloudinary cloudinary;
+    CloudinaryUtils cloudinaryUtils;
+    @Autowired
+    DeviceInfoRepository deviceInfoRepository;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -47,6 +53,36 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public boolean checkDevices(User user, DeviceInfoRequest deviceInfoRequest) {
+        Long userId = user.getUserId();
+        String userAgent = deviceInfoRequest.getUserAgent();
+        String screen = deviceInfoRequest.getScreen();
+        Integer cpuCores = deviceInfoRequest.getCpuCores();
+        String ram = deviceInfoRequest.getRam();
+        String gpu = deviceInfoRequest.getGpu();
+        String platform = deviceInfoRequest.getPlatform();
+
+        DeviceInfo deviceInfo = deviceInfoRepository.findDeviceInfoByUserIdAndUserAgentAndScreenAndCpuCoresAndRamAndGpuAndPlatform(userId, userAgent, screen, cpuCores, ram, gpu, platform);
+        List<DeviceInfo> deviceInfoListByUser = deviceInfoRepository.findDeviceInfoByUserId(userId);
+
+        if (deviceInfo != null || deviceInfoListByUser.size() <= 2) {
+            if(deviceInfo == null) {
+                DeviceInfo newDeviceInfo = new DeviceInfo();
+                newDeviceInfo.setUserId(userId);
+                newDeviceInfo.setUserAgent(userAgent);
+                newDeviceInfo.setScreen(screen);
+                newDeviceInfo.setCpuCores(cpuCores);
+                newDeviceInfo.setRam(ram);
+                newDeviceInfo.setGpu(gpu);
+                newDeviceInfo.setPlatform(platform);
+                deviceInfoRepository.save(newDeviceInfo);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
@@ -62,11 +98,14 @@ public class UserService implements UserDetailsService {
     public UserDto updateUser(UserUpdateRequest user, MultipartFile image) throws IOException {
 
         String imageUrl = user.getLinkImage();
-        if(image != null){
-            imageUrl = uploadToCloudinary(image);
+        if (image != null) {
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                cloudinaryUtils.deleteFromCloudinary(imageUrl);
+            }
+            imageUrl = cloudinaryUtils.uploadToCloudinary(image);
         }
         Optional<User> optionalUser = userRepository.findByUsername(user.getEmail());
-        if(optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             existingUser.setLinkImage(imageUrl);
             existingUser.setFullName(user.getFullName());
@@ -82,16 +121,5 @@ public class UserService implements UserDetailsService {
         } else {
             throw new UsernameNotFoundException("User not found");
         }
-    }
-
-    private String uploadToCloudinary(MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return null;
-        }
-
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
-                ObjectUtils.asMap("resource_type", "auto"));
-
-        return uploadResult.get("secure_url").toString(); // link ảnh trực tiếp
     }
 }

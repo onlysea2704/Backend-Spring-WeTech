@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface VideoRepository extends JpaRepository<Video, Long> {
+
+    public Video findFirstByVideoId(Long videoId);
+
     public List<Video> findBySectionId(Long sectionId);
 
     @Query("select v from Video v inner join Section s on s.sectionId = v.sectionId where s.courseId = :courseId")

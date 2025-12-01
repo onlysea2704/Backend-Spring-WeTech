@@ -8,6 +8,7 @@ import com.wetech.backend_spring_wetech.entity.Section;
 import com.wetech.backend_spring_wetech.entity.Video;
 import com.wetech.backend_spring_wetech.repository.DocumentSectionRepository;
 import com.wetech.backend_spring_wetech.repository.SectionRepository;
+import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,8 @@ public class DocumentService {
     private SectionRepository sectionRepository;
     @Autowired
     private DocumentSectionRepository documentSectionRepository;
+    @Autowired
+    CloudinaryUtils cloudinaryUtils;
 
     public List<DocumentSection> getDocumentBySectionId(Long sectionId){
         List<DocumentSection> documentSections = documentSectionRepository.findBySectionId(sectionId);
@@ -37,9 +40,7 @@ public class DocumentService {
     public List<SectionWithDocumentDTO> findByCourseId(Long courseId) {
 
         List<Section> sections = sectionRepository.findByCourseId(courseId);
-
         List<SectionWithDocumentDTO> result = new ArrayList<>();
-
         // Lặp qua từng section
         for (Section section : sections) {
             // Lấy danh sách document thuộc section đó
@@ -65,7 +66,10 @@ public class DocumentService {
     public DocumentSection update(DocumentSection documentSection, MultipartFile document) throws IOException {
         String documentUrl = documentSection.getLink();
         if(document != null) {
-            documentUrl = uploadToCloudinary(document);
+            if(documentUrl != null && !documentUrl.isEmpty()) {
+                cloudinaryUtils.deleteFromCloudinary(documentUrl);
+            }
+            documentUrl = cloudinaryUtils.uploadToCloudinary(document);
         }
         documentSection.setLink(documentUrl);
         return documentSectionRepository.save(documentSection);
@@ -73,31 +77,12 @@ public class DocumentService {
 
     public boolean deleteDocument(Long documentId){
         try {
+            DocumentSection documentSection = documentSectionRepository.findFirstByDocumentId(documentId);
+            cloudinaryUtils.deleteFromCloudinary(documentSection.getLink());
             documentSectionRepository.deleteById(documentId);
             return true;
         }catch (Exception e){
             return false;
         }
-    }
-
-    private String uploadToCloudinary(MultipartFile file) throws IOException {
-        if (file == null || file.isEmpty()) {
-            return null;
-        }
-
-        // Lấy tên gốc (vd: report.docx)
-        String originalFilename = file.getOriginalFilename();
-        // Lấy timestamp theo giờ phút giây
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        // Tạo tên file mới (vd: 20250913_235959.docx)
-        String newFilename = timestamp + originalFilename;
-        Map uploadResult = cloudinary.uploader().upload(
-                file.getBytes(),
-                ObjectUtils.asMap(
-                        "resource_type", "auto",  // Cloudinary sẽ tự động đoán loại file để phân loại vào image, video hoặc raw
-                        "public_id", newFilename
-                )
-        );
-        return uploadResult.get("secure_url").toString(); // link ảnh trực tiếp
     }
 }
