@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.security.SecureRandom;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -36,6 +37,8 @@ public class UserService implements UserDetailsService {
     CloudinaryUtils cloudinaryUtils;
     @Autowired
     DeviceInfoRepository deviceInfoRepository;
+    @Autowired
+    EmailService emailService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -121,5 +124,42 @@ public class UserService implements UserDetailsService {
         } else {
             throw new UsernameNotFoundException("User not found");
         }
+    }
+
+    public boolean resetPasswordAndSendEmail(String email) {
+        Optional<User> maybeUser = userRepository.findByUsername(email);
+        if (maybeUser.isEmpty()) {
+            return false;
+        }
+
+        User user = maybeUser.get();
+        String newPassword = generateRandomPassword(10);
+        String hashed = passwordEncoder.encode(newPassword);
+
+        user.setPassword(hashed);
+        userRepository.save(user);
+
+        // Gửi email (chỉ text); tốt hơn là dùng template và kèm hướng dẫn đổi mật khẩu
+        String subject = "Yêu cầu đặt lại mật khẩu";
+        String text = String.format("Xin chào %s,\n\nMật khẩu mới của bạn là: %s\n\nVui lòng đăng nhập và đổi mật khẩu ngay.\n\nNếu bạn không yêu cầu, hãy liên hệ admin.",
+                user.getFullName() == null ? user.getUsername() : user.getFullName(),
+                newPassword);
+
+        emailService.sendSimpleMail(user.getUsername(), subject, text);
+        return true;
+    }
+
+    private String generateRandomPassword(int length) {
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "abcdefghijklmnopqrstuvwxyz"
+                + "0123456789"
+                + "!@#$%&*()-_+=<>?";
+
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        }
+        return sb.toString();
     }
 }

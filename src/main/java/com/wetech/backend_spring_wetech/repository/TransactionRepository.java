@@ -25,14 +25,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("""
                 SELECT COALESCE(SUM(t.transferAmount), 0)
                 FROM Transaction t
-                JOIN ListItem l ON t.idTransaction = l.idTransaction
-                WHERE l.typeItem = :type
-                  AND MONTH(t.transactionDate) = :month
+                WHERE MONTH(t.transactionDate) = :month
                   AND YEAR(t.transactionDate) = :year
                   AND t.status = 'SUCCESS'
             """)
-    Double getRevenueByTypeAndMonth(@Param("type") String type,
-                                    @Param("month") int month,
+    Double getRevenueByTypeAndMonth(@Param("month") int month,
                                     @Param("year") int year);
 
     @Query("""

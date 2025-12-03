@@ -9,6 +9,8 @@ import com.wetech.backend_spring_wetech.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import java.util.List;
@@ -33,7 +35,9 @@ public class PaymentService {
 
     public Transaction createTransaction(Transaction transaction, List<ListItem> listItem, User user) {
         try {
+            LocalDateTime dateTime = LocalDateTime.now();
             transaction.setUserId(user.getUserId());
+            transaction.setTransactionDate(dateTime);
             Transaction newTransaction = transactionRepository.save(transaction);
             for (ListItem item : listItem) {
                 item.setIdTransaction(newTransaction.getIdTransaction());
@@ -47,11 +51,13 @@ public class PaymentService {
 
     public boolean verifyTransaction(WebhookPayload webhookPayload) {
 
+        LocalDateTime now = LocalDateTime.now();
         Transaction transaction = transactionRepository.findByCode(webhookPayload.getCode());
 
         if (transaction.getTransferAmount() <= webhookPayload.getTransferAmount()) {
             List<ListItem> listItems = listItemRepository.findByIdTransaction(transaction.getIdTransaction());
             transaction.setStatus("SUCCESS");
+            transaction.setTransactionDate(now);
             transactionRepository.save(transaction);
 
             // Socket gửi đến FE

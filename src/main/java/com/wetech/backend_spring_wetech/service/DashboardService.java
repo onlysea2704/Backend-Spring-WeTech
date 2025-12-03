@@ -54,13 +54,15 @@ public class DashboardService {
         int prevYear = (currentMonth == 1) ? currentYear - 1 : currentYear;
 
         // --- 1. Doanh thu khóa học ---
-        Double courseNow = transactionRepository.getRevenueByTypeAndMonth("course", currentMonth, currentYear);
-        Double coursePrev = transactionRepository.getRevenueByTypeAndMonth("course", prevMonth, prevYear);
+        Double courseNow = transactionRepository.getRevenueByTypeAndMonth(currentMonth, currentYear);
+        Double coursePrev = transactionRepository.getRevenueByTypeAndMonth(prevMonth, prevYear);
         double courseChange = calcChangePercent(courseNow, coursePrev);
 
         // --- 2. Doanh thu thủ tục pháp lý ---
-        Double procedureNow = transactionRepository.getRevenueByTypeAndMonth("procedure", currentMonth, currentYear);
-        Double procedurePrev = transactionRepository.getRevenueByTypeAndMonth("procedure", prevMonth, prevYear);
+//        Double procedureNow = transactionRepository.getRevenueByTypeAndMonth("procedure", currentMonth, currentYear);
+//        Double procedurePrev = transactionRepository.getRevenueByTypeAndMonth("procedure", prevMonth, prevYear);
+        Double procedureNow = 0.0;
+        Double procedurePrev = 0.0;
         double procedureChange = calcChangePercent(procedureNow, procedurePrev);
 
         // --- 3. Tổng doanh thu ---

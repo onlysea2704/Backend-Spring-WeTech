@@ -4,7 +4,9 @@ import com.wetech.backend_spring_wetech.dto.*;
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.security.JwtTokenProvider;
+import com.wetech.backend_spring_wetech.service.EmailService;
 import com.wetech.backend_spring_wetech.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +25,8 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
+    @Autowired
+    EmailService emailService;
 
     public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
@@ -79,5 +83,29 @@ public class AuthController {
         return ResponseEntity.ok(userDto);
     }
 
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        boolean ok = userService.resetPasswordAndSendEmail(request.getEmail());
+        if (!ok) {
+            // Trả 200 vẫn có thể dễ bị lộ user tồn tại hay không. Để an toàn có thể trả 200 chung, nhưng ở đây trả 404.
+            return ResponseEntity.status(404).body("Email không tồn tại");
+        }
+        return ResponseEntity.ok("Đã gửi mật khẩu mới tới email (nếu tồn tại).");
+    }
 
+    @PostMapping("/contact")
+    public ResponseEntity<?> sendConsultingRequest(@RequestBody ConsultingRequest request) {
+
+        String adminEmail = "phamduyhai2k3@gmail.com"; // email cố định của bạn
+
+        emailService.sendConsultingRequestEmail(
+                adminEmail,
+                request.getName(),
+                request.getEmail(),
+                request.getPhone(),
+                request.getService()
+        );
+
+        return ResponseEntity.ok("Đã gửi yêu cầu tư vấn thành công!");
+    }
 }
