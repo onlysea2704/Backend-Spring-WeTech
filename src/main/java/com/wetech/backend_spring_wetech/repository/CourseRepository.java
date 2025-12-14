@@ -17,7 +17,7 @@ public interface CourseRepository extends JpaRepository<Course, Long>, CourseRep
         c.typeCourse,
         COUNT(DISTINCT c.courseId),
         COUNT(DISTINCT t.userId),
-        COALESCE(SUM(t.transferAmount), 0)
+        COALESCE(SUM(t.transferAmount), 0.0)
     )
     FROM Course c
     LEFT JOIN ListItem l ON c.courseId = l.idCourse
