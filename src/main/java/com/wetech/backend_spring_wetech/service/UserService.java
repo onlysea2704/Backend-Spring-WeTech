@@ -2,10 +2,7 @@ package com.wetech.backend_spring_wetech.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.wetech.backend_spring_wetech.dto.DeviceInfoRequest;
-import com.wetech.backend_spring_wetech.dto.RegisterRequest;
-import com.wetech.backend_spring_wetech.dto.UserDto;
-import com.wetech.backend_spring_wetech.dto.UserUpdateRequest;
+import com.wetech.backend_spring_wetech.dto.*;
 import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.DeviceInfo;
 import com.wetech.backend_spring_wetech.repository.DeviceInfoRepository;
@@ -96,6 +93,21 @@ public class UserService implements UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         return (User) loadUserByUsername(username);
+    }
+
+    public void changePassword(String username, ChangePasswordRequest request) {
+        // 1. Tìm user trong DB
+        User user = (User) loadUserByUsername(username); // Hoặc dùng userRepository.findByUsername(...)
+        if (user == null) {
+            throw new RuntimeException("Người dùng không tồn tại");
+        }
+        // 2. Kiểm tra mật khẩu cũ có khớp với mật khẩu đã mã hóa trong DB không
+        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+            throw new RuntimeException("Mật khẩu hiện tại không chính xác");
+        }
+        // 3. Mã hóa mật khẩu mới và lưu vào DB
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
     }
 
     public UserDto updateUser(UserUpdateRequest user, MultipartFile image) throws IOException {

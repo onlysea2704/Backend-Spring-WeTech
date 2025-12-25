@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
@@ -30,9 +32,10 @@ public class GoogleAuthController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/google")
     public ResponseEntity<?> loginWithGoogle(@RequestBody GoogleLoginRequest request) {
@@ -64,17 +67,33 @@ public class GoogleAuthController {
         User user = userRepository.findByUsername(email)
                 .orElseGet(() -> {
                     Date now = new Date();
+                    String newPassword = generateRandomPassword(10);
+                    String hashed = passwordEncoder.encode(newPassword);
                     User newUser = new User();
                     newUser.setUsername(email);
-                    newUser.setPassword(email);
+                    newUser.setFullName(email);
+                    newUser.setPassword(hashed);
                     newUser.setRole("USER");
                     newUser.setCreated(now);
                     return userRepository.save(newUser);
                 });
-
         // 🔹 tạo JWT nội bộ
         String token = jwtTokenProvider.generateToken(user.getUsername(), user.getUserId(), user.getRole());
 
         return ResponseEntity.ok(token);
+    }
+
+    private String generateRandomPassword(int length) {
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "abcdefghijklmnopqrstuvwxyz"
+                + "0123456789"
+                + "!@#$%&*()-_+=<>?";
+
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        }
+        return sb.toString();
     }
 }

@@ -40,14 +40,10 @@ public class VideoControllder {
         return ResponseEntity.ok(video);
     }
 
-    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Object> create(
-            @RequestPart(value = "videoInfo", required = true) Video videoInfo,
-            @RequestPart(value = "video", required = false) MultipartFile video
-    ) throws IOException {
-        System.out.println("videoInfo: " + videoInfo);
-        Video newVideo = videoService.update(videoInfo, video);
-        return ResponseEntity.ok(newVideo);
+    @PostMapping("/update") // Mặc định Spring Boot sẽ hiểu là nhận JSON
+    public ResponseEntity<Object> update(@RequestBody Video videoInfo) {
+        Video updatedVideo = videoService.update(videoInfo);
+        return ResponseEntity.ok(updatedVideo);
     }
 
     @PostMapping("/delete")

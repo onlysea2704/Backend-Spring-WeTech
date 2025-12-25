@@ -88,9 +88,20 @@ public class AuthController {
         boolean ok = userService.resetPasswordAndSendEmail(request.getEmail());
         if (!ok) {
             // Trả 200 vẫn có thể dễ bị lộ user tồn tại hay không. Để an toàn có thể trả 200 chung, nhưng ở đây trả 404.
-            return ResponseEntity.status(404).body("Email không tồn tại");
+            return ResponseEntity.ok(false);
         }
-        return ResponseEntity.ok("Đã gửi mật khẩu mới tới email (nếu tồn tại).");
+        return ResponseEntity.ok(true);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
+        try {
+            String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+            userService.changePassword(currentUsername, request);
+            return ResponseEntity.ok("Đổi mật khẩu thành công");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/contact")

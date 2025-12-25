@@ -53,16 +53,7 @@ public class VideoService {
         return videoRepository.save(newVideo);
     }
 
-    public Video update(Video videoInfo, MultipartFile video) throws IOException {
-        String videoUrl = videoInfo.getLink();
-        if(video != null) {
-            if(videoUrl != null && !videoUrl.isEmpty()) {
-                // nếu có video cũ mà muốn up video mới thì xóa video cũ đi
-                cloudinaryUtils.deleteFromCloudinary(videoUrl);
-            }
-            videoUrl = cloudinaryUtils.uploadToCloudinary(video);
-        }
-        videoInfo.setLink(videoUrl);
+    public Video update(Video videoInfo){
         return videoRepository.save(videoInfo);
     }
 
