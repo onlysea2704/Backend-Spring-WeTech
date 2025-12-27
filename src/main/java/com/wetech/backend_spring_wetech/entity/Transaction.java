@@ -35,5 +35,25 @@ public class Transaction {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "tax_code")
+    private String taxCode;
+
+    @Column(name = "company_name")
+    private String companyName;
+
+    @Column(name = "company_address")
+    private String companyAddress;
+
+    @Column(name = "need_vat")
+    private String needVat;
 }
 

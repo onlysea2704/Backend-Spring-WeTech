@@ -4,6 +4,7 @@ import com.wetech.backend_spring_wetech.dto.CourseCategoryStatsDTO;
 import com.wetech.backend_spring_wetech.dto.ListCardsDTO;
 import com.wetech.backend_spring_wetech.dto.TransactionUserDTO;
 import com.wetech.backend_spring_wetech.dto.UserDto;
+import com.wetech.backend_spring_wetech.entity.Transaction;
 import com.wetech.backend_spring_wetech.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public class DashboardController {
     }
 
     @GetMapping("/transaction/get-data-table")
-    public List<TransactionUserDTO> getAllTransactions() {
-        return dashboardService.getAllTransactionsWithUserInfo();
+    public List<Transaction> getAllTransactions() {
+        return dashboardService.getAllTransaction();
     }
 }

@@ -2,6 +2,7 @@ package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.dto.InputCreateTransactionDto;
 import com.wetech.backend_spring_wetech.dto.WebhookPayload;
+import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.ListItem;
 import com.wetech.backend_spring_wetech.entity.Transaction;
 import com.wetech.backend_spring_wetech.entity.User;
@@ -26,12 +27,24 @@ public class PaymentController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping("/get")
-    public ResponseEntity<?> getPaymentByCode(@RequestParam("code") String code) {
-
-        Transaction transaction = paymentService.getTransactionByCode(code);
+    public ResponseEntity<?> getPaymentByCode(@RequestParam("idTransaction") Long idTransaction) {
+        Transaction transaction = paymentService.getTransactionByCode(idTransaction);
         return ResponseEntity.ok(transaction);
+    }
+
+    @GetMapping("/get-list-item-by-id")
+    public ResponseEntity<?> getListItemById(@RequestParam("idTransaction") Long idTransaction) {
+        List<Course> courses = paymentService.getListItemById(idTransaction);
+        return ResponseEntity.ok(courses);
+    }
+
+    @PostMapping("/update-info")
+    public ResponseEntity<?> updatePaymentInfo(
+            @RequestParam("idTransaction") Long idTransaction,
+            @RequestBody Transaction transaction) {
+        Transaction updatedTransaction = paymentService.updateInfo(idTransaction, transaction);
+        return ResponseEntity.ok(updatedTransaction);
     }
 
     @PostMapping("/create")

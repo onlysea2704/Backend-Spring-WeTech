@@ -1,6 +1,7 @@
 package com.wetech.backend_spring_wetech.service;
 
 import com.wetech.backend_spring_wetech.dto.*;
+import com.wetech.backend_spring_wetech.entity.Transaction;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.repository.CourseRepository;
 import com.wetech.backend_spring_wetech.repository.ListItemRepository;
@@ -125,6 +126,10 @@ public class DashboardService {
 
     public List<TransactionUserDTO> getAllTransactionsWithUserInfo() {
         return transactionRepository.getAllTransactionsWithUserInfo();
+    }
+
+    public List<Transaction> getAllTransaction(){
+        return transactionRepository.findAll();
     }
 
     private double calcChangePercent(Double current, Double previous) {

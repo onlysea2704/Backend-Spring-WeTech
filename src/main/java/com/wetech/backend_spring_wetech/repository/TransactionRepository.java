@@ -13,6 +13,8 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     public Transaction findByCode(String code);
 
+    Transaction findFirstByIdTransaction(Long idTransaction);
+
     @Query("""
                 SELECT COALESCE(SUM(t.transferAmount), 0)
                 FROM Transaction t
