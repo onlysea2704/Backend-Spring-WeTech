@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.Year;
 
 @Service
 @RequiredArgsConstructor
@@ -101,8 +102,10 @@ public class DashboardService {
         return userDtos;
     }
 
-    public List<CourseCategoryStatsDTO> getCourseCategoryStats() {
-        return courseRepository.getCategoryStats();
+    public List<CourseCategoryStatsDTO> getCourseCategoryStats(int month) {
+
+        int currentYear = Year.now().getValue();
+        return courseRepository.getCategoryStatsByMonth(month, currentYear);
     }
 
     public ListCardsDTO getCustomerStatsCards() {
