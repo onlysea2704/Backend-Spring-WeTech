@@ -1,39 +1,25 @@
 package com.wetech.backend_spring_wetech.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "user_card")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+public class UserCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
-    private Long customerId;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "email")
+    private Long id;
+    private String fullName;
     private String email;
-
-    // new
     private String cccd;   // căn cước công dân (PK)
-
-    @Column(name = "gender")
     private String gender;
-
-    @Column(name = "dob")
     private String dob; // Có thể đổi sang LocalDate nếu format chuẩn
-
     private String nationality;
-
     private String ethnicity; // dan toc
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -43,5 +29,7 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "current_address_id")
     private Address currentAddress; // noi o hien tai
-}
 
+    @Column(name = "user_id")
+    private Long userId;
+}

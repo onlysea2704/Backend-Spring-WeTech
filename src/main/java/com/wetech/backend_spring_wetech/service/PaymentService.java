@@ -3,6 +3,9 @@ package com.wetech.backend_spring_wetech.service;
 import com.wetech.backend_spring_wetech.dto.WebhookPayload;
 import com.wetech.backend_spring_wetech.entity.*;
 import com.wetech.backend_spring_wetech.repository.*;
+import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -14,21 +17,15 @@ import java.util.Map;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(makeFinal = true)
 public class PaymentService {
-
-    @Autowired
     private TransactionRepository transactionRepository;
-    @Autowired
     private ListItemRepository listItemRepository;
-    @Autowired
     private MyCourseRepository myCourseRepository;
-    @Autowired
     private CourseRepository courseRepository;
-    @Autowired
-    MyProcedureRepository myProcedureRepository;
-    @Autowired
-    CartRepository cartRepository;
-    @Autowired
+    private MyProcedureRepository myProcedureRepository;
+    private CartRepository cartRepository;
     private SimpMessagingTemplate messagingTemplate;
 
     public Transaction getTransactionByCode(Long idTransaction){
@@ -101,9 +98,8 @@ public class PaymentService {
                     }
                 }
                 else {
-                    MyProcedure myProcedure = new MyProcedure();
-                    myProcedure.setProcedureId(item.getIdProcedure());
-                    myProcedure.setUserId(transaction.getUserId());
+                    MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(transaction.getUserId(), item.getIdProcedure());
+                    myProcedure.setStatus(MyProcedure.Status.PAID);
                     myProcedureRepository.save(myProcedure);
                 }
             }

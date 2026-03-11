@@ -21,4 +21,8 @@ public class CustomerSearch {
 
     @Column(name = "dob")
     private String dob; // Có thể đổi sang LocalDate nếu format chuẩn
+
+    private String nationality;
+
+    private String ethnicity;
 }

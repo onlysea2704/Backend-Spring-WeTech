@@ -19,10 +19,17 @@ public class ProcedureRepositoryCustomImpl implements ProcedureRepositoryCustom 
                 .getResultList();
     }
 
-    public List<Procedure> findByType(String type){
-        String sql = "SELECT p FROM Procedure p where p.type = :type";
+    public List<Procedure> findByServiceType(String type){
+        String sql = "SELECT p FROM Procedure p where p.serviceType = :type";
         return em.createQuery( sql,Procedure.class)
                 .setParameter("type",type)
+                .getResultList();
+    }
+
+    public List<Procedure> findByTypeCompany(String typeCompany){
+        String sql = "SELECT p FROM Procedure p where p.typeCompany = :typeCompany";
+        return em.createQuery( sql,Procedure.class)
+                .setParameter("typeCompany",typeCompany)
                 .getResultList();
     }
 }

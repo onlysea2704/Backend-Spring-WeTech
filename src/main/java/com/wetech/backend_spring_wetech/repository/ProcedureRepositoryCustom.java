@@ -7,5 +7,6 @@ import java.util.List;
 public interface ProcedureRepositoryCustom {
 
     public List<Procedure> getTop();
-    public List<Procedure> findByType(String type);
+    public List<Procedure> findByServiceType(String type);
+    public List<Procedure> findByTypeCompany(String typeCompany);
 }
