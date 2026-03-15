@@ -4,9 +4,11 @@ import com.wetech.backend_spring_wetech.dto.FormDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.MyProcedureResultDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.ProcedureDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.ProcedureGroupDTO;
+import com.wetech.backend_spring_wetech.entity.MyProcedure;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.service.ProcedureService;
 import com.wetech.backend_spring_wetech.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -49,9 +51,9 @@ public class ProcedureController {
         return procedureService.findByTypeCompany(typeCompany);
     }
 
-    @GetMapping("/find-by-id")
+    @GetMapping("/find-by-id-and-check-status")
     public ProcedureDTO findById(@RequestParam("id") Long id) {
-        return new ProcedureDTO(procedureService.findById(id));
+        return procedureService.findByIdAndCheckStatus(id);
     }
 
     @GetMapping("/find-my-procedure")
@@ -104,11 +106,7 @@ public class ProcedureController {
             @RequestParam(value = "endDate", required = false) LocalDateTime endDate,
             @RequestParam(value = "code", required = false) String code
     ) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = (User) userService.loadUserByUsername(username);
-
-        return procedureService.searchRegisteredMyProcedures(user.getUserId(), typeCompany, serviceType, startDate, endDate, code);
+        return procedureService.searchRegisteredMyProcedures(typeCompany, serviceType, startDate, endDate, code);
     }
 
     @GetMapping("/search-drafts")
@@ -118,20 +116,18 @@ public class ProcedureController {
             @RequestParam(value = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(value = "endDate", required = false) LocalDateTime endDate
     ) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = (User) userService.loadUserByUsername(username);
 
-        return procedureService.searchDraftMyProcedures(user.getUserId(), typeCompany, serviceType, startDate, endDate);
+        return procedureService.searchDraftMyProcedures(typeCompany, serviceType, startDate, endDate);
     }
 
-    @PostMapping("/update-my-procedure-status")
+    @PostMapping("/update-my-procedure")
     public ResponseEntity<Object> updateMyProcedureStatus(
             @RequestParam("procedureId") Long procedureId,
-            @RequestParam("status") String statusStr
+            @RequestParam("status") MyProcedure.Status status,
+            @RequestParam("taxAuthority") String taxAuthority
     ) {
         try {
-            boolean updated = procedureService.updateMyProcedureStatusForCurrentUser(procedureId, statusStr);
+            boolean updated = procedureService.updateMyProcedureStatusForCurrentUser(procedureId, status, taxAuthority);
             if (!updated) {
                 return ResponseEntity.status(404).body("No matching my procedure found");
             }
@@ -139,6 +135,14 @@ public class ProcedureController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/download-files")
+    public void downloadFiles(
+            HttpServletResponse response,
+            @RequestParam("procedureId") Long procedureId
+    ) {
+        procedureService.downloadFiles(response, procedureId);
     }
 
 }

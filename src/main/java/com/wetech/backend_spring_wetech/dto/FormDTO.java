@@ -24,6 +24,7 @@ public class FormDTO {
     private String name;
     private String type;
     private LocalDateTime createdAt;
+    private String url;
 
     public FormDTO(Form form) {
         this.formId = form.getFormId();
@@ -31,5 +32,10 @@ public class FormDTO {
         this.name = form.getName();
         this.type = form.getType();
         this.createdAt = form.getCreatedAt();
+    }
+
+    public FormDTO(Form form, String url) {
+        this(form);
+        this.url = url;
     }
 }

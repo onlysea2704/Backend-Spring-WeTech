@@ -6,26 +6,27 @@ import com.wetech.backend_spring_wetech.dto.FormDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.MyProcedureResultDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.ProcedureDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.ProcedureGroupDTO;
-import com.wetech.backend_spring_wetech.entity.Form;
-import com.wetech.backend_spring_wetech.entity.MyProcedure;
-import com.wetech.backend_spring_wetech.entity.Procedure;
-import com.wetech.backend_spring_wetech.entity.User;
+import com.wetech.backend_spring_wetech.entity.*;
+import com.wetech.backend_spring_wetech.repository.FormSubmissionRepository;
 import com.wetech.backend_spring_wetech.repository.MyProcedureRepository;
 import com.wetech.backend_spring_wetech.repository.ProcedureRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 @RequiredArgsConstructor
@@ -33,12 +34,13 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ProcedureService {
 
-    private final ProcedureRepository procedureRepository;
-    private final Cloudinary cloudinary;
-    private final FormService formService;
-    private final MyProcedureRepository myProcedureRepository;
-    private final UserService userService; // injected to resolve current user
-    private final CodeGenerationService codeGenerationService;
+    private ProcedureRepository procedureRepository;
+    private Cloudinary cloudinary;
+    private FormService formService;
+    private MyProcedureRepository myProcedureRepository;
+    private UserService userService; // injected to resolve current user
+    private CodeGenerationService codeGenerationService;
+    private FormSubmissionRepository formSubmissionRepository;
 
     public List<ProcedureDTO> getAll() {
         List<Procedure> procedures = procedureRepository.findAll();
@@ -81,6 +83,17 @@ public class ProcedureService {
 
     public Procedure findById(Long id){
         return procedureRepository.findById(id).orElseThrow(() -> new RuntimeException("Procedure not found"));
+    }
+
+    public ProcedureDTO findByIdAndCheckStatus(Long procedureId) {
+        User user = userService.getCurrentUser();
+        MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
+        Procedure procedure = findById(procedureId);
+        ProcedureDTO procedureDTO = new ProcedureDTO(procedure);
+        if (myProcedure != null) {
+            procedureDTO.setStatus(myProcedure.getStatus());
+        }
+        return procedureDTO;
     }
 
     public List<ProcedureDTO> findMyProcedure(Long userId){
@@ -169,43 +182,83 @@ public class ProcedureService {
         procedureRepository.save(procedure);
     }
 
-    public List<MyProcedureResultDTO> searchRegisteredMyProcedures(Long userId, String typeCompany, String serviceType, LocalDateTime startDate, LocalDateTime endDate, String code){
-        return myProcedureRepository.searchRegistered(userId, typeCompany, serviceType, startDate, endDate, code);
+    public List<MyProcedureResultDTO> searchRegisteredMyProcedures(String typeCompany, String serviceType, LocalDateTime startDate, LocalDateTime endDate, String code){
+        User user = userService.getCurrentUser();
+        return myProcedureRepository.searchRegistered(user.getUserId(), typeCompany, serviceType, startDate, endDate, code);
     }
 
-    public List<MyProcedureResultDTO> searchDraftMyProcedures(Long userId, String typeCompany, String serviceType, LocalDateTime startDate, LocalDateTime endDate){
-        return myProcedureRepository.searchDrafts(userId, typeCompany, serviceType, startDate, endDate);
+    public List<MyProcedureResultDTO> searchDraftMyProcedures(String typeCompany, String serviceType, LocalDateTime startDate, LocalDateTime endDate){
+        User user = userService.getCurrentUser();
+        return myProcedureRepository.searchDrafts(user.getUserId(), typeCompany, serviceType, startDate, endDate);
     }
 
-    public boolean updateMyProcedureStatus(Long userId, Long procedureId, MyProcedure.Status status) {
+    public boolean updateMyProcedureStatusForCurrentUser(Long procedureId, MyProcedure.Status status, String taxAuthority) {
+        User user = userService.getCurrentUser();
+
         if (status == null) return false;
         // only allow certain statuses
         if (status != MyProcedure.Status.PENDING && status != MyProcedure.Status.SUCCESS && status != MyProcedure.Status.FAILED) {
             return false;
         }
-        int updated = myProcedureRepository.updateStatusByUserIdAndProcedureId(userId, procedureId, status);
+        int updated = myProcedureRepository.updateStatusAndTaxAuthorityByUserIdAndProcedureId(user.getUserId(), procedureId, status, taxAuthority);
         return updated > 0;
     }
 
-    public boolean updateMyProcedureStatusForCurrentUser(Long procedureId, String statusStr) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) throw new IllegalArgumentException("Unauthenticated");
-        String username = authentication.getName();
-        User user = (User) userService.loadUserByUsername(username);
+    public List<Map<String, String>> getAllPdfFileUrlsByProcedure(Long procedureId) {
+        User user = userService.getCurrentUser();
+        // check if user has a MyProcedure record for this procedure
+        MyProcedure myProc = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
+        if (myProc == null || myProc.getStatus().equals(MyProcedure.Status.DRAFT)) {
+            return new ArrayList<>();
+        }
 
-        MyProcedure.Status status;
+        Procedure procedure = findById(procedureId);
+        List<Map<String, String>> urls = new ArrayList<>();
+        if (procedure.getForms() == null || procedure.getForms().isEmpty()) return urls;
+
+        for (Form form : procedure.getForms()) {
+            FormSubmission fs = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
+            if (fs != null && fs.getPdfFileUrl() != null) {
+                Map<String, String> url = Map.of(
+                        "url", fs.getPdfFileUrl(),
+                        "code", form.getCode(),
+                        "id", form.getFormId().toString(),
+                        "name", form.getName()
+                );
+                urls.add(url);
+            }
+        }
+
+        return urls;
+    }
+
+    public void downloadFiles(HttpServletResponse response, Long procedureId) {
+        List<Map<String, String>> urls = getAllPdfFileUrlsByProcedure(procedureId);
+        response.setContentType("application/zip");
+        response.setHeader("Content-Disposition", "attachment; filename=files.zip");
         try {
-            status = MyProcedure.Status.valueOf(statusStr.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid status. Allowed: PENDING, SUCCESS, FAILED");
-        }
+            ZipOutputStream zipOut = new ZipOutputStream(response.getOutputStream());
 
-        // only accept PENDING, SUCCESS, FAILED
-        if (status != MyProcedure.Status.PENDING && status != MyProcedure.Status.SUCCESS && status != MyProcedure.Status.FAILED) {
-            throw new IllegalArgumentException("Invalid status. Allowed: PENDING, SUCCESS, FAILED");
-        }
+            for (Map<String, String> urlMap : urls) {
+                String fileUrl = urlMap.get("url");
 
-        return updateMyProcedureStatus(user.getUserId(), procedureId, status);
+                URI uri = URI.create(fileUrl);
+                InputStream inputStream = uri.toURL().openStream();
+
+                ZipEntry zipEntry = new ZipEntry(urlMap.get("name").replaceAll("[\\\\/]", "_") + ".pdf");
+                zipOut.putNextEntry(zipEntry);
+
+                inputStream.transferTo(zipOut);
+
+                zipOut.closeEntry();
+                inputStream.close();
+            }
+
+            zipOut.finish();
+            zipOut.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String uploadToCloudinary(MultipartFile file) throws IOException {

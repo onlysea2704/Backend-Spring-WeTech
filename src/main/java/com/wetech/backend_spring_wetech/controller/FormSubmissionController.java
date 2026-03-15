@@ -2,6 +2,7 @@ package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.dto.FormSubmissionRequestDTO;
 import com.wetech.backend_spring_wetech.service.FormSubmissionService;
+import com.wetech.backend_spring_wetech.service.ProcedureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class FormSubmissionController {
     private final FormSubmissionService formSubmissionService;
+    private final ProcedureService procedureService;
 
     @GetMapping("/get/data-json")
     public ResponseEntity<Map<String, Object>> getDataJson(@RequestParam("formId") Long formId) {
@@ -29,7 +31,7 @@ public class FormSubmissionController {
 
     @GetMapping("/get/all-pdf-file-urls")
     public ResponseEntity<List<Map<String, String>>> getAllPdfFileUrls(@RequestParam("procedureId") Long procedureId) {
-        return ResponseEntity.ok(formSubmissionService.getAllPdfFileUrlsByProcedure(procedureId));
+        return ResponseEntity.ok(procedureService.getAllPdfFileUrlsByProcedure(procedureId));
     }
 
     @PostMapping("/create")

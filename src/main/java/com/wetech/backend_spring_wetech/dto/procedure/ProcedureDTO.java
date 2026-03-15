@@ -2,6 +2,7 @@ package com.wetech.backend_spring_wetech.dto.procedure;
 
 import com.wetech.backend_spring_wetech.dto.FormDTO;
 import com.wetech.backend_spring_wetech.entity.Form;
+import com.wetech.backend_spring_wetech.entity.MyProcedure;
 import com.wetech.backend_spring_wetech.entity.Procedure;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class ProcedureDTO {
     private String typeCompany;
     private String typeCompanyTitle;
     private List<FormDTO> forms;
+    private MyProcedure.Status status;
 
     public ProcedureDTO(Procedure procedure) {
         this.procedureId = procedure.getProcedureId();
@@ -37,5 +39,10 @@ public class ProcedureDTO {
         this.typeCompany = procedure.getTypeCompany();
         this.typeCompanyTitle = procedure.getTypeCompanyTitle();
         this.forms = procedure.getForms().stream().map(FormDTO::new).toList();
+    }
+
+    public ProcedureDTO(Procedure procedure, MyProcedure.Status status) {
+        this(procedure);
+        this.status = status;
     }
 }

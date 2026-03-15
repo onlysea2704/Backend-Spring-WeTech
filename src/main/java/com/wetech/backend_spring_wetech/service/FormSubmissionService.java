@@ -27,7 +27,6 @@ public class FormSubmissionService {
     private FormSubmissionRepository formSubmissionRepository;
     private CloudinaryUtils cloudinaryUtils;
     private MyProcedureRepository myProcedureRepository;
-    private ProcedureService procedureService;
 
     public Map<String, Object> get(Long formId) {
         Form form = formService.findById(formId);
@@ -84,14 +83,7 @@ public class FormSubmissionService {
         }
 
         try {
-            String url;
-            if (formSubmission.getPdfFileUrl() != null && !formSubmission.getPdfFileUrl().isEmpty()) {
-                // overwrite existing file
-                url = cloudinaryUtils.updateToCloudinary(pdfFile, formSubmission.getPdfFileUrl());
-            } else {
-                // fresh upload
-                url = cloudinaryUtils.uploadToCloudinary(pdfFile);
-            }
+            String url = cloudinaryUtils.uploadToCloudinary(pdfFile);
 
             if (url == null) return false;
 
@@ -100,6 +92,7 @@ public class FormSubmissionService {
             return true;
         } catch (Exception e) {
             // Could add logging here
+            e.printStackTrace();
             return false;
         }
     }
@@ -127,32 +120,5 @@ public class FormSubmissionService {
                     "url", formSubmission.getPdfFileUrl() != null ? formSubmission.getPdfFileUrl() : ""
             );
         }
-    }
-
-    public List<Map<String, String>> getAllPdfFileUrlsByProcedure(Long procedureId) {
-        User user = userService.getCurrentUser();
-        // check if user has a MyProcedure record for this procedure
-        MyProcedure myProc = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
-//        if (myProc == null || myProc.getStatus().equals(MyProcedure.Status.DRAFT)) {
-//            return new ArrayList<>();
-//        }
-
-        Procedure procedure = procedureService.findById(procedureId);
-        List<Map<String, String>> urls = new ArrayList<>();
-        if (procedure.getForms() == null || procedure.getForms().isEmpty()) return urls;
-
-        for (Form form : procedure.getForms()) {
-            FormSubmission fs = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
-            if (fs != null && fs.getPdfFileUrl() != null) {
-                Map<String, String> url = Map.of(
-                        "url", fs.getPdfFileUrl(),
-                        "code", form.getCode(),
-                        "id", form.getFormId().toString()
-                );
-                urls.add(url);
-            }
-        }
-
-        return urls;
     }
 }
