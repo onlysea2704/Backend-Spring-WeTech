@@ -1,5 +1,6 @@
 package com.wetech.backend_spring_wetech.controller;
 
+import com.wetech.backend_spring_wetech.dto.ApiResponse;
 import com.wetech.backend_spring_wetech.dto.FormDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.MyProcedureResultDTO;
 import com.wetech.backend_spring_wetech.dto.procedure.ProcedureDTO;
@@ -10,7 +11,6 @@ import com.wetech.backend_spring_wetech.service.ProcedureService;
 import com.wetech.backend_spring_wetech.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -52,8 +52,12 @@ public class ProcedureController {
     }
 
     @GetMapping("/find-by-id-and-check-status")
-    public ProcedureDTO findById(@RequestParam("id") Long id) {
-        return procedureService.findByIdAndCheckStatus(id);
+    public ResponseEntity<ApiResponse<ProcedureDTO>> findById(@RequestParam("id") Long id) {
+        ProcedureDTO dto = procedureService.findByIdAndCheckStatus(id);
+        if (dto == null) {
+            return ResponseEntity.status(404).body(ApiResponse.of(404, "Procedure not found", null));
+        }
+        return ResponseEntity.ok(ApiResponse.success(dto));
     }
 
     @GetMapping("/find-my-procedure")

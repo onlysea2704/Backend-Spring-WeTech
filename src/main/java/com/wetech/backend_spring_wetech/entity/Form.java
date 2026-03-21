@@ -5,11 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 @Entity
 @Table(name = "form")
@@ -37,6 +35,9 @@ public class Form {
     @JoinColumn(name = "procedure_id")
     @NonNull
     private Procedure procedure;
+
+    @OneToMany(mappedBy = "form", cascade = CascadeType.ALL)
+    private List<FormSubmission> formSubmissions;
 
     @PrePersist
     public void prePersist() {

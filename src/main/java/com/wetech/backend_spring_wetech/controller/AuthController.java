@@ -1,13 +1,13 @@
 package com.wetech.backend_spring_wetech.controller;
 
 import com.wetech.backend_spring_wetech.dto.*;
-import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.security.JwtTokenProvider;
 import com.wetech.backend_spring_wetech.service.EmailService;
 import com.wetech.backend_spring_wetech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -41,16 +40,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<ApiResponse<JwtResponse>> login(@RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
         User user = (User) userService.loadUserByUsername(request.getUsername());
         if(!userService.checkDevices(user, request.getDeviceInfoRequest())){
-            return ResponseEntity.badRequest().body("Thiết bị không được phép đăng nhập");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ApiResponse.of(403, "Thiết bị không được phép đăng nhập", null));
         }
         String token = jwtTokenProvider.generateToken(authentication.getName(), user.getUserId(), user.getRole());
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(ApiResponse.success(new JwtResponse(token)));
     }
 
     @PostMapping("/update-profile")
