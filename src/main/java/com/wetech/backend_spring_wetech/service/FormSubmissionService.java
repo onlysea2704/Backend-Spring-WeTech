@@ -4,7 +4,6 @@ import com.wetech.backend_spring_wetech.dto.FormSubmissionRequestDTO;
 import com.wetech.backend_spring_wetech.entity.Form;
 import com.wetech.backend_spring_wetech.entity.FormSubmission;
 import com.wetech.backend_spring_wetech.entity.MyProcedure;
-import com.wetech.backend_spring_wetech.entity.Procedure;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.repository.FormSubmissionRepository;
 import com.wetech.backend_spring_wetech.repository.MyProcedureRepository;
@@ -14,8 +13,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -113,6 +110,12 @@ public class FormSubmissionService {
         Form form = formService.findByCode(code);
         User user = userService.getCurrentUser();
         FormSubmission formSubmission = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
+
+        MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), form.getProcedure().getProcedureId());
+        if (myProcedure == null || myProcedure.getStatus() == MyProcedure.Status.DRAFT) {
+            throw new RuntimeException("User has not paid for this procedure");
+        }
+
         if (formSubmission == null) {
             return null;
         } else {

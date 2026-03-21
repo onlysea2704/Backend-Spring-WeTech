@@ -1,6 +1,5 @@
 package com.wetech.backend_spring_wetech.entity;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,12 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 @Entity
-@Table(name = "form_submission")
+@Table(
+        name = "form_submission",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "form_id"})
+        }
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

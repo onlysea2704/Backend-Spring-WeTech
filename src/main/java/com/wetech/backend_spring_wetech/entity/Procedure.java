@@ -1,8 +1,9 @@
 package com.wetech.backend_spring_wetech.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.lang.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -63,5 +64,6 @@ public class Procedure {
     public void prePersist() {
         LocalDate currentDate = LocalDate.now();
         createdAt = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        numberRegister = 0;
     }
 }

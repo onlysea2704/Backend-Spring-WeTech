@@ -1,7 +1,6 @@
 package com.wetech.backend_spring_wetech.dto.procedure;
 
 import com.wetech.backend_spring_wetech.dto.FormDTO;
-import com.wetech.backend_spring_wetech.entity.Form;
 import com.wetech.backend_spring_wetech.entity.MyProcedure;
 import com.wetech.backend_spring_wetech.entity.Procedure;
 import lombok.AllArgsConstructor;
@@ -17,6 +16,7 @@ public class ProcedureDTO {
     private Long procedureId;
     private String title;
     private String description;
+    private String code;
     private String linkImage;
     private String serviceType;
     private String serviceTypeTitle;
@@ -31,6 +31,7 @@ public class ProcedureDTO {
         this.procedureId = procedure.getProcedureId();
         this.title = procedure.getTitle();
         this.description = procedure.getDescription();
+        this.code = procedure.getCode();
         this.linkImage = procedure.getLinkImage();
         this.serviceType = procedure.getServiceType();
         this.serviceTypeTitle = procedure.getServiceTypeTitle();

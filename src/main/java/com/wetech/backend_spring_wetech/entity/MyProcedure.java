@@ -6,7 +6,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "my_procedures")
+@Table(
+        name = "my_procedures",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "procedure_id"})
+        }
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

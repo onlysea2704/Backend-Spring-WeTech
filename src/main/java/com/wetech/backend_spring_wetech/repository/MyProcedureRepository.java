@@ -56,6 +56,6 @@ public interface MyProcedureRepository extends JpaRepository<MyProcedure, Long> 
 
     @Modifying
     @Transactional
-    @Query("UPDATE MyProcedure mp SET mp.status = :status, mp.taxAuthority = :taxAuthority WHERE mp.userId = :userId AND mp.procedureId = :procedureId")
+    @Query("UPDATE MyProcedure mp SET mp.status = :status, mp.taxAuthority = :taxAuthority, mp.submissionCount = mp.submissionCount + 1, mp.submissionDate = CURRENT_TIMESTAMP WHERE mp.userId = :userId AND mp.procedureId = :procedureId")
     int updateStatusAndTaxAuthorityByUserIdAndProcedureId(@Param("userId") Long userId, @Param("procedureId") Long procedureId, @Param("status") MyProcedure.Status status, @Param("taxAuthority") String taxAuthority);
 }

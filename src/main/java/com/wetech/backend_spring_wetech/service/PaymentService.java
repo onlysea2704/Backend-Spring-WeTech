@@ -3,18 +3,15 @@ package com.wetech.backend_spring_wetech.service;
 import com.wetech.backend_spring_wetech.dto.WebhookPayload;
 import com.wetech.backend_spring_wetech.entity.*;
 import com.wetech.backend_spring_wetech.repository.*;
-import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Map;
-
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +22,8 @@ public class PaymentService {
     private MyCourseRepository myCourseRepository;
     private CourseRepository courseRepository;
     private MyProcedureRepository myProcedureRepository;
+    private ProcedureRepository procedureRepository;
+    private ProcedureService procedureService;
     private CartRepository cartRepository;
     private SimpMessagingTemplate messagingTemplate;
 
@@ -99,8 +98,13 @@ public class PaymentService {
                 }
                 else {
                     MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(transaction.getUserId(), item.getIdProcedure());
-                    myProcedure.setStatus(MyProcedure.Status.PAID);
-                    myProcedureRepository.save(myProcedure);
+                    if (myProcedure != null) {
+                        myProcedure.setStatus(MyProcedure.Status.PAID);
+                        myProcedureRepository.save(myProcedure);
+                    }
+                    Procedure procedure = procedureService.findById(item.getIdProcedure());
+                    procedure.setNumberRegister(procedure.getNumberRegister() == null ? 1 : procedure.getNumberRegister() + 1);
+                    procedureRepository.save(procedure);
                 }
             }
         } else {

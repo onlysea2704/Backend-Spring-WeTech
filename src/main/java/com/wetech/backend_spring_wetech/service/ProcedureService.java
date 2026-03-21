@@ -105,11 +105,8 @@ public class ProcedureService {
         Procedure procedure = new Procedure();
         convertToProcedure(procedureDTO, procedure, image);
 
-        // ensure unique code for procedure
-        if (procedure.getCode() == null || procedure.getCode().isEmpty()) {
-            String procCode = codeGenerationService.generateProcedureCode();
-            procedure.setCode(procCode);
-        }
+        String procCode = codeGenerationService.generateProcedureCode();
+        procedure.setCode(procCode);
 
         List<FormDTO> formDTOS = procedureDTO.getForms();
         List<Form> forms = new ArrayList<>();
