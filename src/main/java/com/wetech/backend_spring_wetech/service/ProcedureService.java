@@ -207,10 +207,10 @@ public class ProcedureService {
     public List<Map<String, String>> getAllPdfFileUrlsByProcedure(Long procedureId) {
         User user = userService.getCurrentUser();
         // check if user has a MyProcedure record for this procedure
-        MyProcedure myProc = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
-        if (myProc == null || myProc.getStatus().equals(MyProcedure.Status.DRAFT)) {
-            return new ArrayList<>();
-        }
+//        MyProcedure myProc = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
+//        if (myProc == null || myProc.getStatus().equals(MyProcedure.Status.DRAFT)) {
+//            return new ArrayList<>();
+//        }
 
         Procedure procedure = findById(procedureId);
         List<Map<String, String>> urls = new ArrayList<>();

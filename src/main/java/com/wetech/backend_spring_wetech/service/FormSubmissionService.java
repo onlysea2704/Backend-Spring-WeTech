@@ -111,10 +111,10 @@ public class FormSubmissionService {
         User user = userService.getCurrentUser();
         FormSubmission formSubmission = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
 
-        MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), form.getProcedure().getProcedureId());
-        if (myProcedure == null || myProcedure.getStatus() == MyProcedure.Status.DRAFT) {
-            throw new RuntimeException("User has not paid for this procedure");
-        }
+//        MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), form.getProcedure().getProcedureId());
+//        if (myProcedure == null || myProcedure.getStatus() == MyProcedure.Status.DRAFT) {
+//            throw new RuntimeException("User has not paid for this procedure");
+//        }
 
         if (formSubmission == null) {
             return null;
