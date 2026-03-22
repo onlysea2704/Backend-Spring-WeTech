@@ -1,10 +1,8 @@
 package com.wetech.backend_spring_wetech.service;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.wetech.backend_spring_wetech.dto.*;
-import com.wetech.backend_spring_wetech.entity.Course;
 import com.wetech.backend_spring_wetech.entity.DeviceInfo;
+import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.repository.DeviceInfoRepository;
 import com.wetech.backend_spring_wetech.repository.UserRepository;
 import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
@@ -15,15 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.wetech.backend_spring_wetech.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.*;
 import java.security.SecureRandom;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -50,6 +47,17 @@ public class UserService implements UserDetailsService {
         user.setSdt(registerRequest.getPhone());
         user.setCreated(new Date());
         user.setFullName(registerRequest.getFullName());
+        return userRepository.save(user);
+    }
+
+    public User createUserWithRole(String username, String rawPassword, String fullName, String sdt, String role) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setRole(role);
+        user.setSdt(sdt);
+        user.setCreated(new Date());
+        user.setFullName(fullName);
         return userRepository.save(user);
     }
 

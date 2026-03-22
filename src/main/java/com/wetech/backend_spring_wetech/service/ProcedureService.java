@@ -197,6 +197,9 @@ public class ProcedureService {
         if (status != MyProcedure.Status.PENDING && status != MyProcedure.Status.SUCCESS && status != MyProcedure.Status.FAILED) {
             return false;
         }
+        MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
+        if (myProcedure == null || myProcedure.getStatus() == MyProcedure.Status.DRAFT) return false;
+
         int updated = myProcedureRepository.updateStatusAndTaxAuthorityByUserIdAndProcedureId(user.getUserId(), procedureId, status, taxAuthority);
         return updated > 0;
     }
