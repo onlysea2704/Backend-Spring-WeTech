@@ -27,7 +27,8 @@ public interface MyProcedureRepository extends JpaRepository<MyProcedure, Long> 
             "AND (:serviceType IS NULL OR p.serviceType = :serviceType) " +
             "AND (:startDate IS NULL OR mp.submissionDate >= :startDate) " +
             "AND (:endDate IS NULL OR mp.submissionDate <= :endDate) " +
-            "AND (:code IS NULL OR p.code = :code)")
+            "AND (:code IS NULL OR p.code = :code)" +
+            "ORDER BY mp.submissionDate DESC")
     List<MyProcedureResultDTO> searchRegistered(
             @Param("userId") Long userId,
             @Param("typeCompany") String typeCompany,
@@ -45,7 +46,8 @@ public interface MyProcedureRepository extends JpaRepository<MyProcedure, Long> 
             "AND (:typeCompany IS NULL OR p.typeCompany = :typeCompany) " +
             "AND (:serviceType IS NULL OR p.serviceType = :serviceType) " +
             "AND (:startDate IS NULL OR mp.createdAt >= :startDate) " +
-            "AND (:endDate IS NULL OR mp.createdAt <= :endDate)")
+            "AND (:endDate IS NULL OR mp.createdAt <= :endDate)" +
+            "ORDER BY mp.createdAt DESC")
     List<MyProcedureResultDTO> searchDrafts(
             @Param("userId") Long userId,
             @Param("typeCompany") String typeCompany,

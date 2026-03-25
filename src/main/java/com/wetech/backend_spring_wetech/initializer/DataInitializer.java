@@ -25,7 +25,6 @@ public class DataInitializer {
 			boolean hasAdminRole = userRepository.findAll().stream()
 					.anyMatch(u -> "ADMIN".equalsIgnoreCase(u.getRole()));
 			if (hasAdminRole) {
-				System.out.println("An ADMIN account already exists in DB");
 				return;
 			}
 

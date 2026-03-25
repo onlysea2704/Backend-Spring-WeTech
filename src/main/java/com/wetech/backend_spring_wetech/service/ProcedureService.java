@@ -195,10 +195,9 @@ public class ProcedureService {
         if (status == null) return false;
         // only allow certain statuses
         if (status != MyProcedure.Status.PENDING && status != MyProcedure.Status.SUCCESS && status != MyProcedure.Status.FAILED) {
+            System.out.println("Accepted statuses: PENDING, SUCCESS, FAILED");
             return false;
         }
-        MyProcedure myProcedure = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
-        if (myProcedure == null || myProcedure.getStatus() == MyProcedure.Status.DRAFT) return false;
 
         int updated = myProcedureRepository.updateStatusAndTaxAuthorityByUserIdAndProcedureId(user.getUserId(), procedureId, status, taxAuthority);
         return updated > 0;
