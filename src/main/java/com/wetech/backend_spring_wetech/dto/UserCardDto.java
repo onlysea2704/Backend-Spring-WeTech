@@ -6,9 +6,11 @@ import lombok.Data;
 
 @Data
 public class UserCardDto {
+    private Long id;
+
     private String fullName;
     @NotBlank
-    @Size(max = 12)
+    @Size(max = 12, min = 12, message = "CCCD phải có đúng 12 ký tự")
     private String cccd;
 
     private String gender;

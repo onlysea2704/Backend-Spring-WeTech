@@ -16,10 +16,15 @@ public class UserCard {
     private Long id;
     private String fullName;
     private String email;
+
     private String cccd;   // căn cước công dân (PK)
+
     private String gender;
+
     private String dob; // Có thể đổi sang LocalDate nếu format chuẩn
+
     private String nationality;
+
     private String ethnicity; // dan toc
 
     @OneToOne(cascade = CascadeType.ALL)

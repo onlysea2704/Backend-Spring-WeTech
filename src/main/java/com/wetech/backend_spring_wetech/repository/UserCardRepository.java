@@ -5,11 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface UserCardRepository extends JpaRepository<UserCard, Long> {
-    Optional<UserCard> findByUserId(Long userId);
+    @Query("SELECT uc FROM UserCard uc WHERE uc.userId = :userId")
+    List<UserCard> findByUserId(Long userId);
+
+    UserCard findByIdAndUserId(Long id, Long userId);
 
     boolean existsByUserId(Long userId);
 }

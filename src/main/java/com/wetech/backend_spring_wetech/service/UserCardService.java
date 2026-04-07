@@ -4,12 +4,14 @@ import com.wetech.backend_spring_wetech.dto.UserCardDto;
 import com.wetech.backend_spring_wetech.entity.Address;
 import com.wetech.backend_spring_wetech.entity.User;
 import com.wetech.backend_spring_wetech.entity.UserCard;
-import com.wetech.backend_spring_wetech.exception.ResourceNotFoundException;
+import com.wetech.backend_spring_wetech.repository.AddressRepository;
 import com.wetech.backend_spring_wetech.repository.UserCardRepository;
 import com.wetech.backend_spring_wetech.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,19 +19,16 @@ public class UserCardService {
     private final UserCardRepository userCardRepository;
     private final UserRepository userRepository;
     private final UserService userService;
+    private final AddressRepository addressRepository;
 
-    public UserCard getUserCard() {
+    public List<UserCard> getUserCard() {
         User user = userService.getCurrentUser();
-        return userCardRepository.findByUserId(user.getUserId()).orElseThrow(() -> new ResourceNotFoundException("UserCard not found for user"));
+        return userCardRepository.findByUserId(user.getUserId());
     }
 
     @Transactional
     public UserCard createUserCard(UserCardDto dto) {
         User user = userService.getCurrentUser();
-
-        if (userCardRepository.existsByUserId(user.getUserId())) {
-            throw new RuntimeException("UserCard already exists for user");
-        }
         UserCard uc = new UserCard();
         uc.setEmail(user.getUsername());
         uc.setUserId(user.getUserId());
@@ -41,7 +40,19 @@ public class UserCardService {
     @Transactional
     public UserCard updateUserCard(UserCardDto dto) {
         User user = userService.getCurrentUser();
-        UserCard uc = userCardRepository.findByUserId(user.getUserId()).orElseThrow(() -> new ResourceNotFoundException("UserCard not found for user"));
+        UserCard uc = userCardRepository.findByIdAndUserId(dto.getId(), user.getUserId());
+
+        if (uc == null) {
+            throw new RuntimeException("UserCard not found or does not belong to the user");
+        }
+        Long permanentAddressId = uc.getPermanentAddress() != null ? uc.getPermanentAddress().getId() : null;
+        Long currentAddressId = uc.getCurrentAddress() != null ? uc.getCurrentAddress().getId() : null;
+        if (permanentAddressId != null) {
+            addressRepository.deleteById(permanentAddressId);
+        }
+        if (currentAddressId != null) {
+            addressRepository.deleteById(currentAddressId);
+        }
 
         mapToUserCard(dto, uc);
 
@@ -65,7 +76,10 @@ public class UserCardService {
                     .province(dto.getPermanentProvince())
                     .build();
             uc.setPermanentAddress(pa);
+        } else {
+            uc.setPermanentAddress(null);
         }
+
         if (dto.getCurrentStreet() != null && dto.getCurrentWard() != null && dto.getCurrentProvince() != null) {
             Address ca = Address.builder()
                     .street(dto.getCurrentStreet())
@@ -73,6 +87,8 @@ public class UserCardService {
                     .province(dto.getCurrentProvince())
                     .build();
             uc.setCurrentAddress(ca);
+        } else {
+            uc.setCurrentAddress(null);
         }
     }
 }
