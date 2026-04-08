@@ -10,20 +10,24 @@ import com.wetech.backend_spring_wetech.repository.MyProcedureRepository;
 import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true)
+@Slf4j
 public class FormSubmissionService {
     private FormService formService;
     private UserService userService;
     private FormSubmissionRepository formSubmissionRepository;
     private CloudinaryUtils cloudinaryUtils;
     private MyProcedureRepository myProcedureRepository;
+    private PdfService pdfService;
 
     public Map<String, Object> get(Long formId) {
         Form form = formService.findById(formId);
@@ -71,37 +75,54 @@ public class FormSubmissionService {
         }
     }
 
-    public boolean confirmFormInfo(Long formId, MultipartFile pdfFile) {
+    public boolean confirmFormInfo(Long formId, MultipartFile htmlFile) {
         Form form = formService.findById(formId);
         User user = userService.getCurrentUser();
         FormSubmission formSubmission = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
+        
         if (formSubmission == null) {
+            log.warn("FormSubmission not found for formId: {} and userId: {}", formId, user.getUserId());
             return false;
         }
 
         try {
-            String url = cloudinaryUtils.uploadToCloudinary(pdfFile);
+            // Read HTML content from file
+            String htmlContent = new String(htmlFile.getBytes(), StandardCharsets.UTF_8);
+            log.debug("HTML content read from file, size: {} bytes", htmlContent.length());
+            
+            if (htmlContent.trim().isEmpty()) {
+                log.warn("HTML file content is empty");
+                return false;
+            }
+            
+            // Generate PDF from HTML and upload to Cloudinary
+            String fileName = "form_" + formId + "_" + System.currentTimeMillis();
+            byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent);
+            log.debug("PDF generated, size: {} bytes", pdfContent.length);
+            
+            // Upload PDF to Cloudinary using MockMultipartFile
+            String url = cloudinaryUtils.uploadToCloudinary(
+                    new PdfService.MockMultipartFile(fileName + ".pdf", pdfContent)
+            );
+            
+            if (url == null) {
+                log.error("Failed to upload PDF to Cloudinary");
+                return false;
+            }
 
-            if (url == null) return false;
-
+            // Save PDF URL to FormSubmission
             formSubmission.setPdfFileUrl(url);
             formSubmissionRepository.save(formSubmission);
+            log.info("FormSubmission confirmed with PDF URL: {}", url);
+            
             return true;
-        } catch (Exception e) {
-            // Could add logging here
-            e.printStackTrace();
+            
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid HTML content: {}", e.getMessage());
             return false;
-        }
-    }
-
-    public String getPdfFileUrl(Long formId) {
-        Form form = formService.findById(formId);
-        User user = userService.getCurrentUser();
-        FormSubmission formSubmission = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
-        if (formSubmission == null) {
-            return null;
-        } else {
-            return formSubmission.getPdfFileUrl();
+        } catch (Exception e) {
+            log.error("Error confirming form submission with PDF generation", e);
+            return false;
         }
     }
 
