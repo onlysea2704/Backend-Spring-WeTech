@@ -3,6 +3,7 @@ package com.wetech.backend_spring_wetech.service;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.Margin;
 import com.wetech.backend_spring_wetech.dto.PdfUploadResponse;
 import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class PdfService {
      * @param html HTML content to be converted to PDF
      * @return PDF content as byte array
      */
-    public byte[] generatePdfFromHtml(String html) {
+    public byte[] generatePdfFromHtml(String html, Boolean landscape) {
         log.info("Starting PDF generation from HTML");
         
         if (html == null || html.trim().isEmpty()) {
@@ -58,6 +59,13 @@ public class PdfService {
             // Generate PDF with specific options
             byte[] pdfContent = page.pdf(new Page.PdfOptions()
                     .setFormat("A4")
+                    .setMargin(new Margin()
+                            .setTop("20mm")
+                            .setBottom("20mm")
+                            .setLeft("15mm")
+                            .setRight("15mm")
+                    )
+                    .setLandscape(landscape != null && landscape)
                     .setPrintBackground(true));
             log.info("PDF generated successfully, size: {} bytes", pdfContent.length);
 
@@ -86,12 +94,12 @@ public class PdfService {
      * @param fileName Name of the file to be uploaded
      * @return PdfUploadResponse containing the Cloudinary URL
      */
-    public PdfUploadResponse generateAndUploadPdf(String html, String fileName) {
+    public PdfUploadResponse generateAndUploadPdf(String html, String fileName, Boolean landscape) {
         log.info("Starting PDF generation and upload process");
 
         try {
             // Generate PDF
-            byte[] pdfContent = generatePdfFromHtml(html);
+            byte[] pdfContent = generatePdfFromHtml(html, landscape);
             log.debug("PDF generated, size: {} bytes", pdfContent.length);
 
             // Create a temporary file to upload
