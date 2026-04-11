@@ -75,7 +75,7 @@ public class FormSubmissionService {
         }
     }
 
-    public boolean confirmFormInfo(Long formId, MultipartFile htmlFile) {
+    public boolean confirmFormInfo(Long formId, MultipartFile htmlFile, Boolean landscape) {
         Form form = formService.findById(formId);
         User user = userService.getCurrentUser();
         FormSubmission formSubmission = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
@@ -97,7 +97,7 @@ public class FormSubmissionService {
             
             // Generate PDF from HTML and upload to Cloudinary
             String fileName = "form_" + formId + "_" + System.currentTimeMillis();
-            byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent);
+            byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent, landscape);
             log.debug("PDF generated, size: {} bytes", pdfContent.length);
             
             // Upload PDF to Cloudinary using MockMultipartFile

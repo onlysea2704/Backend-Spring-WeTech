@@ -84,7 +84,8 @@ public class FormSubmissionController {
     @PostMapping("/confirm")
     public ResponseEntity<Boolean> confirmFormInfo(
             @RequestParam("formId") Long formId,
-            @RequestPart("htmlFile") MultipartFile htmlFile
+            @RequestPart("htmlFile") MultipartFile htmlFile,
+            @RequestParam(value = "landscape", required = false, defaultValue = "false") Boolean landscape
     ) {
 
         try {
@@ -95,7 +96,7 @@ public class FormSubmissionController {
             }
             
             // Process form submission with PDF generation
-            boolean result = formSubmissionService.confirmFormInfo(formId, htmlFile);
+            boolean result = formSubmissionService.confirmFormInfo(formId, htmlFile, landscape);
             
             if (result) {
                 log.info("Form submission confirmed successfully");
