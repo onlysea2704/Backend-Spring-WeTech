@@ -60,11 +60,12 @@ public class PdfService {
             byte[] pdfContent = page.pdf(new Page.PdfOptions()
                     .setFormat("A4")
                     .setMargin(new Margin()
-                            .setTop("20mm")
+                            .setTop("15mm")
                             .setBottom("20mm")
                             .setLeft("15mm")
                             .setRight("15mm")
                     )
+                    .setScale(landscape != null && landscape ? 0.65 : 1.0)
                     .setLandscape(landscape != null && landscape)
                     .setPrintBackground(true));
             log.info("PDF generated successfully, size: {} bytes", pdfContent.length);
