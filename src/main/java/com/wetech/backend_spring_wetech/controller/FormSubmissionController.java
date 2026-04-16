@@ -20,6 +20,7 @@ import java.util.Map;
 public class FormSubmissionController {
     private final FormSubmissionService formSubmissionService;
     private final ProcedureService procedureService;
+    
 
     @GetMapping("/get/data-json")
     public ResponseEntity<Map<String, Object>> getDataJson(@RequestParam("formId") Long formId) {
@@ -90,7 +91,7 @@ public class FormSubmissionController {
 
         try {
             // Validate file
-            if (htmlFile.isEmpty()) {
+            if (htmlFile == null || htmlFile.isEmpty()) {
                 log.warn("HTML file is empty");
                 return ResponseEntity.badRequest().build();
             }
@@ -103,11 +104,13 @@ public class FormSubmissionController {
                 return ResponseEntity.ok(true);
             } else {
                 log.warn("Failed to confirm form submission");
-                return ResponseEntity.status(500).build();
+                return ResponseEntity.status(400).build();
             }
         } catch (Exception e) {
             log.error("Error confirming form submission", e);
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(400).build();
         }
     }
+
+    
 }

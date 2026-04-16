@@ -42,6 +42,9 @@ public class FormSubmission {
     @Column(name = "pdf_file_url")
     private String pdfFileUrl;
 
+    @Column(name = "docx_file_url")
+    private String docxFileUrl;
+
     private LocalDateTime createdAt;
 
     @PrePersist

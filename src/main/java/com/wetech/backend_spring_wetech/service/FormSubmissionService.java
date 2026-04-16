@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Service
@@ -28,6 +27,7 @@ public class FormSubmissionService {
     private CloudinaryUtils cloudinaryUtils;
     private MyProcedureRepository myProcedureRepository;
     private PdfService pdfService;
+    private HtmlToDocxService htmlToDocxService;
 
     public Map<String, Object> get(Long formId) {
         Form form = formService.findById(formId);
@@ -86,37 +86,20 @@ public class FormSubmissionService {
         }
 
         try {
-            // Read HTML content from file
-            String htmlContent = new String(htmlFile.getBytes(), StandardCharsets.UTF_8);
-            log.debug("HTML content read from file, size: {} bytes", htmlContent.length());
-            
-            if (htmlContent.trim().isEmpty()) {
-                log.warn("HTML file content is empty");
-                return false;
-            }
-            
-            // Generate PDF from HTML and upload to Cloudinary
-            String fileName = "form_" + formId + "_" + System.currentTimeMillis();
-            byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent, landscape);
-            log.debug("PDF generated, size: {} bytes", pdfContent.length);
-            
-            // Upload PDF to Cloudinary using MockMultipartFile
-            String url = cloudinaryUtils.uploadToCloudinary(
-                    new PdfService.MockMultipartFile(fileName + ".pdf", pdfContent)
-            );
-            
-            if (url == null) {
+            String pdfUrl = pdfService.generateAndUploadPdf(formId, htmlFile, landscape).getUrl();
+            String docxUrl = htmlToDocxService.convertAndSaveDocx(formId, htmlFile);
+
+            if (pdfUrl == null || docxUrl == null) {
                 log.error("Failed to upload PDF to Cloudinary");
                 return false;
             }
 
             // Save PDF URL to FormSubmission
-            formSubmission.setPdfFileUrl(url);
+            formSubmission.setPdfFileUrl(pdfUrl);
+            formSubmission.setDocxFileUrl(docxUrl);
             formSubmissionRepository.save(formSubmission);
-            log.info("FormSubmission confirmed with PDF URL: {}", url);
-            
+
             return true;
-            
         } catch (IllegalArgumentException e) {
             log.error("Invalid HTML content: {}", e.getMessage());
             return false;
