@@ -59,6 +59,26 @@ public class UserCardService {
         return userCardRepository.save(uc);
     }
 
+    @Transactional
+    public void deleteUserCard(Long id) {
+        User user = userService.getCurrentUser();
+        UserCard uc = userCardRepository.findByIdAndUserId(id, user.getUserId());
+
+        if (uc == null) {
+            throw new RuntimeException("UserCard not found or does not belong to the user");
+        }
+
+        // Delete associated addresses if they exist
+        if (uc.getPermanentAddress() != null) {
+            addressRepository.deleteById(uc.getPermanentAddress().getId());
+        }
+        if (uc.getCurrentAddress() != null) {
+            addressRepository.deleteById(uc.getCurrentAddress().getId());
+        }
+
+        userCardRepository.deleteById(id);
+    }
+
     private void mapToUserCard(UserCardDto dto, UserCard uc) {
         uc.setFullName(dto.getFullName());
         uc.setCccd(dto.getCccd());

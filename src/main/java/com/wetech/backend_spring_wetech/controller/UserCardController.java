@@ -39,5 +39,10 @@ public class UserCardController {
         UserCard updated = userCardService.updateUserCard(dto);
         return ResponseEntity.ok(updated);
     }
-}
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUserCard(@PathVariable Long id) {
+        userCardService.deleteUserCard(id);
+        return ResponseEntity.noContent().build();
+    }
+}
