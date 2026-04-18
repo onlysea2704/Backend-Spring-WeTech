@@ -27,10 +27,10 @@ public class PdfService {
 
     private final Browser browser;
     private final CloudinaryUtils cloudinaryUtils;
-    
+
     public byte[] generatePdfFromHtml(String html, Boolean landscape) {
         log.info("Starting PDF generation from HTML");
-        
+
         if (html == null || html.trim().isEmpty()) {
             throw new IllegalArgumentException("HTML content cannot be empty");
         }
@@ -56,9 +56,8 @@ public class PdfService {
                             .setTop("15mm")
                             .setBottom("20mm")
                             .setLeft("15mm")
-                            .setRight("15mm")
-                    )
-                    .setScale(landscape != null && landscape ? 0.65 : 1.0)
+                            .setRight("15mm"))
+                    .setScale(landscape != null && landscape ? 0.70 : 1.0)
                     .setLandscape(landscape != null && landscape)
                     .setPrintBackground(true));
             log.info("PDF generated successfully, size: {} bytes", pdfContent.length);
@@ -80,7 +79,7 @@ public class PdfService {
             }
         }
     }
-    
+
     public PdfUploadResponse generateAndUploadPdf(Long formId, MultipartFile htmlFile, Boolean landscape) {
         try {
             String htmlContent = new String(htmlFile.getBytes(), StandardCharsets.UTF_8);
@@ -99,8 +98,7 @@ public class PdfService {
 
             String fileName = "form_" + formId + "_" + System.currentTimeMillis() + ".pdf";
             String cloudinaryUrl = cloudinaryUtils.uploadToCloudinary(
-                    new MockMultipartFile(fileName, pdfContent)
-            );
+                    new MockMultipartFile(fileName, pdfContent));
             log.info("PDF uploaded to Cloudinary: {}", cloudinaryUrl);
 
             // Clean up temporary file
@@ -119,4 +117,3 @@ public class PdfService {
         }
     }
 }
-

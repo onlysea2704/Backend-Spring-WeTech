@@ -47,17 +47,17 @@ public class ProcedureService {
         return procedures.stream().map(ProcedureDTO::new).toList();
     }
 
-    public List<ProcedureDTO> getTop(){
+    public List<ProcedureDTO> getTop() {
         List<Procedure> procedures = procedureRepository.getTop();
         return procedures.stream().map(ProcedureDTO::new).toList();
     }
 
-    public List<ProcedureDTO> findByType(String type){
+    public List<ProcedureDTO> findByType(String type) {
         List<Procedure> procedures = procedureRepository.findByServiceType(type);
         return procedures.stream().map(ProcedureDTO::new).toList();
     }
 
-    public List<ProcedureGroupDTO> findByTypeCompany(String typeCompany){
+    public List<ProcedureGroupDTO> findByTypeCompany(String typeCompany) {
         List<Procedure> procedures = procedureRepository.findByTypeCompany(typeCompany);
 
         // group procedures by serviceType
@@ -66,7 +66,7 @@ public class ProcedureService {
 
         // convert to ProcedureGroupDTO
         List<ProcedureGroupDTO> result = new ArrayList<>();
-        for (Map.Entry<String, List<Procedure>> entry : grouped.entrySet()){
+        for (Map.Entry<String, List<Procedure>> entry : grouped.entrySet()) {
             String serviceType = entry.getKey();
             // get original Procedure list for this group so we can extract serviceTypeTitle
             List<Procedure> procs = entry.getValue();
@@ -81,7 +81,7 @@ public class ProcedureService {
         return result;
     }
 
-    public Procedure findById(Long id){
+    public Procedure findById(Long id) {
         return procedureRepository.findById(id).orElseThrow(() -> new RuntimeException("Procedure not found"));
     }
 
@@ -96,7 +96,7 @@ public class ProcedureService {
         return procedureDTO;
     }
 
-    public List<ProcedureDTO> findMyProcedure(Long userId){
+    public List<ProcedureDTO> findMyProcedure(Long userId) {
         List<Procedure> procedures = procedureRepository.findMyProcedureByUserId(userId);
         return procedures.stream().map(ProcedureDTO::new).toList();
     }
@@ -154,12 +154,11 @@ public class ProcedureService {
         return new ProcedureDTO(procedure);
     }
 
-    public boolean delete(Long procedureId){
+    public boolean delete(Long procedureId) {
         try {
             procedureRepository.deleteById(procedureId);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error deleting procedure", e);
             return false;
         }
@@ -179,60 +178,76 @@ public class ProcedureService {
         procedureRepository.save(procedure);
     }
 
-    public List<MyProcedureResultDTO> searchRegisteredMyProcedures(String typeCompany, String serviceType, LocalDateTime startDate, LocalDateTime endDate, String code){
+    public List<MyProcedureResultDTO> searchRegisteredMyProcedures(String typeCompany, String serviceType,
+            LocalDateTime startDate, LocalDateTime endDate, String code) {
         User user = userService.getCurrentUser();
-        return myProcedureRepository.searchRegistered(user.getUserId(), typeCompany, serviceType, startDate, endDate, code);
+        return myProcedureRepository.searchRegistered(user.getUserId(), typeCompany, serviceType, startDate, endDate,
+                code);
     }
 
-    public List<MyProcedureResultDTO> searchDraftMyProcedures(String typeCompany, String serviceType, LocalDateTime startDate, LocalDateTime endDate){
+    public List<MyProcedureResultDTO> searchDraftMyProcedures(String typeCompany, String serviceType,
+            LocalDateTime startDate, LocalDateTime endDate) {
         User user = userService.getCurrentUser();
         return myProcedureRepository.searchDrafts(user.getUserId(), typeCompany, serviceType, startDate, endDate);
     }
 
-    public boolean updateMyProcedureStatusForCurrentUser(Long procedureId, MyProcedure.Status status, String taxAuthority) {
+    public boolean updateMyProcedureStatusForCurrentUser(Long procedureId, MyProcedure.Status status,
+            String taxAuthority) {
         User user = userService.getCurrentUser();
 
-        if (status == null) return false;
+        if (status == null)
+            return false;
         // only allow certain statuses
-        if (status != MyProcedure.Status.PENDING && status != MyProcedure.Status.SUCCESS && status != MyProcedure.Status.FAILED) {
+        if (status != MyProcedure.Status.PENDING && status != MyProcedure.Status.SUCCESS
+                && status != MyProcedure.Status.FAILED) {
             System.out.println("Accepted statuses: PENDING, SUCCESS, FAILED");
             return false;
         }
 
-        int updated = myProcedureRepository.updateStatusAndTaxAuthorityByUserIdAndProcedureId(user.getUserId(), procedureId, status, taxAuthority);
+        int updated = myProcedureRepository.updateStatusAndTaxAuthorityByUserIdAndProcedureId(user.getUserId(),
+                procedureId, status, taxAuthority);
         return updated > 0;
     }
 
-    public List<Map<String, String>> getAllPdfFileUrlsByProcedure(Long procedureId) {
+    public List<Map<String, String>> getAllFileUrlsByProcedure(Long procedureId, String fileType) {
         User user = userService.getCurrentUser();
+        boolean isDocx = "docx".equalsIgnoreCase(fileType);
         // check if user has a MyProcedure record for this procedure
-//        MyProcedure myProc = myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(), procedureId);
-//        if (myProc == null || myProc.getStatus().equals(MyProcedure.Status.DRAFT)) {
-//            return new ArrayList<>();
-//        }
+        // MyProcedure myProc =
+        // myProcedureRepository.findByUserIdAndProcedureId(user.getUserId(),
+        // procedureId);
+        // if (myProc == null || myProc.getStatus().equals(MyProcedure.Status.DRAFT)) {
+        // return new ArrayList<>();
+        // }
 
         Procedure procedure = findById(procedureId);
         List<Map<String, String>> urls = new ArrayList<>();
-        if (procedure.getForms() == null || procedure.getForms().isEmpty()) return urls;
+        if (procedure.getForms() == null || procedure.getForms().isEmpty())
+            return urls;
 
         for (Form form : procedure.getForms()) {
-            FormSubmission fs = formSubmissionRepository.findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
-            if (fs != null && fs.getPdfFileUrl() != null) {
-                Map<String, String> url = Map.of(
-                        "url", fs.getPdfFileUrl(),
-                        "code", form.getCode(),
-                        "id", form.getFormId().toString(),
-                        "name", form.getName()
-                );
-                urls.add(url);
+            FormSubmission fs = formSubmissionRepository
+                    .findTopByFormFormIdAndUserUserIdOrderByCreatedAtDesc(form.getFormId(), user.getUserId());
+            if (fs != null) {
+                String fileUrl = isDocx ? fs.getDocxFileUrl() : fs.getPdfFileUrl();
+                if (fileUrl != null) {
+                    Map<String, String> urlMap = Map.of(
+                            "url", fileUrl,
+                            "code", form.getCode(),
+                            "id", form.getFormId().toString(),
+                            "name", form.getName());
+                    urls.add(urlMap);
+                }
             }
         }
 
         return urls;
     }
 
-    public void downloadFiles(HttpServletResponse response, Long procedureId) {
-        List<Map<String, String>> urls = getAllPdfFileUrlsByProcedure(procedureId);
+    public void downloadFiles(HttpServletResponse response, Long procedureId, String fileType) {
+        boolean isDocx = "docx".equalsIgnoreCase(fileType);
+        String extension = isDocx ? ".docx" : ".pdf";
+        List<Map<String, String>> urls = getAllFileUrlsByProcedure(procedureId, fileType);
         response.setContentType("application/zip");
         response.setHeader("Content-Disposition", "attachment; filename=files.zip");
         try {
@@ -244,7 +259,7 @@ public class ProcedureService {
                 URI uri = URI.create(fileUrl);
                 InputStream inputStream = uri.toURL().openStream();
 
-                ZipEntry zipEntry = new ZipEntry(urlMap.get("name").replaceAll("[\\\\/]", "_") + ".pdf");
+                ZipEntry zipEntry = new ZipEntry(urlMap.get("name").replaceAll("[\\\\/]", "_") + extension);
                 zipOut.putNextEntry(zipEntry);
 
                 inputStream.transferTo(zipOut);

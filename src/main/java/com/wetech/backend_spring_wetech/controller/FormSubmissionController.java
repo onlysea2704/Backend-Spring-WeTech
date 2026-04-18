@@ -34,26 +34,32 @@ public class FormSubmissionController {
         }
     }
 
-    @GetMapping("/get/pdf-file-url")
-    public ResponseEntity<Map<String, String>> getPdfFileUrl(@RequestParam("code") String code) {
-        log.info("Getting PDF file URL for code: {}", code);
+    @GetMapping("/get/file-url")
+    public ResponseEntity<Map<String, String>> getFileUrl(
+            @RequestParam("code") String code,
+            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType
+    ) {
+        log.info("Getting {} file URL for code: {}", fileType, code);
         try {
-            Map<String, String> data = formSubmissionService.getPdfFileUrlByCode(code);
+            Map<String, String> data = formSubmissionService.getFileUrlByCode(code, fileType);
             return ResponseEntity.ok(data);
         } catch (Exception e) {
-            log.error("Error getting PDF file URL", e);
+            log.error("Error getting file URL", e);
             return ResponseEntity.status(500).build();
         }
     }
 
-    @GetMapping("/get/all-pdf-file-urls")
-    public ResponseEntity<List<Map<String, String>>> getAllPdfFileUrls(@RequestParam("procedureId") Long procedureId) {
-        log.info("Getting all PDF file URLs for procedureId: {}", procedureId);
+    @GetMapping("/get/all-file-urls")
+    public ResponseEntity<List<Map<String, String>>> getAllFileUrls(
+            @RequestParam("procedureId") Long procedureId,
+            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType
+    ) {
+        log.info("Getting all {} file URLs for procedureId: {}", fileType, procedureId);
         try {
-            List<Map<String, String>> data = procedureService.getAllPdfFileUrlsByProcedure(procedureId);
+            List<Map<String, String>> data = procedureService.getAllFileUrlsByProcedure(procedureId, fileType);
             return ResponseEntity.ok(data);
         } catch (Exception e) {
-            log.error("Error getting all PDF file URLs", e);
+            log.error("Error getting all file URLs", e);
             return ResponseEntity.status(500).build();
         }
     }
@@ -86,6 +92,7 @@ public class FormSubmissionController {
     public ResponseEntity<Boolean> confirmFormInfo(
             @RequestParam("formId") Long formId,
             @RequestPart("htmlFile") MultipartFile htmlFile,
+            @RequestPart(value = "docxFile", required = false) MultipartFile docxFile,
             @RequestParam(value = "landscape", required = false, defaultValue = "false") Boolean landscape
     ) {
 
@@ -97,7 +104,7 @@ public class FormSubmissionController {
             }
             
             // Process form submission with PDF generation
-            boolean result = formSubmissionService.confirmFormInfo(formId, htmlFile, landscape);
+            boolean result = formSubmissionService.confirmFormInfo(formId, htmlFile, docxFile, landscape);
             
             if (result) {
                 log.info("Form submission confirmed successfully");

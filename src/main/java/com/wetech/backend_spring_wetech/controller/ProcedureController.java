@@ -144,9 +144,10 @@ public class ProcedureController {
     @GetMapping("/download-files")
     public void downloadFiles(
             HttpServletResponse response,
-            @RequestParam("procedureId") Long procedureId
+            @RequestParam("procedureId") Long procedureId,
+            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType
     ) {
-        procedureService.downloadFiles(response, procedureId);
+        procedureService.downloadFiles(response, procedureId, fileType);
     }
 
 }
