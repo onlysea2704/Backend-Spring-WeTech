@@ -9,11 +9,10 @@ import java.util.List;
 
 @Repository
 public interface UserCardRepository extends JpaRepository<UserCard, Long> {
-    @Query("SELECT uc FROM UserCard uc WHERE uc.userId = :userId")
+    @Query("SELECT uc FROM UserCard uc WHERE uc.userId = :userId ORDER BY uc.createdAt DESC")
     List<UserCard> findByUserId(Long userId);
 
     UserCard findByIdAndUserId(Long id, Long userId);
 
     boolean existsByUserId(Long userId);
 }
-

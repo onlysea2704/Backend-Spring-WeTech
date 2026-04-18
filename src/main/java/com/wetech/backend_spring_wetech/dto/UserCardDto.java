@@ -9,6 +9,8 @@ public class UserCardDto {
     private Long id;
 
     private String fullName;
+    private String email;
+    private String phone;
     @NotBlank
     @Size(max = 12, min = 12, message = "CCCD phải có đúng 12 ký tự")
     private String cccd;

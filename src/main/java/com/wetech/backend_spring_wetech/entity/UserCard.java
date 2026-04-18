@@ -1,5 +1,7 @@
 package com.wetech.backend_spring_wetech.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +18,8 @@ public class UserCard {
     private Long id;
     private String fullName;
     private String email;
-
-    private String cccd;   // căn cước công dân (PK)
+    private String phone;
+    private String cccd; // căn cước công dân (PK)
 
     private String gender;
 
@@ -37,4 +39,7 @@ public class UserCard {
 
     @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

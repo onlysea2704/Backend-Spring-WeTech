@@ -40,6 +40,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User registerUser(RegisterRequest registerRequest) {
+        if (userRepository.existsByUsername(registerRequest.getEmail())) {
+            throw new RuntimeException("Email đã tồn tại");
+        }
         User user = new User();
         user.setUsername(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
@@ -70,11 +73,13 @@ public class UserService implements UserDetailsService {
         String gpu = deviceInfoRequest.getGpu();
         String platform = deviceInfoRequest.getPlatform();
 
-        DeviceInfo deviceInfo = deviceInfoRepository.findDeviceInfoByUserIdAndUserAgentAndScreenAndCpuCoresAndRamAndGpuAndPlatform(userId, userAgent, screen, cpuCores, ram, gpu, platform);
+        DeviceInfo deviceInfo = deviceInfoRepository
+                .findDeviceInfoByUserIdAndUserAgentAndScreenAndCpuCoresAndRamAndGpuAndPlatform(userId, userAgent,
+                        screen, cpuCores, ram, gpu, platform);
         List<DeviceInfo> deviceInfoListByUser = deviceInfoRepository.findDeviceInfoByUserId(userId);
 
         if (deviceInfo != null || deviceInfoListByUser.size() <= 2) {
-            if(deviceInfo == null) {
+            if (deviceInfo == null) {
                 DeviceInfo newDeviceInfo = new DeviceInfo();
                 newDeviceInfo.setUserId(userId);
                 newDeviceInfo.setUserAgent(userAgent);
@@ -161,7 +166,8 @@ public class UserService implements UserDetailsService {
 
         // Gửi email (chỉ text); tốt hơn là dùng template và kèm hướng dẫn đổi mật khẩu
         String subject = "Yêu cầu đặt lại mật khẩu";
-        String text = String.format("Xin chào %s,\n\nMật khẩu mới của bạn là: %s\n\nVui lòng đăng nhập và đổi mật khẩu ngay.\n\nNếu bạn không yêu cầu, hãy liên hệ admin.",
+        String text = String.format(
+                "Xin chào %s,\n\nMật khẩu mới của bạn là: %s\n\nVui lòng đăng nhập và đổi mật khẩu ngay.\n\nNếu bạn không yêu cầu, hãy liên hệ admin.",
                 user.getFullName() == null ? user.getUsername() : user.getFullName(),
                 newPassword);
 

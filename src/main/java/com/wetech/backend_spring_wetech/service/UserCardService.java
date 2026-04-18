@@ -30,7 +30,6 @@ public class UserCardService {
     public UserCard createUserCard(UserCardDto dto) {
         User user = userService.getCurrentUser();
         UserCard uc = new UserCard();
-        uc.setEmail(user.getUsername());
         uc.setUserId(user.getUserId());
         mapToUserCard(dto, uc);
 
@@ -82,7 +81,8 @@ public class UserCardService {
     private void mapToUserCard(UserCardDto dto, UserCard uc) {
         uc.setFullName(dto.getFullName());
         uc.setCccd(dto.getCccd());
-        uc.setEmail(uc.getEmail());
+        uc.setEmail(dto.getEmail());
+        uc.setPhone(dto.getPhone());
         uc.setGender(dto.getGender());
         uc.setDob(dto.getDob());
         uc.setNationality(dto.getNationality());
