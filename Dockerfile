@@ -24,21 +24,9 @@ FROM mcr.microsoft.com/playwright/java:v1.43.0
 
 WORKDIR /app
 
-# Cài pandoc + tối ưu layer
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends pandoc && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 # Copy jar
 COPY --from=build /app/target/*.jar app.jar
 
-# JVM tuning (production safe)
-ENV JAVA_OPTS="-XX:+UseContainerSupport \
--XX:MaxRAMPercentage=75.0 \
--XX:+UseG1GC \
--XX:+ExitOnOutOfMemoryError"
-
 EXPOSE 8080
 
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java -jar app.jar"]
