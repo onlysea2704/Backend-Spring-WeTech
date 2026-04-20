@@ -97,13 +97,9 @@ public class PdfService implements InitializingBean {
                 page.setDefaultTimeout(80000.0); // 80 seconds timeout
                 log.debug("New page created");
 
-                // Set HTML content
+                // Set HTML content (by default, this waits for the 'load' event, meaning CSS/images are loaded)
                 page.setContent(html);
-                log.debug("HTML content set");
-
-                // Wait until network is idle for all resources to load (up to 90 seconds)
-                page.waitForLoadState(LoadState.NETWORKIDLE);
-                log.debug("Network idle state reached");
+                log.debug("HTML content set and loaded");
 
                 // Generate PDF with specific options
                 byte[] pdfContent = page.pdf(new Page.PdfOptions()
