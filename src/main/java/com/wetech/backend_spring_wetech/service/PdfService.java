@@ -39,13 +39,14 @@ public class PdfService {
         try {
             // Create a new page from the browser
             page = browser.newPage();
+            page.setDefaultTimeout(90000.0); // 90 seconds timeout
             log.debug("New page created");
 
             // Set HTML content
             page.setContent(html);
             log.debug("HTML content set");
 
-            // Wait until network is idle for all resources to load
+            // Wait until network is idle for all resources to load (up to 90 seconds)
             page.waitForLoadState(LoadState.NETWORKIDLE);
             log.debug("Network idle state reached");
 

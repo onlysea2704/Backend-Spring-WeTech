@@ -1,11 +1,14 @@
 package com.wetech.backend_spring_wetech.config;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Playwright;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 @Slf4j
@@ -17,8 +20,16 @@ public class PlaywrightConfig {
 
     @Bean
     public Browser browser(Playwright playwright) {
-        log.info("Launching Chromium browser");
-        return playwright.chromium().launch();
+        log.info("Launching Chromium browser with memory optimizations");
+        return playwright.chromium().launch(new BrowserType.LaunchOptions()
+                .setArgs(List.of(
+                        "--disable-dev-shm-usage",
+                        "--no-sandbox",
+                        "--disable-setuid-sandbox",
+                        "--disable-gpu",
+                        "--single-process",
+                        "--no-zygote"
+                )));
     }
 
 }
