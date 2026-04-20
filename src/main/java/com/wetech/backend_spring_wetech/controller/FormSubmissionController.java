@@ -20,7 +20,6 @@ import java.util.Map;
 public class FormSubmissionController {
     private final FormSubmissionService formSubmissionService;
     private final ProcedureService procedureService;
-    
 
     @GetMapping("/get/data-json")
     public ResponseEntity<Map<String, Object>> getDataJson(@RequestParam("formId") Long formId) {
@@ -37,8 +36,7 @@ public class FormSubmissionController {
     @GetMapping("/get/file-url")
     public ResponseEntity<Map<String, String>> getFileUrl(
             @RequestParam("code") String code,
-            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType
-    ) {
+            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType) {
         log.info("Getting {} file URL for code: {}", fileType, code);
         try {
             Map<String, String> data = formSubmissionService.getFileUrlByCode(code, fileType);
@@ -52,8 +50,7 @@ public class FormSubmissionController {
     @GetMapping("/get/all-file-urls")
     public ResponseEntity<List<Map<String, String>>> getAllFileUrls(
             @RequestParam("procedureId") Long procedureId,
-            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType
-    ) {
+            @RequestParam(value = "fileType", required = false, defaultValue = "pdf") String fileType) {
         log.info("Getting all {} file URLs for procedureId: {}", fileType, procedureId);
         try {
             List<Map<String, String>> data = procedureService.getAllFileUrlsByProcedure(procedureId, fileType);
@@ -89,35 +86,36 @@ public class FormSubmissionController {
     }
 
     @PostMapping("/confirm")
-    public ResponseEntity<Boolean> confirmFormInfo(
+    public ResponseEntity<?> confirmFormInfo(
             @RequestParam("formId") Long formId,
             @RequestPart("htmlFile") MultipartFile htmlFile,
             @RequestPart(value = "docxFile", required = false) MultipartFile docxFile,
-            @RequestParam(value = "landscape", required = false, defaultValue = "false") Boolean landscape
-    ) {
+            @RequestParam(value = "landscape", required = false, defaultValue = "false") Boolean landscape) {
 
         try {
             // Validate file
             if (htmlFile == null || htmlFile.isEmpty()) {
                 log.warn("HTML file is empty");
-                return ResponseEntity.badRequest().build();
+                return ResponseEntity.badRequest().body("HTML file is empty");
             }
-            
+
             // Process form submission with PDF generation
             boolean result = formSubmissionService.confirmFormInfo(formId, htmlFile, docxFile, landscape);
-            
+
             if (result) {
                 log.info("Form submission confirmed successfully");
                 return ResponseEntity.ok(true);
             } else {
                 log.warn("Failed to confirm form submission");
-                return ResponseEntity.status(400).build();
+                return ResponseEntity.status(400).body("Failed to confirm form submission");
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            log.error("Invalid HTML content: {}", e.getMessage());
+            return ResponseEntity.status(400).body("Invalid HTML content: " + e.getMessage());
+        } catch (RuntimeException e) {
             log.error("Error confirming form submission", e);
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(400).body("Error confirming form submission: " + e.getMessage());
         }
     }
 
-    
 }

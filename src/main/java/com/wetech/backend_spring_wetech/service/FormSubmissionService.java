@@ -107,8 +107,7 @@ public class FormSubmissionService {
             }
 
             if (pdfUrl == null || docxUrl == null) {
-                log.error("Failed to upload PDF to Cloudinary");
-                return false;
+                throw new RuntimeException("Failed to upload PDF to Cloudinary");
             }
 
             // Save PDF URL to FormSubmission
@@ -118,11 +117,9 @@ public class FormSubmissionService {
 
             return true;
         } catch (IllegalArgumentException e) {
-            log.error("Invalid HTML content: {}", e.getMessage());
-            return false;
+            throw new IllegalArgumentException("Invalid HTML content: " + e.getMessage());
         } catch (Exception e) {
-            log.error("Error confirming form submission with PDF generation", e);
-            return false;
+            throw new RuntimeException("Error confirming form submission with PDF generation: " + e.getMessage());
         }
     }
 
