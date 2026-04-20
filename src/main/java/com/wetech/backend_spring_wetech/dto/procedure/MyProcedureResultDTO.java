@@ -19,6 +19,7 @@ public class MyProcedureResultDTO {
     private String code;
     private int submissionCount;
     private LocalDateTime submissionDate;
+    private LocalDateTime createdAt;
     private String taxAuthority;
     private MyProcedure.Status status;
 }
