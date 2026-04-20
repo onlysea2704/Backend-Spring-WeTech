@@ -12,6 +12,7 @@ import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import com.wetech.backend_spring_wetech.utils.MockMultipartFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,11 +28,17 @@ import java.util.function.Function;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PdfService {
+public class PdfService implements InitializingBean {
 
     private final Playwright playwright;
     private final CloudinaryUtils cloudinaryUtils;
     private Browser browser;
+
+    @Override
+    public void afterPropertiesSet() {
+        log.info("Eagerly launching Chromium browser during startup...");
+        getBrowser();
+    }
 
     public synchronized Browser getBrowser() {
         if (browser == null || !browser.isConnected()) {
@@ -87,7 +94,7 @@ public class PdfService {
             Page page = context.newPage();
             try {
                 // Create a new page from the browser
-                page.setDefaultTimeout(60000.0); // 60 seconds timeout
+                page.setDefaultTimeout(80000.0); // 80 seconds timeout
                 log.debug("New page created");
 
                 // Set HTML content
