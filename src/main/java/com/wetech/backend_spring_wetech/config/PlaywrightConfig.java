@@ -18,16 +18,6 @@ public class PlaywrightConfig {
         return Playwright.create();
     }
 
-    @Bean
-    public Browser browser(Playwright playwright) {
-        log.info("Launching Chromium browser with memory optimizations");
-        return playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setArgs(List.of(
-                        "--disable-dev-shm-usage",
-                        "--no-sandbox",
-                        "--disable-setuid-sandbox",
-                        "--disable-gpu"
-                )));
-    }
+
 
 }
