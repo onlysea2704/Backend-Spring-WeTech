@@ -26,9 +26,7 @@ public class PlaywrightConfig {
                         "--disable-dev-shm-usage",
                         "--no-sandbox",
                         "--disable-setuid-sandbox",
-                        "--disable-gpu",
-                        "--single-process",
-                        "--no-zygote"
+                        "--disable-gpu"
                 )));
     }
 
