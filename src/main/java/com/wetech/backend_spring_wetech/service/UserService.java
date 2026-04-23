@@ -7,6 +7,7 @@ import com.wetech.backend_spring_wetech.repository.DeviceInfoRepository;
 import com.wetech.backend_spring_wetech.repository.UserRepository;
 import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,7 +51,12 @@ public class UserService implements UserDetailsService {
         user.setSdt(registerRequest.getPhone());
         user.setCreated(new Date());
         user.setFullName(registerRequest.getFullName());
-        return userRepository.save(user);
+
+        try {
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("Email đã tồn tại"); // catch exception nếu email đã tồn tại do ràng buộc unique
+        }
     }
 
     public User createUserWithRole(String username, String rawPassword, String fullName, String sdt, String role) {
