@@ -34,4 +34,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Long getNewCustomersToday(@Param("day") int day, @Param("month") int month, @Param("year") int year);
 
     boolean existsByUsername(String username);
+
+    @Query("SELECT 1 FROM User u WHERE u.role = :role")
+    boolean existsByRole(@Param("role") String role);
 }

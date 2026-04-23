@@ -22,8 +22,7 @@ public class DataInitializer {
 	@Bean
 	CommandLineRunner initAdmin(UserRepository userRepository, UserService userService) {
 		return args -> {
-			boolean hasAdminRole = userRepository.findAll().stream()
-					.anyMatch(u -> "ADMIN".equalsIgnoreCase(u.getRole()));
+			boolean hasAdminRole = userRepository.existsByRole("ADMIN");
 			if (hasAdminRole) {
 				return;
 			}
