@@ -7,6 +7,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.LoadState;
 import com.microsoft.playwright.options.Margin;
+import com.microsoft.playwright.options.WaitUntilState;
 import com.wetech.backend_spring_wetech.dto.PdfUploadResponse;
 import com.wetech.backend_spring_wetech.utils.CloudinaryUtils;
 import com.wetech.backend_spring_wetech.utils.MockMultipartFile;
@@ -97,8 +98,8 @@ public class PdfService implements InitializingBean {
                 page.setDefaultTimeout(80000.0); // 80 seconds timeout
                 log.debug("New page created");
 
-                // Set HTML content (by default, this waits for the 'load' event, meaning CSS/images are loaded)
-                page.setContent(html);
+                // Set HTML content (wait for network idle to ensure fonts/images load without hanging on full load event)
+                page.setContent(html, new Page.SetContentOptions().setWaitUntil(WaitUntilState.NETWORKIDLE));
                 log.debug("HTML content set and loaded");
 
                 // Generate PDF with specific options
