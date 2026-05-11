@@ -24,6 +24,13 @@ FROM mcr.microsoft.com/playwright/java:v1.43.0
 
 WORKDIR /app
 
+# Cài font Liberation Serif (tương đương Times New Roman, hỗ trợ đầy đủ tiếng Việt)
+# Chromium tự động map 'Times New Roman' → Liberation Serif khi font gốc không có
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends fonts-liberation fontconfig && \
+    fc-cache -fv && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy jar
 COPY --from=build /app/target/*.jar app.jar
 
